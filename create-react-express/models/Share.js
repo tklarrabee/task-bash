@@ -6,7 +6,6 @@ const ShareSchema = new Schema({
 
     accepted: {
         type: Boolean,
-        required: true,
         default: false
     },
 
@@ -17,6 +16,12 @@ const ShareSchema = new Schema({
     },
 
     user: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
+    },
+
+    invited_by: {
         type: Schema.Types.ObjectId,
         required: true,
         ref: 'User'

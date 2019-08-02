@@ -33,7 +33,9 @@ const UserSchema = new Schema({
 
     projects: [{type: Schema.Types.ObjectId, ref: 'Project'}],
 
-    shared_projects: [{type: Schema.Types.ObjectId, ref:'Share'}]
+    shared_projects: [{type: Schema.Types.ObjectId, ref:'Share'}],
+
+    pending_invites: [{type: Schema.Types.ObjectId, ref: 'Share'}]
 });
 
 const User = mongoose.model('User', UserSchema);
