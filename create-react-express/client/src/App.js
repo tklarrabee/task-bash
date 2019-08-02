@@ -4,19 +4,30 @@ import Welcome from "./pages/Welcome";
 import Client from "./pages/Client";
 import Board from "./pages/Board";
 import logo from "./logo.svg";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Wrapper from "./components/Wrapper";
 import "./App.css";
 
 class App extends Component {
   state = {
-    projects,
-    elements
+    user:{}
   }
 
-  parseText = content => {
-    // split at returns
-    // split at ::      *proj* :: *body*
-    // 
-  }
+// <>
+  render() {
+    return(
+      <Router>
+        <div>
+          <Navbar />
+          <Wrapper>
+            
+          </Wrapper>
+          <Footer />
+        </div>
+      </Router>
+    )
+}
 // When there is no state you do not need to extend a class
 // function App() {
 //   return (

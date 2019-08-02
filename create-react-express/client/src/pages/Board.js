@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+// TODO: Set Kanban Card Element as Child Element to the Board
 class Board extends Component {
     state = {
         Columm: ""

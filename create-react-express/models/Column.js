@@ -12,6 +12,10 @@ const ColumnSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Project'
     },
+    index: {
+        type: Number,
+        required: true
+    },
 
     elements: [{type: Schema.Types.ObjectId, ref: 'Element'}]
 })
