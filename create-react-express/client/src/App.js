@@ -1,6 +1,10 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Welcome from "./pages/Welcome";
+import Client from "./pages/Client";
+import Board from "./pages/Board";
+import logo from "./logo.svg";
+import "./App.css";
 
 class App extends Component {
   state = {
@@ -13,7 +17,6 @@ class App extends Component {
     // split at ::      *proj* :: *body*
     // 
   }
-}
 // When there is no state you do not need to extend a class
 // function App() {
 //   return (
