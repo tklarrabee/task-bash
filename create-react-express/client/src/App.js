@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Welcome from "./pages/Welcome";
 import Client from "./pages/Client";
@@ -38,5 +38,5 @@ class App extends Component {
 //     </div>
 //   );
 // }
-
+}
 export default App;
