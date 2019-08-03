@@ -1,7 +1,19 @@
 const express = require("express");
 const path = require("path");
+const mongoose = require("mongoose");
+const axios = require("axios");
+const db = require("./models");
+
+
 const PORT = process.env.PORT || 3001;
 const app = express();
+
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/taskBash';
+
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true }, (err, res) => {
+  if(err) console.log('ERROR connecting to: ' + MONGODB_URI + '. ' + err)
+  else console.log('Succeded connected to: ' + MONGODB_URI)
+});
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));

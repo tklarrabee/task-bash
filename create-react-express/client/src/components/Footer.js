@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class Welcome extends Component {
+class Footer extends Component {
     state = {
         login: ""
     };
@@ -12,4 +12,4 @@ class Welcome extends Component {
         );
         }
 };
-    export default Welcome;
+    export default Footer;
