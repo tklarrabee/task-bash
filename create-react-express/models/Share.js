@@ -28,6 +28,6 @@ const ShareSchema = new Schema({
     }
 })
 
-const Share = mongoose.model('Project', ProjectSchema);
+const Share = mongoose.model('Project', ShareSchema);
 
 module.exports = Share;
