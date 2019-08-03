@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Axios from 'axios';
+import axios from 'axios';
 
 class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            Email: '',
-            Password: ''
+            username: '',
+            password: ''
         };
         // binds methods the constructor so that they can handle state changes
         this.handleChange = this.handleChange.bind(this);
@@ -17,6 +17,21 @@ class Login extends Component {
     }
     handleSubmit(event) {
         event.preventDefault();
+        console.log(this.state.username)
+        axios.post('/', {
+            username: this.state.username, 
+            password: this.state.password
+        })
+            .then(response => {
+                console.log(response);
+                if(response.data) {
+                    console.log('successful login')
+                    this.setState({
+                        redirectTo: '/client'
+                    })
+                }
+            })
+
     }
 
     render()
