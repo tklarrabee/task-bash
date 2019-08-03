@@ -18,7 +18,7 @@ class Login extends Component {
     handleSubmit(event) {
         event.preventDefault();
         console.log(this.state.username)
-        axios.post('/', {
+        axios.post('/login', {
             username: this.state.username, 
             password: this.state.password
         })
@@ -30,6 +30,11 @@ class Login extends Component {
                         redirectTo: '/client'
                     })
                 }
+                else {
+                    console.log('Login error')
+                }
+            }).catch(error => {
+                console.log('Log In Error', error);
             })
 
     }
