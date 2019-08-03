@@ -11,43 +11,47 @@ import "./App.css";
 
 class App extends Component {
   state = {
-    user:{}
-  }
+    user: {}
+  };
 
-// <>
+  // <>
   render() {
-    return(
-      <Router>
-        <div>
+    return (
+      <div>
+        <Router>
           <Navbar />
           <Wrapper>
-            
+            <Switch>
+              <Route exact path="/" component={Welcome} />
+              <Route exact path="/client" component={Client} />
+              <Route exact path="/board" component={Board} />
+            </Switch>
+            <Footer />
           </Wrapper>
-          <Footer />
-        </div>
-      </Router>
-    )
-}
-// When there is no state you do not need to extend a class
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
+        </Router>
+      </div>
+    );
+  }
+  // When there is no state you do not need to extend a class
+  // function App() {
+  //   return (
+  //     <div className="App">
+  //       <header className="App-header">
+  //         <img src={logo} className="App-logo" alt="logo" />
+  //         <p>
+  //           Edit <code>src/App.js</code> and save to reload.
+  //         </p>
+  //         <a
+  //           className="App-link"
+  //           href="https://reactjs.org"
+  //           target="_blank"
+  //           rel="noopener noreferrer"
+  //         >
+  //           Learn React
+  //         </a>
+  //       </header>
+  //     </div>
+  //   );
+  // }
 }
 export default App;
