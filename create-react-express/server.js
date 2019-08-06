@@ -6,6 +6,7 @@ const axios = require("axios");
 const db = require("./models");
 const morgan = require("morgan");
 const cors = require('cors');
+const registrationRoutes = require('./routes/register');
 
 
 const PORT = process.env.PORT || 3001;
@@ -19,10 +20,12 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true }, (err, res) => {
 });
 
 // Define middleware here
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 app.use(cors());
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use('/signin', registrationRoutes)
+
+
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));

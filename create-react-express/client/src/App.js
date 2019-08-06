@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Welcome from "./pages/Welcome";
 import Client from "./pages/Client";
 import Board from "./pages/Board";
+import Login from "./components/Login"
+import Signup from "./components/Signup"
 import logo from "./logo.svg";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -22,6 +24,8 @@ class App extends Component {
           <Navbar />
           <Wrapper>
             <Switch>
+              <Route exact path="/signup" component={Signup} />
+						  <Route exact path="/login" component={Login} />
               <Route exact path="/" component={Welcome} />
               <Route exact path="/client" component={Client} />
               <Route exact path="/board" component={Board} />

@@ -19,7 +19,7 @@ const UserSchema = new Schema({
         required: false
     },
 
-    email: {
+    user_name: {
         type: String,
 
         validate: [emailValidator, 'Please Enter a Valid Email']

@@ -7,12 +7,12 @@ class Footer extends Component {
   };
   render() {
     return (
-      <footer class="site-footer">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-12 col-md-6">
+      <footer className="site-footer">
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-12 col-md-6">
               <h6>About</h6>
-              <p class="text-justify">
+              <p className="text-justify">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
                 sit amet vehicula ante. In vestibulum arcu arcu, aliquet
                 fermentum nisi facilisis nec. Ut id ligula non arcu ultrices
@@ -21,9 +21,9 @@ class Footer extends Component {
               </p>
             </div>
 
-            <div class="col-xs-6 col-md-3">
+            <div className="col-xs-6 col-md-3">
               <h6>Categories</h6>
-              <ul class="footer-links">
+              <ul className="footer-links">
                 <li>
                   <a href="http://scanfcode.com/category/c-language/">C</a>
                 </li>
@@ -53,9 +53,9 @@ class Footer extends Component {
               </ul>
             </div>
 
-            <div class="col-xs-6 col-md-3">
+            <div className="col-xs-6 col-md-3">
               <h6>Quick Links</h6>
-              <ul class="footer-links">
+              <ul className="footer-links">
                 <li>
                   <a href="http://scanfcode.com/about/">About Us</a>
                 </li>
@@ -80,35 +80,35 @@ class Footer extends Component {
           </div>
           <hr />
         </div>
-        <div class="container">
-          <div class="row">
-            <div class="col-md-8 col-sm-6 col-xs-12">
-              <p class="copyright-text">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-8 col-sm-6 col-xs-12">
+              <p className="copyright-text">
                 Copyright &copy; 2019 All Rights Reserved by
                 <a href="#"> ME</a>.
               </p>
             </div>
 
-            <div class="col-md-4 col-sm-6 col-xs-12">
-              <ul class="social-icons">
+            <div className="col-md-4 col-sm-6 col-xs-12">
+              <ul className="social-icons">
                 <li>
-                  <a class="facebook" href="#">
-                    <i class="fa fa-facebook" />
+                  <a className="facebook" href="#">
+                    <i className="fa fa-facebook" />
                   </a>
                 </li>
                 <li>
-                  <a class="twitter" href="#">
-                    <i class="fa fa-twitter" />
+                  <a className="twitter" href="#">
+                    <i className="fa fa-twitter" />
                   </a>
                 </li>
                 <li>
-                  <a class="dribbble" href="#">
-                    <i class="fa fa-dribbble" />
+                  <a className="dribbble" href="#">
+                    <i className="fa fa-dribbble" />
                   </a>
                 </li>
                 <li>
-                  <a class="linkedin" href="#">
-                    <i class="fa fa-linkedin" />
+                  <a className="linkedin" href="#">
+                    <i className="fa fa-linkedin" />
                   </a>
                 </li>
               </ul>
