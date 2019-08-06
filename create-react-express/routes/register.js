@@ -1,11 +1,11 @@
 const express = require('express');
 const registrationRoutes = express.Router();
 const bcrypt = require('bcryptjs');
-let Registration = require('../models/User');
+let User = require('../models/User');
 
 // Registration route
 registrationRoutes.route('/signup').post(function (req, res) {
-	let register = new Registration(req.body);
+	let register = new User(req.body);
 	register.save()
 		.then(reg => {
 			res.sendStatus(200);
