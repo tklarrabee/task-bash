@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-import React from "react";
-import "./style.css";
-
-function Footer() {
-  return (
-    <footer className="footer">
-      <span>Task-Bash 2019</span>
-    </footer>
-  );
-}
-
-=======
 import React, { Component } from "react";
 import "./style.css";
 
@@ -132,5 +119,4 @@ class Footer extends Component {
     );
   }
 }
->>>>>>> 9d673ad75a2aecd8c844f457902f958eeb087e0b
 export default Footer;

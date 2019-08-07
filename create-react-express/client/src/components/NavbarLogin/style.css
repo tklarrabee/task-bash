@@ -1,0 +1,38 @@
+.title {
+  margin-top: 15%;
+  font-size: 40px;
+}
+
+.navbar li {
+  display: inline-block;
+  text-align: center;
+}
+
+.logo {
+ margin-right: 8rem;
+}
+
+.btn {
+  margin-right: 2rem;
+}
+
+.navbar {
+  background: #26272b;
+  /* box-shadow: 0 3px 6px #999, 0 3px 6px #999; */
+  margin-bottom: 2rem
+}
+
+
+li {
+  color: white;
+  padding: 15px 0;
+}
+
+li.btn {
+  color:#737373;
+  font-size: 18px;
+}
+
+body {
+  font-size: 24px;
+}

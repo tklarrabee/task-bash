@@ -3,8 +3,11 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Welcome from "./pages/Welcome";
 import Client from "./pages/Client";
 import Board from "./pages/Board";
-
-import Navbar1 from "./components/Navbar";
+import Login from "./pages/Login";
+import Logout from "./pages/Logout";
+import CreateAccount from "./pages/CreateAccount";
+import Summary from "./pages/Summary";
+import Navbar from "./components/NavbarAll";
 import Footer from "./components/Footer";
 import Wrapper from "./components/Wrapper";
 import "./App.css";
@@ -16,29 +19,20 @@ class App extends Component {
 
   // <>
   render() {
-<<<<<<< HEAD
-    return(
-      <Router>
-        <div>
-          <Navbar1 />
-          <Wrapper>
-          <Route exact path="/" component={Welcome} />
-          <Route exact path="/client" component={Client} />
-          <Route exact path="/board" component={Board} />
-=======
     return (
       <div>
         <Router>
-          <Navbar />
-          <Wrapper>
+
             <Switch>
               <Route exact path="/" component={Welcome} />
               <Route exact path="/client" component={Client} />
               <Route exact path="/board" component={Board} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/create" component={CreateAccount} />
+              <Route exact path="/logout" component={Logout} />
+              <Route exact path="/summary" component={Summary} />
             </Switch>
-            <Footer />
->>>>>>> 9d673ad75a2aecd8c844f457902f958eeb087e0b
-          </Wrapper>
+
         </Router>
       </div>
     );
