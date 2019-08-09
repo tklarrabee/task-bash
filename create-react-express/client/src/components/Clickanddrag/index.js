@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { Container, Header, Columm, Card, EmptyColumm } from "../components/Boards";
-import AppDragDropDemo from "../components/Clickanddrag";
-// TODO: Set Kanban Card Element as Child Element to the Board
-class Board extends Component {
+
+export default class AppDragDropDemo extends Component {
   state = {
     tasks: [
       { name: "Learn Angular", category: "wip", bgcolor: "yellow" },
@@ -57,21 +55,27 @@ class Board extends Component {
     });
 
     return (
-      <div>
-        <Container>
-          <Header>Header</Header>
-            < AppDragDropDemo/>
-            < AppDragDropDemo/>
-            < EmptyColumm/>
-          {/* <EmptyColumm/> */}
-          {/* <div className="box-2">Small Box 2</div>
-          <div className="box-3">Small Box 3</div> */}
-          {/* <div className="sidebar">Sidebar</div> */}
-          {/* <div className="main-content">Main Content</div> */}
-          {/* <div className="footer">Footer</div> */}
-        </Container>
+      <div className="container-drag">
+        <h2 className="header">Columm Title</h2>
+        <div
+          className="wip"
+          onDragOver={e => this.onDragOver(e)}
+          onDrop={e => {
+            this.onDrop(e, "wip");
+          }}
+        >
+          <span className="task-header">card title</span>
+          {tasks.wip}
+        </div>
+        <div
+          className="droppable"
+          onDragOver={e => this.onDragOver(e)}
+          onDrop={e => this.onDrop(e, "complete")}
+        >
+          <span className="task-header">card title</span>
+          {tasks.complete}
+        </div>
       </div>
     );
   }
 }
-export default Board;

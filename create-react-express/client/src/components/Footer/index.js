@@ -85,29 +85,29 @@ class Footer extends Component {
             <div class="col-md-8 col-sm-6 col-xs-12">
               <p class="copyright-text">
                 Copyright &copy; 2019 All Rights Reserved by
-                <a href="#"> ME</a>.
+                <a href="/"> ME</a>.
               </p>
             </div>
 
             <div class="col-md-4 col-sm-6 col-xs-12">
               <ul class="social-icons">
                 <li>
-                  <a class="facebook" href="#">
+                  <a class="facebook" href="/">
                     <i class="fa fa-facebook" />
                   </a>
                 </li>
                 <li>
-                  <a class="twitter" href="#">
+                  <a class="twitter" href="/">
                     <i class="fa fa-twitter" />
                   </a>
                 </li>
                 <li>
-                  <a class="dribbble" href="#">
+                  <a class="dribbble" href="/">
                     <i class="fa fa-dribbble" />
                   </a>
                 </li>
                 <li>
-                  <a class="linkedin" href="#">
+                  <a class="linkedin" href="/">
                     <i class="fa fa-linkedin" />
                   </a>
                 </li>
