@@ -1,17 +1,18 @@
 import React, { Component } from "react";
+import "./styles.css";
 
 export default class AppDragDropDemo extends Component {
   state = {
     tasks: [
-      { name: "Learn Angular", category: "wip", bgcolor: "yellow" },
-      { name: "React", category: "wip", bgcolor: "pink" },
-      { name: "Vue", category: "complete", bgcolor: "skyblue" }
+      { name: "Yellow", category: "wip", context: "hello, I am yellow", bgcolor: "yellow" },
+      { name: "Pink", category: "wip", context: "hello, I am pink", bgcolor: "pink" },
+      { name: "Skyblue", category: "complete", context: "hello, I am skyblue", bgcolor: "skyblue" }
     ]
   };
 
   onDragStart = (ev, id) => {
     console.log("dragstart:", id);
-    ev.dataTransfer.setData("id", id);
+    ev.dataTransfer.setData("text/plain", id);
   };
 
   onDragOver = ev => {
@@ -19,7 +20,7 @@ export default class AppDragDropDemo extends Component {
   };
 
   onDrop = (ev, cat) => {
-    let id = ev.dataTransfer.getData("id");
+    let id = ev.dataTransfer.getData("text");
 
     let tasks = this.state.tasks.filter(task => {
       if (task.name === id) {
@@ -49,7 +50,8 @@ export default class AppDragDropDemo extends Component {
           className="draggable"
           style={{ backgroundColor: t.bgcolor }}
         >
-          {t.name}
+          <p>{t.name}</p>
+          <p>{t.context}</p>
         </div>
       );
     });
@@ -64,7 +66,7 @@ export default class AppDragDropDemo extends Component {
             this.onDrop(e, "wip");
           }}
         >
-          <span className="task-header">card title</span>
+          <span className="task-header">task 1</span>
           {tasks.wip}
         </div>
         <div
@@ -72,7 +74,7 @@ export default class AppDragDropDemo extends Component {
           onDragOver={e => this.onDragOver(e)}
           onDrop={e => this.onDrop(e, "complete")}
         >
-          <span className="task-header">card title</span>
+          <span className="task-header">task 2</span>
           {tasks.complete}
         </div>
       </div>
