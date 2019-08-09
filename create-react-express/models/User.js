@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
-
 const Schema = mongoose.Schema;
+const bcrypt = require('bcryptjs');
+mongoose.promise = Promise
 
 function emailValidator(email) {
     const emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
@@ -37,6 +38,28 @@ const UserSchema = new Schema({
 
     pending_invites: [{type: Schema.Types.ObjectId, ref: 'Share'}]
 });
+
+UserSchema.methods = {
+    checkPassword: function(inputPassword) {
+        return bcrypt.compareSync(inputPassword, this.password)
+    },
+    hashPassword: plainTextPassword => {
+		return bcrypt.hashSync(plainTextPassword, 10)
+	}
+}
+
+UserSchema.pre('save', function (next) {
+	if (!this.password) {
+		console.log('models/user.js =======NO PASSWORD PROVIDED=======')
+		next()
+	} else {
+		console.log('models/user.js hashPassword in pre save');
+		
+		this.password = this.hashPassword(this.password)
+		next()
+	}
+})
+
 
 const User = mongoose.model('User', UserSchema);
 
