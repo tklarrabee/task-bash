@@ -4,9 +4,36 @@ import "./styles.css";
 export default class AppDragDrop extends Component {
   state = {
     tasks: [
-      { name: "Yellow", category: "wip", context: "hello, I am yellow", bgcolor: "yellow" },
-      { name: "Pink", category: "wip", context: "hello, I am pink", bgcolor: "pink" },
-      { name: "Skyblue", category: "complete", context: "hello, I am skyblue", bgcolor: "skyblue" }
+      {
+        name: "Yellow",
+        category: "wip",
+        context: "hello, I am yellow",
+        bgcolor: "yellow"
+      },
+      {
+        name: "Pink",
+        category: "wip",
+        context: "hello, I am pink",
+        bgcolor: "pink"
+      },
+      {
+        name: "Skyblue",
+        category: "complete",
+        context: "hello, I am skyblue",
+        bgcolor: "skyblue"
+      },
+      {
+        name: "Whitesmoke",
+        category: "complete",
+        context: "hello, I am Whitesmoke",
+        bgcolor: "Whitesmoke"
+      },
+      {
+        name: "Orange",
+        category: "complete",
+        context: "hello, I am Orange",
+        bgcolor: "Orange"
+      }
     ]
   };
 
@@ -58,24 +85,37 @@ export default class AppDragDrop extends Component {
 
     return (
       <div className="container-drag">
-        <h2 className="header">sub board title</h2>
-        <div
-          className="wip"
-          onDragOver={e => this.onDragOver(e)}
-          onDrop={e => {
-            this.onDrop(e, "wip");
-          }}
-        >
-          <span className="task-header">Columm 1</span>
-          {tasks.wip}
-        </div>
-        <div
-          className="droppable"
-          onDragOver={e => this.onDragOver(e)}
-          onDrop={e => this.onDrop(e, "complete")}
-        >
-          <span className="task-header">Columm 2</span>
-          {tasks.complete}
+        <div className="boardWrapper">
+          <div
+            className="wip"
+            onDragOver={e => this.onDragOver(e)}
+            onDrop={e => {
+              this.onDrop(e, "wip");
+            }}
+          >
+            <div className="colummContainer">
+              <span>Columm 1</span>
+              {tasks.wip}
+            </div>
+          </div>
+          <div
+            className="droppable"
+            onDragOver={e => this.onDragOver(e)}
+            onDrop={e => this.onDrop(e, "complete")}
+          >
+            <div className="colummContainer">
+              <span>Columm 2</span>
+              {tasks.complete}
+            </div>
+          </div>
+          <div className="colummContainer newColumn">
+            <p>
+              click for new columm
+            </p>
+              <button class="btn btn-warning">
+                <i class="fa fa-plus" />
+              </button>
+          </div>
         </div>
       </div>
     );

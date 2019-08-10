@@ -1,12 +1,32 @@
 .draggable {
-    width: 100%;
+  width: 100%;
   min-height: 200px;
   border-radius: 12px;
   position: relative;
 }
 
 .draggable p {
-    margin: 10px 20px;
-    padding: 10px 0px;
-    color: black;
+  margin: 10px 20px;
+  padding: 10px 0px;
+  color: black;
+}
+
+.boardWrapper {
+  width: 45rem;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns:repeat(3, 1fr) ;
+
+
+  
+}
+
+
+
+.colummContainer {
+  background-color: purple;
+  padding: 10px;
+  color: white;
+  border-radius: 12px;
+  align-self: start;
 }
