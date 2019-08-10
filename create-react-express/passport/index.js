@@ -1,6 +1,7 @@
 module.exports = function (app, user) {
     const passport = require('passport')
     const LocalStrategy = require('passport-local').Strategy
+    // var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
     const User = user
     // require('./localStrategy')(passport, user)
     // called on login, saves the id to session req.session.passport.user = {id:'..'}
@@ -46,6 +47,20 @@ module.exports = function (app, user) {
             })
         }
     ))
+
+
+    // TODO: 
+    // passport.use(new GoogleStrategy({
+    //     clientID: GOOGLE_CLIENT_ID,
+    //     clientSecret: GOOGLE_CLIENT_SECRET,
+    //     callbackURL: "http://localhost:3000/auth/google/callback"
+    //   },
+    //   function(accessToken, refreshToken, profile, done) {
+    //        User.findOrCreate({ googleId: profile.id }, function (err, user) {
+    //          return done(err, user);
+    //        });
+    //   }
+    // ));
 
     app.use(passport.initialize())
     app.use(passport.session()) // calls the deserializeUser

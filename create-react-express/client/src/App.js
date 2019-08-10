@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 // import Footer from "./components/Footer";
 import Wrapper from "./components/Wrapper";
 import Register from "./components/Register";
+import Login from "./components/Login";
 import "./App.css";
 
 class App extends Component {
@@ -27,7 +28,7 @@ class App extends Component {
               <Route exact path="/client" component={Client} />
               <Route exact path="/board" component={Board} />
               <Route exact path="/register" component={Register} />
-              <Route exact path="/login" component={Register} />
+              <Route exact path="/login" component={Login} />
             </Switch>
             
           </Wrapper>

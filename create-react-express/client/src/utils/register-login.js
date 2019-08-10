@@ -3,7 +3,7 @@ import axios from 'axios'
         //request to server to add a new username/password
         
 const UserRegistration = data => {
-    axios.post('/user/', {
+    axios.post('/user', {
         username: data.username,
         password: data.password
     })

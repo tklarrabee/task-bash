@@ -97,6 +97,7 @@ class Login extends Component {
                                 type="submit">Login</button>
                         </div>
                     </form>
+                    {/* <a href="/auth/google">Sign In with Google</a> */}
                 </div>
             )
         }
