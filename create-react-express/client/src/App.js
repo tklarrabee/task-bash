@@ -3,15 +3,11 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Welcome from "./pages/Welcome";
 import Client from "./pages/Client";
 import Board from "./pages/Board";
-<<<<<<< HEAD
-import Navbar from "./components/Navbar";
-=======
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import CreateAccount from "./pages/CreateAccount";
 import Summary from "./pages/Summary";
 import Navbar from "./components/NavbarAll";
->>>>>>> origin/izzyrouter
 import Footer from "./components/Footer";
 import Wrapper from "./components/Wrapper";
 import "./App.css";
@@ -36,12 +32,6 @@ class App extends Component {
               <Route exact path="/logout" component={Logout} />
               <Route exact path="/summary" component={Summary} />
             </Switch>
-<<<<<<< HEAD
-          </Wrapper>
-            <Footer />
-=======
-
->>>>>>> origin/izzyrouter
         </Router>
       </div>
     );
