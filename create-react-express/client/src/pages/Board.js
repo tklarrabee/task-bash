@@ -6,7 +6,7 @@ import {
   Card,
   EmptyColumm
 } from "../components/Boards";
-import AppDragDropDemo from "../components/Clickanddrag";
+import AppDragDrop from "../components/Clickanddrag";
 // TODO: Set Kanban Card Element as Child Element to the Board
 import NavbarAll from "../components/NavbarAll";
 import Footer from "../components/Footer";
@@ -48,7 +48,9 @@ class Board extends Component {
     return (
       <div>
         <NavbarAll />
-        <p>this is going to be board page</p>
+        <Header>Header</Header>
+            < AppDragDrop/>
+            < EmptyColumm/>
         <Footer />
       </div>
     );

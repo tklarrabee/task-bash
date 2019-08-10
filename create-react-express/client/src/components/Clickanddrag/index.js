@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./styles.css";
 
-export default class AppDragDropDemo extends Component {
+export default class AppDragDrop extends Component {
   state = {
     tasks: [
       { name: "Yellow", category: "wip", context: "hello, I am yellow", bgcolor: "yellow" },
@@ -58,7 +58,7 @@ export default class AppDragDropDemo extends Component {
 
     return (
       <div className="container-drag">
-        <h2 className="header">Columm Title</h2>
+        <h2 className="header">sub board title</h2>
         <div
           className="wip"
           onDragOver={e => this.onDragOver(e)}
@@ -66,7 +66,7 @@ export default class AppDragDropDemo extends Component {
             this.onDrop(e, "wip");
           }}
         >
-          <span className="task-header">task 1</span>
+          <span className="task-header">Columm 1</span>
           {tasks.wip}
         </div>
         <div
@@ -74,7 +74,7 @@ export default class AppDragDropDemo extends Component {
           onDragOver={e => this.onDragOver(e)}
           onDrop={e => this.onDrop(e, "complete")}
         >
-          <span className="task-header">task 2</span>
+          <span className="task-header">Columm 2</span>
           {tasks.complete}
         </div>
       </div>
