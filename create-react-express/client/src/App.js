@@ -3,10 +3,11 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Welcome from "./pages/Welcome";
 import Client from "./pages/Client";
 import Board from "./pages/Board";
-import logo from "./logo.svg";
+// import logo from "./logo.svg";
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+// import Footer from "./components/Footer";
 import Wrapper from "./components/Wrapper";
+import Register from "./components/Register";
 import "./App.css";
 
 class App extends Component {
@@ -14,7 +15,7 @@ class App extends Component {
     user: {}
   };
 
-  // <>
+  // <Footer />
   render() {
     return (
       <div>
@@ -25,8 +26,9 @@ class App extends Component {
               <Route exact path="/" component={Welcome} />
               <Route exact path="/client" component={Client} />
               <Route exact path="/board" component={Board} />
+              <Route exact path="/register" component={Register} />
             </Switch>
-            <Footer />
+            
           </Wrapper>
         </Router>
       </div>

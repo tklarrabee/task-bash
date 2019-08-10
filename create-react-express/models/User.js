@@ -1,43 +1,39 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+const bcrypt = require('bcryptjs');
+mongoose.promise = Promise
 
-const Schema = mongoose.Schema;
+// Define userSchema
+const userSchema = new Schema({
 
-function emailValidator(email) {
-    const emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-    return emailRegex.test(email)
+	username: { type: String, unique: false, required: false },
+	password: { type: String, unique: false, required: false }
+
+})
+
+// Define schema methods
+userSchema.methods = {
+	checkPassword: function (inputPassword) {
+		return bcrypt.compareSync(inputPassword, this.password)
+	},
+	hashPassword: plainTextPassword => {
+		return bcrypt.hashSync(plainTextPassword, 10)
+	}
 }
 
-const UserSchema = new Schema({
+// Define hooks for pre-saving
+userSchema.pre('save', function (next) {
+	if (!this.password) {
+		console.log('models/user.js =======NO PASSWORD PROVIDED=======')
+		next()
+	} else {
+		console.log('models/user.js hashPassword in pre save');
+		
+		this.password = this.hashPassword(this.password)
+		next()
+	}
+})
 
-    first_name: {
-        type: String,
-        required: false
-    },
 
-    last_name: {
-        type: String,
-        required: false
-    },
-
-    email: {
-        type: String,
-
-        validate: [emailValidator, 'Please Enter a Valid Email']
-
-    },
-
-    password: {
-        type: String,
-        required: true
-    },
-
-    projects: [{type: Schema.Types.ObjectId, ref: 'Project'}],
-
-    shared_projects: [{type: Schema.Types.ObjectId, ref:'Share'}],
-
-    pending_invites: [{type: Schema.Types.ObjectId, ref: 'Share'}]
-});
-
-const User = mongoose.model('User', UserSchema);
-
-module.exports = User;
+const User = mongoose.model('User', userSchema)
+module.exports = User
