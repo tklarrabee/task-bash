@@ -1,0 +1,12 @@
+.draggable {
+    width: 100%;
+  min-height: 200px;
+  border-radius: 12px;
+  position: relative;
+}
+
+.draggable p {
+    margin: 10px 20px;
+    padding: 10px 0px;
+    color: black;
+}

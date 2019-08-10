@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Welcome from "./pages/Welcome";
 import Client from "./pages/Client";
 import Board from "./pages/Board";
-import logo from "./logo.svg";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Wrapper from "./components/Wrapper";
@@ -26,8 +25,8 @@ class App extends Component {
               <Route exact path="/client" component={Client} />
               <Route exact path="/board" component={Board} />
             </Switch>
-            <Footer />
           </Wrapper>
+            <Footer />
         </Router>
       </div>
     );
