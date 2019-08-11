@@ -24,7 +24,6 @@ class LoginForm extends Component {
     handleSubmit(event) {
         event.preventDefault()
         console.log('handleSubmit')
-
         axios
             .post('/user/login', {
                 username: this.state.username,
@@ -52,11 +51,18 @@ class LoginForm extends Component {
     }
 
     render() {
+
+        const loggedIn = this.props.loggedIn
+
         if (this.state.redirectTo) {
             return <Redirect to={{ pathname: this.state.redirectTo }} />
-        } else {
+        } else if(loggedIn) {
+            return <Redirect to="/" />
+        } 
+        else {
             return (
                 <div>
+                    
                     <h4>Login</h4>
                     <form className="form-horizontal">
                         <div className="form-group">

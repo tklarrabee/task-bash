@@ -3,12 +3,12 @@ import Wrapper from "../components/Wrapper";
 import Carousel from 'react-bootstrap/Carousel';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container'
-import Form from 'react-bootstrap/Form'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+// import Form from 'react-bootstrap/Form'
+// import Row from 'react-bootstrap/Row'
+// import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
-import NavbarLogin from "../components/NavbarLogin";
-import Footer from "../components/Footer";
+// import NavbarLogin from "../components/NavbarLogin"; // Login/ Logout Nabar Component > Dynamic Navbar Component 
+// import Footer from "../components/Footer";
 
 
 class Welcome extends Component {
@@ -18,7 +18,7 @@ class Welcome extends Component {
     render() {
         return (
             <div>
-                <NavbarLogin />
+                {/* <NavbarLogin /> */}
                 <Wrapper>
                     <Container style={{ marginTop: 30 }}>
                         <Wrapper>
@@ -65,7 +65,7 @@ class Welcome extends Component {
                             </div>
                         </Wrapper>
                     </Container>
-                    <Footer />
+                    {/* <Footer /> */}
                 </Wrapper>
             </div>
 

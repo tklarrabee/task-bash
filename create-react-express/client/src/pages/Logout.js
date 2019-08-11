@@ -18,7 +18,7 @@ class Logout extends Component {
     render() {
         return (
             <div>
-                <NavbarLogin />
+                {/* <NavbarLogin /> */}
                 <Wrapper>
                     <Container style={{ marginTop: 30 }}>
                         <Wrapper>
@@ -40,7 +40,7 @@ class Logout extends Component {
                             </div>
                         </Wrapper>
                     </Container>
-                    <Footer />
+                    {/* <Footer /> */}
                 </Wrapper>
             </div>
 

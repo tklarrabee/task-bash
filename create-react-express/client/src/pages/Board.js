@@ -48,10 +48,10 @@ class Board extends Component {
   render() {
     return (
       <div>
-        <NavbarAll />
+        {/* <NavbarAll /> */}
         <Header>Header</Header>
             < AppDragDrop/>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     );
   }

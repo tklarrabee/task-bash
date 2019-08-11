@@ -12,8 +12,8 @@ export class Header extends Component {
   render() {
     return (
       <div className="header">
-        <span>{this.state.boardName} <button class="btn btn-primary"><i class="fa fa-star-o"></i></button></span> 
-        <span style={{color: "white", float: "right"}}> Users: {this.state.users}<button class="btn btn-success">invite</button></span>
+        <span>{this.state.boardName} <button className="btn btn-primary"><i className="fa fa-star-o"></i></button></span> 
+        <span style={{color: "white", float: "right"}}> Users: {this.state.users}<button className="btn btn-success">invite</button></span>
       </div>
     );
   }
@@ -24,7 +24,7 @@ export function Columm(props) {
           <div>
 
             <span>Columm Title
-            <button class="btn btn-warning"><i class="fa fa-plus"/></button></span>
+            <button className="btn btn-warning"><i className="fa fa-plus"/></button></span>
             <div className="box">{props.children}</div>
           </div>
         )
@@ -35,121 +35,121 @@ export function Card()  {
       <div>
       {/* <div className="card">
       <row>      
-      <div class="col-sm-8">Card title</div> <button class="btn btn-dark cardBtn"><i class="fa fa-plus-circle"/></button>
+      <div className="col-sm-8">Card title</div> <button className="btn btn-dark cardBtn"><i className="fa fa-plus-circle"/></button>
       </row>
       <p>card contents</p>
       </div> */}
-      <div class="wrapper">
+      <div className="wrapper">
 
   
-<div class="profile-card js-profile-card">
-  <div class="profile-card__img">
+<div className="profile-card js-profile-card">
+  <div className="profile-card__img">
   </div>
 
-  <div class="profile-card__cnt js-profile-cnt">
-    <div class="profile-card__name">Card title</div>
-    <div class="profile-card__txt">Card context</div>
-    <div class="profile-card-loc">
-      <span class="profile-card-loc__icon">
-        <svg class="icon"><use href="#icon-location"></use></svg>
+  <div className="profile-card__cnt js-profile-cnt">
+    <div className="profile-card__name">Card title</div>
+    <div className="profile-card__txt">Card context</div>
+    <div className="profile-card-loc">
+      <span className="profile-card-loc__icon">
+        <svg className="icon"><use href="#icon-location"></use></svg>
       </span>
 
-      <span class="profile-card-loc__txt">
+      <span className="profile-card-loc__txt">
         Istanbul, Turkey
       </span>
     </div>
 
-    <div class="profile-card-inf">
-      <div class="profile-card-inf__item">
-        <div class="profile-card-inf__title">1598</div>
-        <div class="profile-card-inf__txt">Followers</div>
+    <div className="profile-card-inf">
+      <div className="profile-card-inf__item">
+        <div className="profile-card-inf__title">1598</div>
+        <div className="profile-card-inf__txt">Followers</div>
       </div>
 
-      <div class="profile-card-inf__item">
-        <div class="profile-card-inf__title">65</div>
-        <div class="profile-card-inf__txt">Following</div>
+      <div className="profile-card-inf__item">
+        <div className="profile-card-inf__title">65</div>
+        <div className="profile-card-inf__txt">Following</div>
       </div>
 
-      <div class="profile-card-inf__item">
-        <div class="profile-card-inf__title">123</div>
-        <div class="profile-card-inf__txt">Articles</div>
+      <div className="profile-card-inf__item">
+        <div className="profile-card-inf__title">123</div>
+        <div className="profile-card-inf__txt">Articles</div>
       </div>
 
-      <div class="profile-card-inf__item">
-        <div class="profile-card-inf__title">85</div>
-        <div class="profile-card-inf__txt">Works</div>
+      <div className="profile-card-inf__item">
+        <div className="profile-card-inf__title">85</div>
+        <div className="profile-card-inf__txt">Works</div>
       </div>
     </div>
 
-    <div class="profile-card-social">
-      <a href="https://www.facebook.com/iaMuhammedErdem" class="profile-card-social__item facebook"  rel="noopener noreferrer" target="_blank">
-        <span class="icon-font">
-            <svg class="icon"><use href="#icon-facebook"></use></svg>
+    <div className="profile-card-social">
+      <a href="https://www.facebook.com/iaMuhammedErdem" className="profile-card-social__item facebook"  rel="noopener noreferrer" target="_blank">
+        <span className="icon-font">
+            <svg className="icon"><use href="#icon-facebook"></use></svg>
         </span>
       </a>
 
-      <a href="https://twitter.com/iaMuhammedErdem" class="profile-card-social__item twitter" rel="noopener noreferrer" target="_blank">
-        <span class="icon-font">
-            <svg class="icon"><use href="#icon-twitter"></use></svg>
+      <a href="https://twitter.com/iaMuhammedErdem" className="profile-card-social__item twitter" rel="noopener noreferrer" target="_blank">
+        <span className="icon-font">
+            <svg className="icon"><use href="#icon-twitter"></use></svg>
         </span>
       </a>
 
-      <a href="https://www.instagram.com/iamuhammederdem" class="profile-card-social__item instagram" rel="noopener noreferrer" target="_blank">
-        <span class="icon-font">
-            <svg class="icon"><use href="#icon-instagram"></use></svg>
+      <a href="https://www.instagram.com/iamuhammederdem" className="profile-card-social__item instagram" rel="noopener noreferrer" target="_blank">
+        <span className="icon-font">
+            <svg className="icon"><use href="#icon-instagram"></use></svg>
         </span>
       </a>
 
-      <a href="https://www.behance.net/iaMuhammedErdem" class="profile-card-social__item behance"  rel="noopener noreferrer" target="_blank">
-        <span class="icon-font">
-            <svg class="icon"><use href="#icon-behance"></use></svg>
+      <a href="https://www.behance.net/iaMuhammedErdem" className="profile-card-social__item behance"  rel="noopener noreferrer" target="_blank">
+        <span className="icon-font">
+            <svg className="icon"><use href="#icon-behance"></use></svg>
         </span>
       </a>
 
-      <a href="https://github.com/muhammederdem" class="profile-card-social__item github" rel="noopener noreferrer" target="_blank">
-        <span class="icon-font">
-            <svg class="icon"><use href="#icon-github"></use></svg>
+      <a href="https://github.com/muhammederdem" className="profile-card-social__item github" rel="noopener noreferrer" target="_blank">
+        <span className="icon-font">
+            <svg className="icon"><use href="#icon-github"></use></svg>
         </span>
       </a>
 
-      <a href="https://codepen.io/JavaScriptJunkie" class="profile-card-social__item codepen" rel="noopener noreferrer" target="_blank">
-        <span class="icon-font">
-            <svg class="icon"><use href="#icon-codepen"></use></svg>
+      <a href="https://codepen.io/JavaScriptJunkie" className="profile-card-social__item codepen" rel="noopener noreferrer" target="_blank">
+        <span className="icon-font">
+            <svg className="icon"><use href="#icon-codepen"></use></svg>
         </span>
       </a>
 
-      <a href="http://muhammederdem.com.tr/" class="profile-card-social__item link" rel="noopener noreferrer" target="_blank">
-        <span class="icon-font">
-            <svg class="icon"><use href="#icon-link"></use></svg>
+      <a href="http://muhammederdem.com.tr/" className="profile-card-social__item link" rel="noopener noreferrer" target="_blank">
+        <span className="icon-font">
+            <svg className="icon"><use href="#icon-link"></use></svg>
         </span>
       </a>
 
     </div>
 
-    <div class="profile-card-ctr">
-      <button class="profile-card__button button--blue js-message-btn">Message</button>
-      <button class="profile-card__button button--orange">Follow</button>
+    <div className="profile-card-ctr">
+      <button className="profile-card__button button--blue js-message-btn">Message</button>
+      <button className="profile-card__button button--orange">Follow</button>
     </div>
   </div>
 
-  <div class="profile-card-message js-message">
-    <form class="profile-card-form">
-      <div class="profile-card-form__container">
+  <div className="profile-card-message js-message">
+    <form className="profile-card-form">
+      <div className="profile-card-form__container">
         <textarea placeholder="Say something..."></textarea>
       </div>
 
-      <div class="profile-card-form__bottom">
-        <button class="profile-card__button button--blue js-message-close">
+      <div className="profile-card-form__bottom">
+        <button className="profile-card__button button--blue js-message-close">
           Send
         </button>
 
-        <button class="profile-card__button button--gray js-message-close">
+        <button className="profile-card__button button--gray js-message-close">
           Cancel
         </button>
       </div>
     </form>
 
-    <div class="profile-card__overlay js-message-close"></div>
+    <div className="profile-card__overlay js-message-close"></div>
   </div>
 
 </div>
@@ -220,7 +220,7 @@ export function EmptyColumm() {
     return(
       <div>
          <p>click for new columm
-            <button class="btn btn-warning"><i class="fa fa-plus"/></button></p>
+            <button className="btn btn-warning"><i className="fa fa-plus"/></button></p>
       </div>
     )
 }

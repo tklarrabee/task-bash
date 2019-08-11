@@ -7,8 +7,8 @@ import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
-import NavbarLogin from "../components/NavbarLogin";
-import Footer from "../components/Footer";
+// import NavbarLogin from "../components/NavbarLogin";
+// import Footer from "../components/Footer";
 
 
 class Login extends Component {
@@ -18,7 +18,7 @@ class Login extends Component {
     render() {
         return (
             <div>
-                <NavbarLogin />
+                {/* <NavbarLogin /> */}
                 <Wrapper>
                     <Container style={{ marginTop: 30 }}>
                         <Wrapper>
@@ -62,7 +62,7 @@ class Login extends Component {
                             </div>
                         </Wrapper>
                     </Container>
-                    <Footer />
+                    {/* <Footer /> */}
                 </Wrapper>
             </div>
 
