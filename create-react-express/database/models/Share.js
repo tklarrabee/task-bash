@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
-
 const Schema = mongoose.Schema;
+mongoose.promise = Promise
+
 
 const ShareSchema = new Schema({
 
@@ -28,6 +29,6 @@ const ShareSchema = new Schema({
     }
 })
 
-const Share = mongoose.model('Project', ShareSchema);
+const Share = mongoose.model('Share', ShareSchema);
 
 module.exports = Share;
