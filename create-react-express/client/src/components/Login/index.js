@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
-import axios from 'axios'
+import API from '../../utils/user'
+
 
 class LoginForm extends Component {
     constructor() {
@@ -24,11 +25,8 @@ class LoginForm extends Component {
     handleSubmit(event) {
         event.preventDefault()
         console.log('handleSubmit')
-        axios
-            .post('/user/login', {
-                username: this.state.username,
-                password: this.state.password
-            })
+        const user = {username: this.state.username, password: this.state.password}
+        API.login(user)
             .then(response => {
                 console.log('login response: ')
                 console.log(response)
@@ -57,8 +55,8 @@ class LoginForm extends Component {
         if (this.state.redirectTo) {
             return <Redirect to={{ pathname: this.state.redirectTo }} />
         } else if(loggedIn) {
-            return <Redirect to="/" />
-        } 
+            return <Redirect to="/board" />
+        }
         else {
             return (
                 <div>

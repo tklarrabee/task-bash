@@ -1,18 +1,40 @@
 import React, { Component } from 'react'
-import axios from 'axios'
+// import { Redirect } from 'react-router-dom'
+import Error from '../Error'
+import API from '../../utils/user'
+import Wrapper from "../Wrapper";
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container'
+import Form from 'react-bootstrap/Form'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Card from 'react-bootstrap/Card'
+import {PASSWORD_MATCH} from '../../MessageBundle'
 
-class Signup extends Component {
+class Register extends Component {
 	constructor() {
 		super()
 		this.state = {
 			username: '',
 			password: '',
-			confirmPassword: ''
+			name: '',
+			confirmPassword: '',
+			error: false,
+			redirectTo: null
 
 		}
 		this.handleSubmit = this.handleSubmit.bind(this)
 		this.handleChange = this.handleChange.bind(this)
+		this.handlePasswordConfirm = this.handlePasswordConfirm.bind(this)
 	}
+	handlePasswordConfirm(event) {
+		if(this.state.password === event.target.value){
+			this.setState({})
+		} else {
+			this.setState({error: true})
+		}
+	}
+
 	handleChange(event) {
 		this.setState({
 			[event.target.name]: event.target.value
@@ -22,12 +44,15 @@ class Signup extends Component {
 		console.log('sign-up handleSubmit, username: ')
 		console.log(this.state.username)
 		event.preventDefault()
-
-		//request to server to add a new username/password
-		axios.post('/user/', {
+		const user = {
 			username: this.state.username,
-			password: this.state.password
-		})
+			password: this.state.password, 
+			first_name: this.state.password,
+			last_name: this.state.password,
+			error: false
+		}
+		//request to server to add a new username/password
+		API.register(user)
 			.then(response => {
 				console.log(response)
 				if (!response.data.errmsg) {
@@ -47,52 +72,60 @@ class Signup extends Component {
 
 
 render() {
-	return (
-		<div className="SignupForm">
-			<h4>Sign up</h4>
-			<form className="form-horizontal">
-				<div className="form-group">
-					<div className="col-1 col-ml-auto">
-						<label className="form-label" htmlFor="username">Username</label>
-					</div>
-					<div className="col-3 col-mr-auto">
-						<input className="form-input"
-							type="text"
-							id="username"
-							name="username"
-							placeholder="Username"
-							value={this.state.username}
-							onChange={this.handleChange}
-						/>
-					</div>
-				</div>
-				<div className="form-group">
-					<div className="col-1 col-ml-auto">
-						<label className="form-label" htmlFor="password">Password: </label>
-					</div>
-					<div className="col-3 col-mr-auto">
-						<input className="form-input"
-							placeholder="password"
-							type="password"
-							name="password"
-							value={this.state.password}
-							onChange={this.handleChange}
-						/>
-					</div>
-				</div>
-				<div className="form-group ">
-					<div className="col-7"></div>
-					<button
-						className="btn btn-primary col-1 col-mr-auto"
-						onClick={this.handleSubmit}
-						type="submit"
-					>Sign up</button>
-				</div>
-			</form>
-		</div>
+	const { error } = this.state
+
+		return (
+			<Wrapper>
+				<Container>
+					<Card>
+					<Card.Header>Create Account</Card.Header>
+					<Card.Text>
+						<Form>
+							<Form.Row>
+								<Form.Group as={Col}  controlId="formGridEmail">
+									<Form.Label>Email</Form.Label>
+									<Form.Control 
+										type='text'
+										placeholder='Enter Email'
+									/>
+									<Form.Label>Password</Form.Label>
+									<Form.Control 
+                                        type="password" 
+                                        placeholder="Password" 
+                                        name="password"
+                                        value={this.state.password}
+                                        onChange={this.handleChange}
+                                    />
+									<Form.Label>Confirm Password</Form.Label>
+									<Form.Control
+                                    type="password"
+                                    placeholder="Confirm Password"
+                                    name="confirmPassword"
+                                    value={this.state.confirmPassword}
+									onChange={this.handleChange}
+									onBlur={this.handlePasswordConfirm}
+									/>
+									{error && <Error message={PASSWORD_MATCH}/>}
+									<Form.Label>Name</Form.Label>
+									<Form.Control 
+										type="text"
+										placeholder="Name"
+										name="name"
+										value={this.state.name}
+										onChange={this.handleChange}
+									/>
+									<Button variant="primary" type="submit" onClick={this.handleSubmit}> Submit </Button>
+								</Form.Group>
+							</Form.Row>
+						</Form>
+					</Card.Text>
+					</Card>
+				</Container>
+			</Wrapper>
 
 	)
+
 }
 }
 
-export default Signup
+export default Register

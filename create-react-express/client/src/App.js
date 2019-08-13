@@ -9,6 +9,7 @@ import Logout from "./pages/Logout";
 import CreateAccount from "./pages/CreateAccount";
 import Summary from "./pages/Summary";
 import Navbar from "./components/Navbar";
+import Register from "./components/Register";
 // import Footer from "./components/Footer";
 // import Wrapper from "./components/Wrapper";
 import "./App.css";
@@ -66,10 +67,13 @@ class App extends Component {
               <Route exact path="/board" component={Board} />
               <Route exact path="/login" 
                 render={() => <Login 
-                updateUser={this.updateUser} loggedIn={this.state.loggedIn} />} 
+                  updateUser={this.updateUser} 
+                  loggedIn={this.state.loggedIn} 
+                  />} 
                 />
-              <Route exact path="/create" component={CreateAccount} />
+              <Route exact path="/register" component={Register} />
               <Route exact path="/logout" component={Logout} />
+              <Route exact path="/create" component={CreateAccount} />
               <Route exact path="/summary" component={Summary} />
             </Switch>
           <Footer />

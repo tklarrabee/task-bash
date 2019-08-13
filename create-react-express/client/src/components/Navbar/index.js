@@ -2,8 +2,8 @@ import React, {Component} from "react";
 import "./style.css";
 import Navigate from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
-import { Redirect } from 'react-router-dom'
-import axios from 'axios'
+import API from '../../utils/user'
+
 
 class Navbar extends Component {
     constructor() {
@@ -14,7 +14,7 @@ class Navbar extends Component {
     logout(event) {
         event.preventDefault()
         console.log('loggin out')
-        axios.post('/user/logout').then(res => {
+        API.logout().then(res => {
             console.log(res.data)
             if (res.status === 200) {
                 this.props.updateUser({
@@ -51,7 +51,7 @@ class Navbar extends Component {
                                 ) : (
                                     <Nav className="mr-auto">
                                         <Nav.Link href="/login">Login</Nav.Link>
-                                        <Nav.Link href="/create">Create Account</Nav.Link>
+                                        <Nav.Link href="/register">Create Account</Nav.Link>
                                     </Nav>
                                     )}
                             

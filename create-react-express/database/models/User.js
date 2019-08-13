@@ -8,12 +8,7 @@ mongoose.promise = Promise
 
 const userSchema = new Schema({
 
-    first_name: {
-        type: String,
-        required: false
-    },
-
-    last_name: {
+    name: {
         type: String,
         required: false
     },
