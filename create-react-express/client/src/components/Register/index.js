@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-// import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import Error from '../Error'
 import API from '../../utils/user'
 import Wrapper from "../Wrapper";
@@ -9,7 +9,7 @@ import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
-import {PASSWORD_MATCH} from '../../MessageBundle'
+import { PASSWORD_MATCH } from '../../MessageBundle'
 
 class Register extends Component {
 	constructor() {
@@ -28,10 +28,16 @@ class Register extends Component {
 		this.handlePasswordConfirm = this.handlePasswordConfirm.bind(this)
 	}
 	handlePasswordConfirm(event) {
-		if(this.state.password === event.target.value){
-			this.setState({})
+		if (this.state.password !== event.target.value) {
+			this.setState({
+				error: true,
+				confirmPassword: event.target.value
+			})
 		} else {
-			this.setState({error: true})
+			this.setState({
+				error: false,
+				confirmPassword: event.target.value
+			})
 		}
 	}
 
@@ -46,10 +52,11 @@ class Register extends Component {
 		event.preventDefault()
 		const user = {
 			username: this.state.username,
-			password: this.state.password, 
+			password: this.state.password,
 			first_name: this.state.password,
 			last_name: this.state.password,
-			error: false
+			error: false,
+			redirectTo: null
 		}
 		//request to server to add a new username/password
 		API.register(user)
@@ -71,61 +78,66 @@ class Register extends Component {
 	}
 
 
-render() {
-	const { error } = this.state
+	render() {
+		const { error } = this.state
+		const loggedIn = this.props.loggedIn
+		if (this.state.redirectTo) {
+			return (<Redirect to={{ pathname: this.state.redirectTo }} />)
+		} else if (loggedIn) {
+			return (<Redirect to='/board' />)
+		} else {
+			return (
+				<Wrapper>
+					<Container>
+						<Card>
+							<Card.Header>Create Account</Card.Header>
+							<Card.Text>
+								<Form>
+									<Form.Row>
+										<Form.Group as={Col} controlId="formGridEmail">
+											<Form.Label>Email</Form.Label>
+											<Form.Control
+												type='text'
+												placeholder='Enter Email'
+											/>
+											<Form.Label>Password</Form.Label>
+											<Form.Control
+												type="password"
+												placeholder="Password"
+												name="password"
+												value={this.state.password}
+												onChange={this.handleChange}
+											/>
+											<Form.Label>Confirm Password</Form.Label>
+											<Form.Control
+												type="password"
+												placeholder="Confirm Password"
+												name="confirmPassword"
+												value={this.state.confirmPassword}
+												onChange={this.handlePasswordConfirm}
+											/>
+											<Form.Label>Name</Form.Label>
+											<Form.Control
+												type="text"
+												placeholder="Name"
+												name="name"
+												value={this.state.name}
+												onChange={this.handleChange}
+											/>
+											<Button variant="primary" type="submit" onClick={this.handleSubmit}> Submit </Button>
+										</Form.Group>
+									</Form.Row>
+								</Form>
+							</Card.Text>
+							{error && <Error message={PASSWORD_MATCH} />}
+						</Card>
+					</Container>
+				</Wrapper>
+			)
 
-		return (
-			<Wrapper>
-				<Container>
-					<Card>
-					<Card.Header>Create Account</Card.Header>
-					<Card.Text>
-						<Form>
-							<Form.Row>
-								<Form.Group as={Col}  controlId="formGridEmail">
-									<Form.Label>Email</Form.Label>
-									<Form.Control 
-										type='text'
-										placeholder='Enter Email'
-									/>
-									<Form.Label>Password</Form.Label>
-									<Form.Control 
-                                        type="password" 
-                                        placeholder="Password" 
-                                        name="password"
-                                        value={this.state.password}
-                                        onChange={this.handleChange}
-                                    />
-									<Form.Label>Confirm Password</Form.Label>
-									<Form.Control
-                                    type="password"
-                                    placeholder="Confirm Password"
-                                    name="confirmPassword"
-                                    value={this.state.confirmPassword}
-									onChange={this.handleChange}
-									onBlur={this.handlePasswordConfirm}
-									/>
-									{error && <Error message={PASSWORD_MATCH}/>}
-									<Form.Label>Name</Form.Label>
-									<Form.Control 
-										type="text"
-										placeholder="Name"
-										name="name"
-										value={this.state.name}
-										onChange={this.handleChange}
-									/>
-									<Button variant="primary" type="submit" onClick={this.handleSubmit}> Submit </Button>
-								</Form.Group>
-							</Form.Row>
-						</Form>
-					</Card.Text>
-					</Card>
-				</Container>
-			</Wrapper>
+		}
 
-	)
-
-}
+	}
 }
 
 export default Register

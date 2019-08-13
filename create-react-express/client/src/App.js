@@ -10,10 +10,9 @@ import CreateAccount from "./pages/CreateAccount";
 import Summary from "./pages/Summary";
 import Navbar from "./components/Navbar";
 import Register from "./components/Register";
-// import Footer from "./components/Footer";
+import Footer from "./components/Footer";
 // import Wrapper from "./components/Wrapper";
 import "./App.css";
-import Footer from "./components/Footer";
 
 class App extends Component {
   constructor() {
@@ -71,7 +70,11 @@ class App extends Component {
                   loggedIn={this.state.loggedIn} 
                   />} 
                 />
-              <Route exact path="/register" component={Register} />
+              <Route exact path="/register" 
+                render={() => <Register 
+                  loggedIn={this.state.loggedIn}
+                />} 
+              />
               <Route exact path="/logout" component={Logout} />
               <Route exact path="/create" component={CreateAccount} />
               <Route exact path="/summary" component={Summary} />
