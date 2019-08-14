@@ -6,7 +6,7 @@ import Wrapper from "../Wrapper";
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
-import Row from 'react-bootstrap/Row'
+// import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 import { PASSWORD_MATCH } from '../../MessageBundle'
@@ -53,10 +53,7 @@ class Register extends Component {
 		const user = {
 			username: this.state.username,
 			password: this.state.password,
-			first_name: this.state.password,
-			last_name: this.state.password,
-			error: false,
-			redirectTo: null
+			name: this.state.name
 		}
 		//request to server to add a new username/password
 		API.register(user)
@@ -99,6 +96,9 @@ class Register extends Component {
 											<Form.Control
 												type='text'
 												placeholder='Enter Email'
+												name="username"
+												value={this.state.username}
+												onChange={this.handleChange}
 											/>
 											<Form.Label>Password</Form.Label>
 											<Form.Control
