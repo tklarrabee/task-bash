@@ -7,8 +7,8 @@ import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
-import NavbarLogin from "../components/NavbarLogin";
-import Footer from "../components/Footer";
+// import NavbarLogin from "../components/NavbarLogin";
+// import Footer from "../components/Footer";
 
 
 class CreateAccount extends Component {
@@ -18,7 +18,7 @@ class CreateAccount extends Component {
     render() {
         return (
             <div>
-                <NavbarLogin />
+                {/* <NavbarLogin /> */}
                 <Wrapper>
                     <Container style={{ marginTop: 30 }}>
                         <Wrapper>
@@ -34,11 +34,15 @@ class CreateAccount extends Component {
                                                 <Form.Group as={Col} controlId="formGridEmail">
                                                     <Form.Label>Email</Form.Label>
                                                     <Form.Control type="email" placeholder="Enter email" />
-                                                </Form.Group>
-
-                                                <Form.Group as={Col} controlId="formGridPassword">
+                                                
                                                     <Form.Label>Password</Form.Label>
-                                                    <Form.Control type="password" placeholder="Password" />
+                                                    <Form.Control 
+                                                        type="password" 
+                                                        placeholder="Password" 
+                                                        name="password"
+                                                        value={this.state.password}
+                                                        onChange={this.handleChange}
+                                                    />
                                                 </Form.Group>
                                             </Form.Row>
 
@@ -90,7 +94,7 @@ class CreateAccount extends Component {
                             </div>
                         </Wrapper>
                     </Container>
-                    <Footer />
+                    {/* <Footer /> */}
                 </Wrapper>
             </div>
 

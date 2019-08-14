@@ -7,8 +7,8 @@ import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
-import NavbarAll from "../components/NavbarAll";
-import Footer from "../components/Footer";
+// import NavbarAll from "../components/NavbarAll";
+// import Footer from "../components/Footer";
 
 
 class Summary extends Component {
@@ -18,7 +18,7 @@ class Summary extends Component {
     render() {
         return (
             <div>
-                <NavbarAll />
+                {/* <NavbarAll /> */}
                 <Wrapper>
                     <Container style={{ marginTop: 30 }}>
                         <Wrapper>
@@ -40,7 +40,7 @@ class Summary extends Component {
                             </div>
                         </Wrapper>
                     </Container>
-                    <Footer />
+                    {/* <Footer /> */}
                 </Wrapper>
             </div>
 

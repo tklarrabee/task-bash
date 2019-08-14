@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
-import NavbarAll from "../components/NavbarAll";
-import Footer from "../components/Footer";
+// import NavbarAll from "../components/NavbarAll";
+// import Footer from "../components/Footer";
 
 
 class Client extends Component {
@@ -11,10 +11,10 @@ class Client extends Component {
     render() {
         return (
             <div>
-                <NavbarAll />
+                {/* <NavbarAll /> */}
 
                 <p>this is going to be client page</p>
-                <Footer />
+                {/* <Footer /> */}
 
             </div>
         );
