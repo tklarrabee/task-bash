@@ -10,6 +10,11 @@ const ShareSchema = new Schema({
         default: false
     },
 
+    declined: {
+        type: Boolean,
+        default: false
+    },
+
     project: {
         type: Schema.Types.ObjectId,
         required: true,

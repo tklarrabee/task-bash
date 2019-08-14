@@ -7,6 +7,7 @@ const dbConnection = require("./database");
 const MongoStore = require('connect-mongo')(session);
 const passport = require("./passport");
 const user = require('./routes/user');
+const collaborate = require('./routes/collaborate');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -44,6 +45,7 @@ app.use(passport.session()) // calls the deserializeUser
 
 // Define API routes here
 app.use('/user', user)
+app.use('/invite', collaborate)
 
 
 // Send every other request to the React app

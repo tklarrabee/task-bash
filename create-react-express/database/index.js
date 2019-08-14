@@ -19,11 +19,4 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true }).then(
         }
   );
 
-//   module.exports = {
-//     Project: require('./models/Project'),
-//     Column: require('./models/Column'),
-//     Element: require('./models/Element'),
-//     User: require('./models/User'),
-//     Share: require('./models/Share')
-// }
 module.exports = mongoose.connection
