@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import TextEditor  from "../TextEditor";
 import "./styles.css";
 
 export function Container({ children }) {
@@ -12,7 +13,7 @@ export class Header extends Component {
   render() {
     return (
       <div className="header">
-        <span>{this.state.boardName} <button className="btn btn-primary"><i className="fa fa-star-o"></i></button></span> 
+        <TextEditor/> <button className="btn btn-primary"><i className="fa fa-star-o"></i></button>
         <span style={{color: "white", float: "right"}}> Users: {this.state.users}<button className="btn btn-success">invite</button></span>
       </div>
     );

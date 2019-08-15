@@ -1,8 +1,22 @@
 import React, { Component } from "react";
+import Columns from "../Columns";
+import TextEditor from "../TextEditor";
 import "./styles.css";
+
+const ParentComponent = props => (
+  <div className="card calculator">
+    <p><a href="#" onClick={props.addChild}>Add Another Child Component</a></p>
+    <div id="children-pane">
+      {props.children}
+    </div>
+  </div>
+);
+
+const ChildComponent = props => <div>{"I am child " + props.number}</div>;
 
 export default class AppDragDrop extends Component {
   state = {
+    numChildren: 0,
     tasks: [
       {
         name: "Yellow",
@@ -34,6 +48,16 @@ export default class AppDragDrop extends Component {
         context: "hello, I am Orange",
         bgcolor: "Orange"
       }
+    ],
+    columns: [
+      {
+        name: "Column 1",
+        category: "hello"
+      },
+      {
+        name: "column 2",
+        category: "world"
+      }
     ]
   };
 
@@ -62,10 +86,28 @@ export default class AppDragDrop extends Component {
     });
   };
 
+  onAddChild = () => {
+    this.setState({
+      numChildren: this.state.numChildren + 1
+    });
+  }
+
+
   render() {
     var tasks = {
       wip: [],
       complete: []
+    };
+
+    var columns = {
+      hello: [],
+      world: []
+    };
+
+    const children = [];
+
+    for (var i = 0; i < this.state.numChildren; i += 1) {
+      children.push(<ChildComponent key={i} number={i} />);
     };
 
     this.state.tasks.forEach(t => {
@@ -83,9 +125,23 @@ export default class AppDragDrop extends Component {
       );
     });
 
+    this.state.columns.forEach(c => {
+      columns[c.category].push(
+        <div
+          key={c.name}
+          onDragStart={e => this.onDragStart(e, c.name)}
+          draggable
+          className="draggable"
+        >
+          <p>{c.name}</p>
+        </div>
+      );
+    });
+
     return (
       <div className="container-drag">
         <div className="boardWrapper">
+          {/* Column 1 */}
           <div
             className="wip"
             onDragOver={e => this.onDragOver(e)}
@@ -94,28 +150,55 @@ export default class AppDragDrop extends Component {
             }}
           >
             <div className="colummContainer">
-              <span>Columm 1</span>
-              {tasks.wip}
+              <Columns>
+                <TextEditor />
+                {tasks.wip}
+              </Columns>
             </div>
           </div>
+          {/* Columns 2 */}
           <div
             className="droppable"
             onDragOver={e => this.onDragOver(e)}
             onDrop={e => this.onDrop(e, "complete")}
           >
             <div className="colummContainer">
-              <span>Columm 2</span>
-              {tasks.complete}
+              <Columns>
+                <TextEditor />
+                {tasks.complete}
+              </Columns>
             </div>
           </div>
-          <div className="colummContainer newColumn">
-            <p>
-              click for new columm
-            </p>
-              <button class="btn btn-warning">
-                <i class="fa fa-plus" />
-              </button>
+          {/* Columns 3 */}
+          <div
+            className="droppable"
+            onDragOver={e => this.onDragOver(e)}
+            onDrop={e => this.onDrop(e, "world")}
+          >
+            <div className="colummContainer">
+              <Columns>{columns.hello}</Columns>
+            </div>
           </div>
+          {/* Columns 4 */}
+          <div
+            className="droppable"
+            onDragOver={e => this.onDragOver(e)}
+            onDrop={e => this.onDrop(e, "hello")}
+          >
+            <div className="colummContainer">
+              <Columns>{columns.world}</Columns>
+            </div>
+          </div>
+          {/* new columns creater */}
+          <div className="colummContainer newColumn">
+            <p>click for new columm</p>
+            <button class="btn btn-warning" onClick={this.handleNewColumns}>
+              <i class="fa fa-plus" />
+            </button>
+          </div>
+          <ParentComponent addChild={this.onAddChild}>
+            {children}
+          </ParentComponent>
         </div>
       </div>
     );

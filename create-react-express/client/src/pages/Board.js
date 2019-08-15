@@ -18,6 +18,9 @@ class Board extends Component {
       { name: "React", category: "wip", bgcolor: "pink" },
       { name: "Vue", category: "complete", bgcolor: "skyblue" }
       
+    ],
+    Columns: [
+      { name: "Column 1"}
     ]
   };
 
@@ -49,7 +52,7 @@ class Board extends Component {
     return (
       <div>
         {/* <NavbarAll /> */}
-        <Header>Header</Header>
+        <Header></Header>
             < AppDragDrop/>
         {/* <Footer /> */}
       </div>
