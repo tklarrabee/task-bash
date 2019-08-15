@@ -2,7 +2,7 @@ const db = require("../database/models");
 const express = require('express')
 const router = express.Router()
 
-
+// project invites for signed in user
 router.get('/pending', (req, res) => {
     console.log('Pending Project Invites for User: ', req.body)
     const { id } = req.body
@@ -15,6 +15,7 @@ router.get('/pending', (req, res) => {
 
 })
 
+// Check for valid user before creating invites
 router.get('/verify', (req, res) => {
     console.log('Find user with matching name', req.body)
     const { username } = req.body
@@ -24,6 +25,7 @@ router.get('/verify', (req, res) => {
     })
 })
 
+// Accept collaboration invite and keep share document, reject collaboration and delete share record
 router.post('/accept', (req, res) => {
     console.log('Invite request', req.body)
     const { id, accepted, rejected } = req.body
@@ -55,7 +57,7 @@ router.post('/accept', (req, res) => {
 
 })
 
-
+// Send invitation to users
 router.post('/invite', (req, res) => {
     console.log('Send Invite', req.body)
     const {user, project, invited_by} = req.body
@@ -86,7 +88,7 @@ router.post('/invite', (req, res) => {
     })
 })
 
-// Find projects shared with a given user
+// Find projects shared with logged in user
 router.get('/projects', (req, res) => {
     const { id } = req.body
     db.Share.find({ user: id }, (err, share) => {

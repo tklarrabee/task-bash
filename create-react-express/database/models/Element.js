@@ -15,16 +15,10 @@ const ElementSchema = new Schema({
         required: false
     },
 
-    // user: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'User'
-    // },
-
     column: {
         type: Schema.Types.ObjectId,
         ref: 'Column',
     }
-
 
 });
 
