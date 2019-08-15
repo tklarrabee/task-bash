@@ -2,6 +2,7 @@ const db = require("../database/models");
 const express = require('express')
 const router = express.Router()
 
+// prefix /share
 // project invites for signed in user
 router.get('/pending', (req, res) => {
     console.log('Pending Project Invites for User: ', req.body)
