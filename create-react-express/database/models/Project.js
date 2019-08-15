@@ -9,15 +9,17 @@ const ProjectSchema = new Schema({
         required: true
     },
 
-    // columns: [{type: Schema.Types.ObjectId, ref: 'Column'}],
-
     owner: {
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true
+    },
+
+    description: {
+        type: String,
+        required: false
     }
-    //,
-    //  members: [{type: Schema.Types.ObjectId, ref: 'Share'}]
+
 });
 
 const Project = mongoose.model('Project', ProjectSchema);
