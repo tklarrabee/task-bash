@@ -24,11 +24,11 @@ class Board extends Component {
     return (
       <div>
         {/* <NavbarAll /> */}
-        <BoardContainer addColumns={this.onAddColumns}>
           <Header />
-          <AppDragDrop />
+        <BoardContainer addColumns={this.onAddColumns}>
           {columns}
         </BoardContainer>
+          <AppDragDrop />
         {/* <Footer /> */}
       </div>
     );

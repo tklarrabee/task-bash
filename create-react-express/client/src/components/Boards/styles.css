@@ -1,23 +1,14 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto+Mono");
 * {
   box-sizing: border-box;
   font-weight: normal;
 }
 
-body {
-  color: #555;
-  background: #222;
-  text-align: center;
-  font-family: "Roboto Mono";
-  padding: 1em;
-}
-
 h1 {
-  font-size: 2.2em;
+  font-size: 1em;
 }
 
 .flip {
-  position: relative;
+  position: auto;
 }
 .flip > .front,
 .flip > .back {
@@ -60,7 +51,7 @@ h1 {
   display: inline-block;
   margin-right: 2px;
   margin-bottom: 1em;
-  width: 400px;
+  width: 180px;
 }
 .flip > .front,
 .flip > .back {
@@ -69,7 +60,7 @@ h1 {
   width: inherit;
   background-size: cover !important;
   background-position: center !important;
-  height: 220px;
+  height: 150px;
   padding: 1em 2em;
   background: #313131;
   border-radius: 10px;
@@ -92,4 +83,34 @@ h1 {
     0.625rem 0.625rem rgba(0, 0, 0, 0.04), 16px 16px rgba(0, 0, 0, 0.04),
     17px 17px rgba(0, 0, 0, 0.04), 18px 18px rgba(0, 0, 0, 0.04),
     19px 19px rgba(0, 0, 0, 0.04), 1.25rem 1.25rem rgba(0, 0, 0, 0.04);
+}
+
+/* for columns */
+
+.draggable {
+  width: 100%;
+  min-height: 200px;
+  border-radius: 12px;
+  position: relative;
+}
+
+.draggable p {
+  margin: 10px 20px;
+  padding: 10px 0px;
+  color: black;
+}
+
+.boardWrapper {
+  width: 45rem;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(6, 200px);
+}
+
+.columnContainer {
+  background-color: purple;
+  padding: 10px;
+  color: white;
+  border-radius: 12px;
+  align-self: start;
 }

@@ -5,9 +5,9 @@ import "./styles.css";
 export function BoardContainer(props) {
   return (
     <div className="card">
-      <div>{props.children}</div>
-      <div className="card">
-        <button className="btn btn-sm btn-primary" onClick={props.addColumns}>
+      <div className="boardWrapper">{props.children}</div>
+      <div className="columnContainer">
+        <button className="btn btn-primary" onClick={props.addColumns}>
           Add Columns
         </button>
       </div>
@@ -39,7 +39,7 @@ export class Header extends Component {
 
 export function Columns(props) {
   return (
-    <div>
+    <div className="columnContainer">
       {"column " + props.number}
       <button className="btn btn-warning">
         <i className="fa fa-plus" />
@@ -56,13 +56,12 @@ export function Card() {
     <div>
       <div className="flip">
         <div className="front">
-          <h1 className="text-shadow">MOUNTAIN</h1>
+          <h1 className="text-shadow">Card</h1>
         </div>
         <div className="back">
-          <h2>Angular</h2>
+          <h2>detail</h2>
           <p>
-            Good tools make application development quicker and easier to
-            maintain than if you did everything by hand..
+            context
           </p>
         </div>
       </div>

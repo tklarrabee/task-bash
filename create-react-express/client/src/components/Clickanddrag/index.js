@@ -171,7 +171,7 @@ export default class AppDragDrop extends Component {
             </div>
           </div>
           {/* Columns 3 */}
-          <div
+          {/* <div
             className="droppable"
             onDragOver={e => this.onDragOver(e)}
             onDrop={e => this.onDrop(e, "world")}
@@ -179,9 +179,9 @@ export default class AppDragDrop extends Component {
             <div className="colummContainer">
               <Columns>{columns.hello}</Columns>
             </div>
-          </div>
+          </div> */}
           {/* Columns 4 */}
-          <div
+          {/* <div
             className="droppable"
             onDragOver={e => this.onDragOver(e)}
             onDrop={e => this.onDrop(e, "hello")}
@@ -189,17 +189,17 @@ export default class AppDragDrop extends Component {
             <div className="colummContainer">
               <Columns>{columns.world}</Columns>
             </div>
-          </div>
+          </div> */}
           {/* new columns creater */}
+          <ParentComponent addChild={this.onAddChild}>
+            {children}
+          </ParentComponent>
           <div className="colummContainer newColumn">
             <p>click for new columm</p>
             <button className="btn btn-warning" onClick={this.handleNewColumns}>
               <i className="fa fa-plus" />
             </button>
           </div>
-          <ParentComponent addChild={this.onAddChild}>
-            {children}
-          </ParentComponent>
         </div>
       </div>
     );
