@@ -16,9 +16,9 @@ const ColumnSchema = new Schema({
     index: {
         type: Number,
         required: true
-    }
+    },
 
-    // elements: [{type: Schema.Types.ObjectId, ref: 'Element'}]
+    elements: [{type: Schema.Types.ObjectId, ref: 'Element'}]
 })
 
 const Column = mongoose.model('Column', ColumnSchema);

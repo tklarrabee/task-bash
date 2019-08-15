@@ -2,6 +2,7 @@ const db = require("../database/models");
 const express = require('express')
 const router = express.Router()
 
+// Create a new project
 router.post('/new', (req, res) => {
     console.log('New Project', req.body)
 
@@ -19,6 +20,7 @@ router.post('/new', (req, res) => {
     })
 })
 
+// Creates a new column
 router.post('/col/new', (req, res) => {
     console.log('New project', req.body)
 
@@ -27,15 +29,37 @@ router.post('/col/new', (req, res) => {
         name: name,
         project: project,
         index: index
-    }).then(dbColumn => {
+    }).then((err, dbColumn) => {
         console.log('dbColumn project.js 38: ', dbColumn)
-        db.Column.findOne({_id: dbColumn._id})
-            .populate('project')
-            .then( dbColumn=> res.json(dbColumn))
-            .catch( err => res.json(err))
+        if(err) res.json(err)
+        else res.json(dbColumn)
     })
 })
 
+
+// Create new Kanban card
+router.post('/card/new', (req, res) => {
+    console.log('New Card', req.body)
+
+    const { column, user, date, body } = req.body
+
+    db.Element.create({
+        column: column,
+        body: body,
+        date: date,
+        user: user
+    }).then((dbElement) => {
+        db.Column.findOneAndUpdate({}, {$push: { elements: dbElement._id} }, { new: true })
+        .then((dbColumn) => {
+            res.json(dbColumn)
+        })
+        .catch((err) => res.json(err))
+    })
+
+})
+
+
+// get projects created by signed in ruser
 router.get('/mine', (req, res) => {
     console.log('My projects ', req.body)
 
@@ -46,13 +70,19 @@ router.get('/mine', (req, res) => {
     })
 })
 
-router.get('/shared', (req, res) => {
-    
-    const { user } = req.body
-    db.Share.find({user: user}, (err, user) => {
-        if (err) console.log('Err finding user share records')
-        else res.json(user)
+// get all columns and their related cards for a given project
+router.get('/col', (req, res) => {
+    console.log('Project Columns', req.body)
+
+    const{ project } = req.body
+    db.Column.find({project: project}, (err, project) => {
+        if(err) console.log("Error loading columns", err)
+        else res.json(project)
     })
+    .populate('elements')
+    .then( (dbColumns) => res.json(dbColumns))
 })
+
+
 
 module.exports = router
