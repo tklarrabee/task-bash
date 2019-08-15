@@ -81,6 +81,34 @@ router.get('/col', (req, res) => {
     })
     .populate('elements')
     .then( (dbColumns) => res.json(dbColumns))
+    .catch( err => res.json(err))
+})
+
+// delete column
+router.delete('/col', (req, res) => {
+    console.log('Delete Project: ', req.body)
+    const { id } = req.body
+    db.Column.deleteOne({ _id: id})
+    .then( (deleted) => res.json(deleted))
+    .catch( err => res.json(err))
+})
+
+// delete card
+router.delete('/card', (req, res) => {
+    console.log('Delete Card: ', req.body)
+    const { id } = req.body
+    db.Element.deleteOne({ _id: id })
+    .then( (deleted) => res.json(deleted))
+    .catch( err => res.json(err))
+})
+
+// delete project
+router.delete('/', (req, res) => {
+    console.log('Delete Project: ', req.body)
+    const { id } = req.body
+    db.Project.deleteOne({ _id: id})
+    .then( deleted => res.json(deleted))
+    .catch( err => res.json(err))
 })
 
 

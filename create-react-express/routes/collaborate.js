@@ -117,4 +117,10 @@ router.get('/sent', (req, res) => {
     .then( (dbInvites) => res.json(dbInvites))
 })
 
+router.delete('/invite', (req, res) => {
+    const{ id } = req.body
+    db.Share.deleteOne({ _id: id })
+        .then( (deleted) => res.json(deleted))
+})
+
 module.exports = router
