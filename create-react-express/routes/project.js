@@ -2,6 +2,7 @@ const db = require("../database/models");
 const express = require('express')
 const router = express.Router()
 
+// Prefix /project
 // Create a new project
 router.post('/new', (req, res) => {
     console.log('New Project', req.body)
@@ -21,7 +22,7 @@ router.post('/new', (req, res) => {
 })
 
 // Creates a new column
-router.post('/col/new', (req, res) => {
+router.post('/col', (req, res) => {
     console.log('New project', req.body)
 
     const { name, project, index } = req.body 
@@ -38,7 +39,7 @@ router.post('/col/new', (req, res) => {
 
 
 // Create new Kanban card
-router.post('/card/new', (req, res) => {
+router.post('/card', (req, res) => {
     console.log('New Card', req.body)
 
     const { column, user, date, body } = req.body
@@ -60,7 +61,7 @@ router.post('/card/new', (req, res) => {
 
 
 // get projects created by signed in ruser
-router.get('/mine', (req, res) => {
+router.get('/', (req, res) => {
     console.log('My projects ', req.body)
 
     const { id } = req.body
@@ -71,7 +72,7 @@ router.get('/mine', (req, res) => {
 })
 
 // get all columns and their related cards for a given project
-router.get('/col', (req, res) => {
+router.get('/board', (req, res) => {
     console.log('Project Columns', req.body)
 
     const{ project } = req.body
