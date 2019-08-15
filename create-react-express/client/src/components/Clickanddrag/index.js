@@ -16,7 +16,6 @@ const ChildComponent = props => <div>{"I am child " + props.number}</div>;
 
 export default class AppDragDrop extends Component {
   state = {
-    numChildren: 0,
     tasks: [
       {
         name: "Yellow",
@@ -58,7 +57,8 @@ export default class AppDragDrop extends Component {
         name: "column 2",
         category: "world"
       }
-    ]
+    ],
+    numChildren: 0
   };
 
   onDragStart = (ev, id) => {
@@ -86,7 +86,8 @@ export default class AppDragDrop extends Component {
     });
   };
 
-  onAddChild = () => {
+  onAddChild = e => {
+    e.preventDefault();
     this.setState({
       numChildren: this.state.numChildren + 1
     });
@@ -192,8 +193,8 @@ export default class AppDragDrop extends Component {
           {/* new columns creater */}
           <div className="colummContainer newColumn">
             <p>click for new columm</p>
-            <button class="btn btn-warning" onClick={this.handleNewColumns}>
-              <i class="fa fa-plus" />
+            <button className="btn btn-warning" onClick={this.handleNewColumns}>
+              <i className="fa fa-plus" />
             </button>
           </div>
           <ParentComponent addChild={this.onAddChild}>

@@ -3,7 +3,7 @@ import React, { Component } from "react";
 
 class TextEditor extends Component {
   state = {
-    value: "some text here",
+    value: "Title Placeholder",
     isInEditMode: false
   };
 
