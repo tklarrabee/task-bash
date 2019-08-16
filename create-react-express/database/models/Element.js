@@ -15,9 +15,9 @@ const ElementSchema = new Schema({
         required: false
     },
 
-    column: {
+    user: {
         type: Schema.Types.ObjectId,
-        ref: 'Column',
+        ref: 'User'
     }
 
 });

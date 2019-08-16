@@ -31,14 +31,9 @@ router.post('/accept', (req, res) => {
     console.log('Invite request', req.body)
     const { id, accepted, rejected } = req.body
     if (accepted) {
-        db.Share.findOneAndUpdate({ _id: id }, { accepted: accepted }).then( (err, accept) => {
-            if (err) {
-                console.log('collaborate.js post error on "/share/accept": ', err)
-            }
-            else {
-                res.json(accept)
-            }
-        })
+        db.Share.findOneAndUpdate({ _id: id }, { accepted: accepted })
+        .then( accept => res.json(accept) )
+        .catch( err => res.json(err) )
     }
 
     else if (rejected) {
@@ -92,19 +87,41 @@ router.post('/invite', (req, res) => {
 // Find projects shared with logged in user
 router.get('/projects', (req, res) => {
     const { id } = req.body
-    db.Share.find({ user: id }, (err, share) => {
-        if (err) return res.json(err)
+    db.Share.find({ user: id })
+    .populate('user')
+    .exec((err, share) => {
+        if (err) res.json(err)
         else res.json(share)
-        console.log(share)
-    }).then((dbShare) => {
-                console.log("dbShare collaborate.js 86: ", dbShare)
-                db.Share.findOne({_id: dbShare._id})
-                    .populate('user')
-                    .populate('project')
-                    .populate('invited_by')
-                    .then( (dbShare) => res.json(dbShare))
-            })
+    })
+
+    // db.Share.find({ user: id, accepted: true })
+    //     .then( dbShare => {
+    //     dbShare.aggregate([{ $group: { _id: "$group", user: { $push: "$$ROOT" }}}
+    //     ], (err, results) => {
+    //         db.
+    //     })
+    // })
+    // // .populate('user')
+    // // .populate('project')
+    // // .populate('invited_by')
+    // // .then( dbShare => res.json(dbShare) )
+    // // .catch( (err) => res.json(err))
+
+    // db.Share.aggregate([
+    //     { $match: { user: id } }
+    // ], (err, results) => {
+    //     db.Share
+    // })
+
 })
+            // .then((dbShare) => {
+            //         console.log("dbShare collaborate.js 86: ", dbShare)
+            //         dbShare.findOne({ _id: dbShare._id })
+            //             .populate('user')
+            //             .populate('project')
+            //             .populate('invited_by')
+            //             .then((dbShare) => res.json(dbShare))
+            //     })
 
 // Invitations sent by user
 router.get('/sent', (req, res) => {

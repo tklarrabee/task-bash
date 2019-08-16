@@ -43,10 +43,9 @@ router.post('/col', (req, res) => {
 router.post('/card', (req, res) => {
     console.log('New Card', req.body)
 
-    const { column, user, date, body } = req.body
+    const { user, date, body } = req.body
 
     db.Element.create({
-        column: column,
         body: body,
         date: date,
         user: user
@@ -168,15 +167,6 @@ router.put('/col', (req, res) => {
         })
         .catch(err => res.json({ error: "Error updating Column", text: err }))
 })
-            // console.log(dbColumn)
-            // dbColumn.save( (err, updateCol) => {
-            //     if(err) res.json({ error: 'Error updating column', text: err })
-            //     else res.json(updateCol)
-            // })
-//         })
-// })
-
-
 
 
 module.exports = router
