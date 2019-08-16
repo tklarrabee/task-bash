@@ -18,13 +18,7 @@ const ElementSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User'
-    },
-
-    column: {
-        type: Schema.Types.ObjectId,
-        ref: 'Column',
     }
-
 
 });
 

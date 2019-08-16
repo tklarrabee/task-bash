@@ -5,7 +5,7 @@ mongoose.Promise = global.Promise
 //your local database url
 //27017 is the default mongoDB port
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/taskBash';
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true }).then(
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useFindAndModify: false }).then(
     () => { 
         /** ready to use. The `mongoose.connect()` promise resolves to undefined. */ 
         console.log('Connected to Mongo');
