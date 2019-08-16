@@ -6,11 +6,6 @@ export function BoardContainer(props) {
   return (
     <div className="card">
       <div className="boardWrapper">{props.children}</div>
-      <div className="columnContainer">
-        <button className="btn btn-primary" onClick={props.addColumns}>
-          Add Columns
-        </button>
-      </div>
     </div>
   );
 }
@@ -41,17 +36,17 @@ export function Columns(props) {
   return (
     <div className="columnContainer">
       {"column " + props.number}
-      <button className="btn btn-warning">
+      <button className="btn btn-warning" onClick={props.addCards}>
         <i className="fa fa-plus" />
       </button>
       <div className="box">
-        <Card />
+        {props.children}
       </div>
     </div>
   );
 }
 
-export function Card() {
+export function Cards() {
   return (
     <div>
       <div className="flip">
@@ -60,24 +55,22 @@ export function Card() {
         </div>
         <div className="back">
           <h2>detail</h2>
-          <p>
-            context
-          </p>
+          <p>context</p>
         </div>
       </div>
     </div>
   );
 }
 
-export function EmptyColumm() {
+export function EmptyColumm(props) {
   return (
-    <div>
-      <p>
-        click for new columm
-        <button className="btn btn-warning">
-          <i className="fa fa-plus" />
-        </button>
-      </p>
+    <div className="columnContainer">
+      click for new columm
+      <button className="btn btn-warning" onClick={props.addColumns}>
+        <i className="fa fa-plus" />
+      </button>
+      <div className="box">
+      </div>
     </div>
   );
 }
