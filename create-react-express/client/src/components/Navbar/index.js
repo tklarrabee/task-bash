@@ -21,6 +21,7 @@ class Navbar extends Component {
                     loggedIn: false,
                     username: null
                 })
+                
             }
         }).catch(error => {
             console.log('logout error');
@@ -43,9 +44,10 @@ class Navbar extends Component {
                                 {loggedIn ? (
                                     <Nav className="mr-auto">
                                         <Nav.Link href="/summary">Summary</Nav.Link>
-                                        <Nav.Link href="/client">Client</Nav.Link>
                                         <Nav.Link href="/board">Board</Nav.Link>
-                                        <Nav.Link to="#" onClick={this.logout}>Logout</Nav.Link>
+                                        <Nav.Link href="/calendar">Calendar</Nav.Link>
+                                        
+                                        <Nav.Link to="/login" onClick={this.logout}>Logout</Nav.Link>
                                     </Nav>
 
                                 ) : (
