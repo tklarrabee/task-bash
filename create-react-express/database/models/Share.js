@@ -23,13 +23,13 @@ const ShareSchema = new Schema({
 
     user: {
         type: Schema.Types.ObjectId,
-        required: true,
+        required: false,
         ref: 'User'
     },
 
     invited_by: {
         type: Schema.Types.ObjectId,
-        required: true,
+        required: false,
         ref: 'User'
     }
 })

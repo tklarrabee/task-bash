@@ -16,11 +16,10 @@ const userSchema = new Schema({
 	username: { type: String, unique: false, required: false },
 	password: { type: String, unique: false, required: false },
 
-    projects: [{type: Schema.Types.ObjectId, ref: 'Project'}],
+    // projects: [{type: Schema.Types.ObjectId, ref: 'Project'}],
 
-    shared_projects: [{type: Schema.Types.ObjectId, ref:'Share'}],
+    // shared_projects: [{type: Schema.Types.ObjectId, ref:'Share'}]
 
-    pending_invites: [{type: Schema.Types.ObjectId, ref: 'Share'}]
 });
 
 // Define schema methods
