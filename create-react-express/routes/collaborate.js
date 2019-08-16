@@ -87,51 +87,16 @@ router.post('/invite', (req, res) => {
 // Find projects shared with logged in user
 router.get('/projects', (req, res) => {
     const { id } = req.body
-    db.Share.find({ user: id })
-    .populate('user')
-    .exec((err, share) => {
-        if (err) res.json(err)
-        else res.json(share)
-    })
-
-    // db.Share.find({ user: id, accepted: true })
-    //     .then( dbShare => {
-    //     dbShare.aggregate([{ $group: { _id: "$group", user: { $push: "$$ROOT" }}}
-    //     ], (err, results) => {
-    //         db.
-    //     })
-    // })
-    // // .populate('user')
-    // // .populate('project')
-    // // .populate('invited_by')
-    // // .then( dbShare => res.json(dbShare) )
-    // // .catch( (err) => res.json(err))
-
-    // db.Share.aggregate([
-    //     { $match: { user: id } }
-    // ], (err, results) => {
-    //     db.Share
-    // })
+    db.Share.find({ user: id, accepted: true }).then( (dbShare) => res.json(dbShare))
 
 })
-            // .then((dbShare) => {
-            //         console.log("dbShare collaborate.js 86: ", dbShare)
-            //         dbShare.findOne({ _id: dbShare._id })
-            //             .populate('user')
-            //             .populate('project')
-            //             .populate('invited_by')
-            //             .then((dbShare) => res.json(dbShare))
-            //     })
 
-// Invitations sent by user
 router.get('/sent', (req, res) => {
     const { id } = req.body
     db.Share.find({invited_by: id}, (err, sent) => {
         if (err) return res.json(err)
         else return res.json(sent)
     })
-    .populate('user')
-    .populate('project')
     .then( (dbInvites) => res.json(dbInvites))
 })
 
