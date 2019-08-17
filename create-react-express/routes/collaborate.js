@@ -135,7 +135,10 @@ router.post('/invite', (req, res) => {
 router.delete('/invite', (req, res) => {
     const{ id } = req.body
     db.Share.deleteOne({ _id: id })
-        .then( (deleted) => res.json(deleted))
+        .exec( (err,deleted) =>{
+            if(err) res.json(err)
+            else res.json(deleted)
+            })
 })
 
 module.exports = router
