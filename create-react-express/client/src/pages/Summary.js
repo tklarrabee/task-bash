@@ -7,8 +7,11 @@ import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
-// import NavbarAll from "../components/NavbarAll";
-// import Footer from "../components/Footer";
+import Projects from "../components/DisplayProjects";
+
+// import DeleteBtn from "../../components/DeleteBtn";
+// import { List, ListItem } from "../../components/List";
+
 
 
 class Summary extends Component {
@@ -56,6 +59,9 @@ class Summary extends Component {
                                                                                 <Col>
 
                                                                                     <Card.Title>You Currently have X Projects Open!</Card.Title>
+                                                                                    <Projects />
+
+                                                            
                                                                                 </Col>
 
                                                                             </Row>
