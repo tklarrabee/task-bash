@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Header } from "../components/Boards";
 import Board from 'react-trello'
 
 const data = {
@@ -23,6 +24,11 @@ const data = {
 
 export default class App extends React.Component {
   render() {
-    return <Board data={data} draggable collapsibleLanes editable editLaneTitle canAddLanes/>
+    return (
+      <div>
+      <Header/>
+    <Board data={data} draggable collapsibleLanes editable editLaneTitle canAddLanes/>
+    </div>
+    )
   }
 }
