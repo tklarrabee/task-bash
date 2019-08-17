@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import API from '../../utils/user'
+import Card from 'react-bootstrap/Card'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+
 
 
 class LoginForm extends Component {
@@ -56,13 +61,19 @@ class LoginForm extends Component {
         if (this.state.redirectTo) {
             return <Redirect to={{ pathname: this.state.redirectTo }} />
         } else if(loggedIn) {
-            return <Redirect to="/board" />
+            return <Redirect to="/summary" />
         }
         else {
             return (
                 <div>
-                    
-                    <h4>Login</h4>
+                  
+
+                    <Container>
+                      
+                    <Card>
+                    <Card.Header>Login:</Card.Header>
+                    <Row>
+                        <Col>
                     <form className="form-horizontal">
                         <div className="form-group">
                             <div className="col-1 col-ml-auto">
@@ -102,6 +113,12 @@ class LoginForm extends Component {
                                 type="submit">Login</button>
                         </div>
                     </form>
+                    </Col>
+                    </Row>
+                    </Card>
+                   
+                    </Container>
+                   
                 </div>
             )
         }
