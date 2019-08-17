@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from 'axios';
 import Welcome from "./pages/Welcome";
-import Client from "./pages/Client";
+import Calendar from "./pages/Calendar";
 import Board from "./pages/Board";
 import Login from "./components/Login";
 import Logout from "./pages/Logout";
@@ -63,8 +63,8 @@ class App extends Component {
           <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn}></Navbar>
             <Switch>
               <Route exact path="/" component={Welcome} />
-              <Route exact path="/client" component={Client} />
               <Route exact path="/board" component={Board} />
+              <Route exact path="/calendar" component={Calendar} />
               <Route exact path="/login" 
                 render={() => <Login 
                   updateUser={this.updateUser} 
@@ -79,32 +79,13 @@ class App extends Component {
               <Route exact path="/logout" component={Logout} />
               <Route exact path="/create" component={CreateAccount} />
               <Route exact path="/summary" component={Summary} />
+              
             </Switch>
           <Footer />
         </Router>
       </div>
     );
   }
-  // When there is no state you do not need to extend a class
-  // function App() {
-  //   return (
-  //     <div className="App">
-  //       <header className="App-header">
-  //         <img src={logo} className="App-logo" alt="logo" />
-  //         <p>
-  //           Edit <code>src/App.js</code> and save to reload.
-  //         </p>
-  //         <a
-  //           className="App-link"
-  //           href="https://reactjs.org"
-  //           target="_blank"
-  //           rel="noopener noreferrer"
-  //         >
-  //           Learn React
-  //         </a>
-  //       </header>
-  //     </div>
-  //   );
-  // }
+
 }
 export default App;
