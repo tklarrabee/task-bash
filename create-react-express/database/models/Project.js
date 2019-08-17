@@ -18,7 +18,10 @@ const ProjectSchema = new Schema({
     description: {
         type: String,
         required: false
-    }
+    },
+
+    columns: [{type: Schema.Types.ObjectId, ref: 'Column'}],
+
 
 });
 

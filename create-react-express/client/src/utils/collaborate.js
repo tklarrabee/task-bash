@@ -4,7 +4,16 @@ export default {
 
     pendingInvites: share => axios.get('/share/pending', share),
     // {id: "val"}
+    // will populate user and project info
+    
+    getSharedProjects: user => axios.get('/share/projects', user),
+    // { id: "ObjectId"}
+    // pass Id of logged in user to see 
 
+    sentInvitations: share => axios.get('/share/sent', share),
+    // { id, accepted }
+    // get accepted or pending requests
+    
     verifyUser: username => axios.get('/share/verify', username),
     // {username: "val"}
     // use email address, not ObjectId
@@ -17,10 +26,8 @@ export default {
     // Creates new share doc
     // {user: "ObjectId", project: "ObjectId", invited_by: "ObjectId"}
 
-    getSharedProjects: user => axios.get('/share/projects', user),
-    // { id: "ObjectId"}
-    // pass Id of logged in user to see 
 
-    sentInvitations: share => axios.get('/share/sent', share),
     deleteInvitations: share => axios.delete('/share/invite', share)
+    // { id }
+    // pass share id to delete 
 }

@@ -17,25 +17,30 @@ router.post('/new', (req, res) => {
         .then((dbProject) => {
             console.log('dbProject project.js 22: ', dbProject)
             db.Project.findOne({ _id: dbProject._id })
-                .populate('owner')
                 .then((dbProject) => res.json(dbProject))
         })
 })
 
 // Creates a new column
 router.post('/col', (req, res) => {
-    console.log('New project', req.body)
+    console.log('New Column', req.body)
 
     const { name, project, index } = req.body
-    db.Column.create({
+    
+    col = new db.Column({
         name: name,
-        project: project,
         index: index
-    }).then((err, dbColumn) => {
-        console.log('dbColumn project.js 38: ', dbColumn)
-        if (err) res.json(err)
-        else res.json(dbColumn)
     })
+    col.save(function(err, newCol) { 
+        if(err) res.json(err)
+        // else res.json(newCol) 
+        else db.Project.findOneAndUpdate({_id: project}, { $push: { columns: newCol._id } }, { new: true })
+            .exec((err, dbProject) => {
+                if(err) res.json(err)
+                else res.json(dbProject)
+            })
+    })
+    
 })
 
 
@@ -161,11 +166,16 @@ router.put('/card/move', (req, res) => {
 router.put('/col', (req, res) => {
     console.log('Update Column: ', req.body)
     
-    db.Column.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true })
-        .then(dbColumn => {
-            res.json(dbColumn)
+    db.Column.findOne({ _id: req.body._id })
+        .exec((err, dbColumn) => {
+            if(err) res.json (err)
+            else dbColumn.update( req.body , { new: true })
+            .exec((err, colUpdate) => {
+                if(err) res.json(err)
+                else res.json(colUpdate)
+            })
         })
-        .catch(err => res.json({ error: "Error updating Column", text: err }))
+        // .catch(err => res.json({ error: "Error updating Column", text: err }))
 })
 
 

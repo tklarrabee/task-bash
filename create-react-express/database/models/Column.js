@@ -9,10 +9,10 @@ const ColumnSchema = new Schema({
         type: String,
         required: true
     },
-    project: {
-        type: Schema.Types.ObjectId,
-        ref: 'Project'
-    },
+    // project: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Project'
+    // },
     index: {
         type: Number,
         required: true
