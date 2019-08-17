@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+User = mongoose.model('User')
 const Schema = mongoose.Schema;
-mongoose.promise = Promise
+// mongoose.promise = Promise
 
 
 const ShareSchema = new Schema({
@@ -10,10 +11,10 @@ const ShareSchema = new Schema({
         default: false
     },
 
-    declined: {
-        type: Boolean,
-        default: false
-    },
+    // declined: {
+    //     type: Boolean,
+    //     default: false
+    // },
 
     project: {
         type: Schema.Types.ObjectId,
@@ -24,7 +25,8 @@ const ShareSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
         required: false,
-        ref: 'User'
+        ref: 'User',
+
     },
 
     invited_by: {
@@ -33,6 +35,10 @@ const ShareSchema = new Schema({
         ref: 'User'
     }
 })
+
+
+// https://stackoverflow.com/questions/46019149/many-to-many-with-mongoose
+
 
 const Share = mongoose.model('Share', ShareSchema);
 
