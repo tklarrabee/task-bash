@@ -6,11 +6,6 @@ export function BoardContainer(props) {
   return (
     <div className="card">
       <div className="boardWrapper">{props.children}</div>
-      <div className="columnContainer">
-        <button className="btn btn-primary" onClick={props.addColumns}>
-          Add Columns
-        </button>
-      </div>
     </div>
   );
 }
@@ -18,20 +13,92 @@ export function BoardContainer(props) {
 export class Header extends Component {
   state = {
     boardName: "Board Name",
-    users: ["user1", "user2", "user3"]
+    users: ["user1", "user2", "user3"],
+    isInEditMode: false
   };
+
+  changeEditMode = () => {
+    this.setState({
+      isInEditMode: !this.state.isInEditMode
+    });
+    console.log("should go to edit mode now");
+  };
+
+  updateComponentValue = () => {
+    this.setState({
+      isInEditMode: false,
+      boardName: this.refs.theTextInput.value
+    });
+  };
+
+  renderEditView = () => {
+    return (
+      <div>
+        <input
+          type="text"
+          defaultValue={this.state.boardName}
+          ref="theTextInput"
+        />
+        <button onClick={this.updateComponentValue}>OK</button>
+        <button onClick={this.changeEditMode}>X</button>
+      </div>
+    );
+  };
+
+  renderDefaultView = () => {
+    return (
+      <div onDoubleClick={this.changeEditMode}>{this.state.boardName}</div>
+    );
+  };
+
   render() {
     return (
       <div className="header">
-        <TextEditor />{" "}
-        <button className="btn btn-primary">
-          <i className="fa fa-star-o" />
-        </button>
-        <span style={{ color: "white", float: "right" }}>
-          {" "}
-          Users: {this.state.users}
-          <button className="btn btn-success">invite</button>
-        </span>
+        <div className="plx-card silver">
+          
+          <div className="pxc-avatar">
+            <img src="https://i.pinimg.com/originals/ab/eb/42/abeb4287590a49402d0b125a6dceebdb.jpg" />
+          </div>
+          <div className="pxc-subcard">
+            <div className="pxc-title">
+              {this.state.isInEditMode
+                ? this.renderEditView()
+                : this.renderDefaultView()}
+            </div>
+            <div className="pxc-sub">
+              description
+            </div>
+            <div className="bottom-row">
+              <div className="pxc-info">
+                <div className="flags">
+                  <span>
+                    <img src="http://pollux.fun/images/flags/EN.png" />
+                  </span>
+                  <span>
+                    <img src="http://pollux.fun/images/flags/BR.png" />
+                  </span>
+                  <span>
+                    <img src="http://pollux.fun/images/flags/FR.png" />
+                  </span>
+                  <span>
+                    <img src="http://pollux.fun/images/flags/TR.png" />
+                  </span>
+                  <span>
+                    <img src="http://pollux.fun/images/flags/JP.png" />
+                  </span>
+                </div>
+              </div>
+              <div className="links">
+                <a className="shop">
+                  <i className="fa fa-star-o"> </i>
+                </a>
+                <a className="shop">
+                  <i className="fa fa-plus-circle"> </i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -41,17 +108,15 @@ export function Columns(props) {
   return (
     <div className="columnContainer">
       {"column " + props.number}
-      <button className="btn btn-warning">
+      <button className="btn btn-warning" onClick={props.addCards}>
         <i className="fa fa-plus" />
       </button>
-      <div className="box">
-        <Card />
-      </div>
+      <div className="box">{props.children}</div>
     </div>
   );
 }
 
-export function Card() {
+export function Cards() {
   return (
     <div>
       <div className="flip">
@@ -60,24 +125,21 @@ export function Card() {
         </div>
         <div className="back">
           <h2>detail</h2>
-          <p>
-            context
-          </p>
+          <p>context</p>
         </div>
       </div>
     </div>
   );
 }
 
-export function EmptyColumm() {
+export function EmptyColumm(props) {
   return (
-    <div>
-      <p>
-        click for new columm
-        <button className="btn btn-warning">
-          <i className="fa fa-plus" />
-        </button>
-      </p>
+    <div className="columnContainer">
+      click for new columm
+      <button className="btn btn-warning" onClick={props.addColumns}>
+        <i className="fa fa-plus" />
+      </button>
+      <div className="box" />
     </div>
   );
 }
