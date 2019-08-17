@@ -53,20 +53,12 @@ export class Header extends Component {
 
   render() {
     return (
-      <div>
+      <div className="header">
         <div className="plx-card silver">
-          <div
-            className="pxc-bg"
-            style={{
-              backgroundImage: `url(https://i.gyazo.com/a846fc87cca5ebd3942ae1e038bb5083.png)`
-            }}
-          >
-            {" "}
-          </div>
+          
           <div className="pxc-avatar">
-            <img src="https://store.playstation.com/store/api/chihiro/00_09_000/container/GB/en/999/EP4312-CUSA07658_00-AV00000000000049/1536930670000/image?w=240&amp;h=240&amp;bg_color=000000&amp;opacity=100&amp;_version=00_09_000" />
+            <img src="https://i.pinimg.com/originals/ab/eb/42/abeb4287590a49402d0b125a6dceebdb.jpg" />
           </div>
-          <div className="pxc-stopper"> </div>
           <div className="pxc-subcard">
             <div className="pxc-title">
               {this.state.isInEditMode
@@ -74,7 +66,7 @@ export class Header extends Component {
                 : this.renderDefaultView()}
             </div>
             <div className="pxc-sub">
-              This probably should be called tagline instead
+              description
             </div>
             <div className="bottom-row">
               <div className="pxc-info">
@@ -98,10 +90,10 @@ export class Header extends Component {
               </div>
               <div className="links">
                 <a className="shop">
-                  <i className="fas fa-shopping-bag"> </i>
+                  <i className="fa fa-star-o"> </i>
                 </a>
                 <a className="shop">
-                  <i className="fas fa-shopping-bag"> </i>
+                  <i className="fa fa-plus-circle"> </i>
                 </a>
               </div>
             </div>
