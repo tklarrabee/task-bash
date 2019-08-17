@@ -17,7 +17,6 @@ router.post('/new', (req, res) => {
         .then((dbProject) => {
             console.log('dbProject project.js 22: ', dbProject)
             db.Project.findOne({ _id: dbProject._id })
-                .populate('owner')
                 .then((dbProject) => res.json(dbProject))
         })
 })

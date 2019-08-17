@@ -7,14 +7,51 @@ const router = express.Router()
 router.get('/pending', (req, res) => {
     console.log('Pending Project Invites for User: ', req.body)
     const { id } = req.body
-    db.Share.find({ user: id, accepted: false, rejected: false }).then((err, pend) => {
-        if(err) console.log('pending invite error ', err)
-        else res.json(pend)
-    })
-    .populate('project')
+    db.Share.find({user: id, accepted: false})
     .populate('user')
-
+    .populate('invited_by')
+    .populate('project')
+    .exec((err, dbShare) => {
+        if(err) res.json(err)
+        else res.json(dbShare)
+    })
 })
+
+
+// Find projects shared with logged in user
+router.get('/projects', (req, res) => {
+    const { id } = req.body
+    db.Share.find({ user: id, accepted: true }) 
+    .populate('user')
+    .populate('invited_by')
+    .populate('project')
+    .exec((err, dbShare) => {
+        if (err) res.json(err)
+        else res.json(dbShare)
+    })
+
+
+    // .select('user -_id')
+    // .then( dbShare => {
+    //     const fuckMongo = []
+    //     for(i = 0; i < dbShare.length ; i++){
+    //         fuckMongo.push({_id: dbShare[i].user})
+    //     }
+    //     db.Project.find({_id: {$in: fuckMongo}})
+            // res.json(dbShare)
+    })
+
+
+// pass accepted true or false depending on accepted or rejected
+router.get('/sent', (req, res) => {
+    const { id, accepted } = req.body
+    db.Share.find({invited_by: id, accepted: accepted}, (err, sent) => {
+        if (err) return res.json(err)
+        else return res.json(sent)
+    })
+    .then( (dbInvites) => res.json(dbInvites))
+})
+
 
 // Check for valid user before creating invites
 router.get('/verify', (req, res) => {
@@ -31,9 +68,16 @@ router.post('/accept', (req, res) => {
     console.log('Invite request', req.body)
     const { id, accepted, rejected } = req.body
     if (accepted) {
-        db.Share.findOneAndUpdate({ _id: id }, { accepted: accepted })
-        .then( accept => res.json(accept) )
-        .catch( err => res.json(err) )
+        db.Share.findOne({ _id: id }, { accepted: accepted })
+        // db.Share.findOneAndUpdate({ _id: id }, { accepted: accepted })
+        .exec((err, dbShare) => {
+            if (err) res.json(err)
+            else dbShare.update({accepted: accepted})
+            .exec((err, dbShare) => {
+                if(err) res.json(err)
+                else res.json(dbShare)
+            })
+        })
     }
 
     else if (rejected) {
@@ -56,11 +100,14 @@ router.post('/accept', (req, res) => {
 // Send invitation to users
 router.post('/invite', (req, res) => {
     console.log('Send Invite', req.body)
+    // const {user, project, invited_by} = req.body
     const {user, project, invited_by} = req.body
-    db.Share.findOne({user: user, project: project}, (err, share) => {
+    // db.Share.findOne({user: user}, (err, share) => {
+    db.Share.findOne({user: user, project: project, invited_by: invited_by}, (err, share) => {
         if (err) {
             console.log('collaborate.js post error: ', err)
         } else if (share) {
+            
             res.json({
                 error: 'Invite already sent'
             })
@@ -75,30 +122,15 @@ router.post('/invite', (req, res) => {
             .then((dbShare) => {
                 console.log("dbShare collaborate.js 86: ", dbShare)
                 db.Share.findOne({_id: dbShare._id})
-                    .populate('user')
-                    .populate('project')
-                    .populate('invited_by')
+                    // .populate('user')
+                    // .populate('project')
+                    // .populate('invited_by')
                     .then( (dbShare) => res.json(dbShare))
             })
         }
     })
 })
 
-// Find projects shared with logged in user
-router.get('/projects', (req, res) => {
-    const { id } = req.body
-    db.Share.find({ user: id, accepted: true }).then( (dbShare) => res.json(dbShare))
-
-})
-
-router.get('/sent', (req, res) => {
-    const { id } = req.body
-    db.Share.find({invited_by: id}, (err, sent) => {
-        if (err) return res.json(err)
-        else return res.json(sent)
-    })
-    .then( (dbInvites) => res.json(dbInvites))
-})
 
 router.delete('/invite', (req, res) => {
     const{ id } = req.body

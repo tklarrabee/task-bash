@@ -22,7 +22,6 @@ const ProjectSchema = new Schema({
 
     columns: [{type: Schema.Types.ObjectId, ref: 'Column'}],
 
-    shares: [{type: Schema.Types.ObjectId, ref: 'Share'}]
 
 });
 
