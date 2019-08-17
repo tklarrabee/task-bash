@@ -22,6 +22,8 @@ class Login extends Component {
                 <Wrapper>
                     <Container style={{ marginTop: 30 }}>
                         <Wrapper>
+                            <Row>
+                                <Col>
 
 
                             <Card>
@@ -33,8 +35,7 @@ class Login extends Component {
                                                 <Form.Label>User Name:</Form.Label>
                                                 <Form.Control type="email" placeholder="Enter email" />
                                                 <Form.Text className="text-muted">
-                                                    We'll never share your email with anyone else.
-    </Form.Text>
+                                                    We'll never share your email with anyone else.</Form.Text>
                                             </Form.Group>
 
                                             <Form.Group controlId="formBasicPassword">
@@ -44,9 +45,7 @@ class Login extends Component {
                                             <Form.Group controlId="formBasicChecbox">
                                                 <Form.Check type="checkbox" label="Check me out" />
                                             </Form.Group>
-                                            <Button variant="primary" type="submit">
-                                                Submit
-  </Button>
+                                            <Button variant="primary" type="submit">Submit</Button>
                                         </Form>
                                     </Card.Title>
                                     <Card.Text>
@@ -57,6 +56,8 @@ class Login extends Component {
                                 </Card.Body>
                                 <Button variant="primary" href="/summary">Temp: Logged in</Button>
                             </Card>
+                            </Col>
+                            </Row>
                             <div>
 
                             </div>

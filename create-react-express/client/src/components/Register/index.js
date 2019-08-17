@@ -65,6 +65,7 @@ class Register extends Component {
 						redirectTo: '/login'
 					})
 				} else {
+					alert("User Already Taken!!")
 					console.log('username already taken')
 				}
 			}).catch(error => {
