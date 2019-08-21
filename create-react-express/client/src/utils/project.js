@@ -1,7 +1,7 @@
-import axios from 'axios'
+import axios from 'axios';
 
 export default {
-    newProject: project => axios.post('/project/new', project),
+    newProject: project => axios.post('/project/newproject', project),
     // { owner: "val", name: "val", description: "val"}
 
     newColumn: column => axios.post('/project/col', column),

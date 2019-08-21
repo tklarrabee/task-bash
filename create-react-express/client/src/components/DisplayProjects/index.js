@@ -50,7 +50,7 @@ class projects extends Component {
   // Then reload Projects from the database
   handleFormSubmit = event => {
     event.preventDefault();
-    if (this.state.name && this.state.owner) {
+  
       Project.newProject({
         name: this.state.name,
         owner: this.state.owner,
@@ -58,7 +58,7 @@ class projects extends Component {
       })
         .then(res => this.loadProjects(this.props.user.id))
         .catch(err => console.log(err));
-    };}
+    }
   
 
   render() {
@@ -81,6 +81,10 @@ class projects extends Component {
                 onChange={this.handleInputChange}
                 name="name"
                 placeholder="project name (required)"
+                className="text-center"
+                id="Title"
+                type="text"
+                required
               />
               <Input
                 value={this.state.owner}
@@ -95,7 +99,7 @@ class projects extends Component {
                 placeholder="description (Optional)"
               />
               <FormBtn
-                disabled={!(this.state.owner && this.state.name)}
+               
                 onClick={this.handleFormSubmit}
               >
                 Submit Project

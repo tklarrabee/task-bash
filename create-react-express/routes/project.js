@@ -1,4 +1,4 @@
-const db = require("../database/models");
+const db = require("../database/models/Project");
 const express = require('express')
 const router = express.Router()
 
@@ -204,7 +204,7 @@ router.put('/col', (req, res) => {
               .catch(err => res.status(422).json(err));
           }
           // Matches with "/api/books"
-          router.route("/")
+          router.route("/newproject")
             .get(findAll)
             .post(create);
           
