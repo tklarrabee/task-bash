@@ -1,4 +1,4 @@
-const db = require("../database/models");
+const db = require("../database/models/Project");
 const express = require('express')
 const router = express.Router()
 
@@ -176,6 +176,44 @@ router.put('/col', (req, res) => {
             })
         })
         // .catch(err => res.json({ error: "Error updating Column", text: err }))
+
+        const findAll= function(req, res) {
+            db.Project.find(req.query)
+              .then(dbProject => res.json(dbProject))
+              .catch(err => res.status(422).json(err));
+          }
+          const findById= function(req, res) {
+            db.Project.findById(req.params.id)
+              .then(dbProject => res.json(dbProject))
+              .catch(err => res.status(422).json(err));
+          }
+          const create= function(req, res) {
+            db.Project.create(req.body)
+              .then(dbProject => res.json(dbProject))
+              .catch(err => res.status(422).json(err));
+          }
+          const update= function(req, res) {
+            db.Project.findOneAndUpdate({ id: req.params.id }, req.body)
+              .then(dbProject => res.json(dbProject))
+              .catch(err => res.status(422).json(err));
+          }
+          const remove= function(req, res) {
+            db.Project.findById(req.params.id)
+              .then(dbProject => dbProject.remove())
+              .then(dbProject => res.json(dbProject))
+              .catch(err => res.status(422).json(err));
+          }
+          // Matches with "/api/books"
+          router.route("/newproject")
+            .get(findAll)
+            .post(create);
+          
+          // Matches with "/api/books/:id"
+          router
+            .route("/:id")
+            .get(findById)
+            .put(update)
+            .delete(remove);
 })
 
 

@@ -2,12 +2,11 @@ import React, { Component } from "react";
 import Jumbotron from "../../components/Jumbotron";
 import DeleteBtn from "../DeleteBtn";
 import Project from "../../utils/project"
-import API from "../../utils/project";
 import { Col, Row, Container } from "../Grid";
 import { List, ListItem } from "../List";
 import { Input, TextArea, FormBtn } from "../Form";
 
-class Projects extends Component {
+class projects extends Component {
   // Setting our component's initial state
   state = {
     projects: [],
@@ -51,7 +50,7 @@ class Projects extends Component {
   // Then reload Projects from the database
   handleFormSubmit = event => {
     event.preventDefault();
-    if (this.state.name && this.state.owner) {
+  
       Project.newProject({
         name: this.state.name,
         owner: this.state.owner,
@@ -60,7 +59,7 @@ class Projects extends Component {
         .then(res => this.loadProjects(this.props.user.id))
         .catch(err => console.log(err));
     }
-  };
+  
 
   render() {
     const user ={ id: this.props.userId }
@@ -82,6 +81,10 @@ class Projects extends Component {
                 onChange={this.handleInputChange}
                 name="name"
                 placeholder="project name (required)"
+                className="text-center"
+                id="Title"
+                type="text"
+                required
               />
               <Input
                 value={this.state.owner}
@@ -96,7 +99,7 @@ class Projects extends Component {
                 placeholder="description (Optional)"
               />
               <FormBtn
-                disabled={!(this.state.owner && this.state.name)}
+               
                 onClick={this.handleFormSubmit}
               >
                 Submit Project
@@ -132,4 +135,4 @@ class Projects extends Component {
   }
 }
 
-export default Projects;
+export default projects;
