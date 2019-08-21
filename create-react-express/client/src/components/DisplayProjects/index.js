@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Jumbotron from "../../components/Jumbotron";
 import DeleteBtn from "../DeleteBtn";
 import Project from "../../utils/project"
-import API from "../../utils/project";
 import { Col, Row, Container } from "../Grid";
 import { List, ListItem } from "../List";
 import { Input, TextArea, FormBtn } from "../Form";
@@ -51,20 +50,15 @@ class projects extends Component {
   // Then reload Projects from the database
   handleFormSubmit = event => {
     event.preventDefault();
-<<<<<<< HEAD
-    
-      API.newProject({
-=======
     if (this.state.name && this.state.owner) {
       Project.newProject({
->>>>>>> 786aea2b07841501a39c0838e54fd233e7813f50
         name: this.state.name,
         owner: this.state.owner,
         description: this.state.description
       })
         .then(res => this.loadProjects(this.props.user.id))
         .catch(err => console.log(err));
-    };
+    };}
   
 
   render() {

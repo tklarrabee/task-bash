@@ -9,7 +9,7 @@ const passport = require("./passport");
 const user = require('./routes/user');
 const collaborate = require('./routes/collaborate');
 const project = require('./routes/project');
-
+const mongoose = require("mongoose");
 const PORT = process.env.PORT || 3001;
 const app = express();
 
