@@ -3,14 +3,14 @@ Free-form text entry that converts to smart project elements online or in from t
 
 ## Overview
 
-A new React-based Google Books Search app. This app utilize React lifecycle methods to query and display books based on user searches. 
-As a user, you can save books to review or save them for later.
+A new React-based App. This app utilize React lifecycle methods to query and display and stores user informations. 
+As a user, you can create accounts, then create cards, topics, and others for Kanban style organization.
 
 ## Features
 
-- [x] Fully functioning app. 
+- [] Fully functioning app. 
 - [x] Complete routes for future features.
-- [x] Movie header for added effect!
+- [] Calandar feature
 - [x] Fully utilizes advantages of React.
 
 
@@ -18,9 +18,9 @@ As a user, you can save books to review or save them for later.
 
 * Preview
 
-![Image of Preview](/img/googleSearchBook.PNG)
+![TBD]()
 
 
 * App demo
 
-![App demo](/img/demoREADME.gif/)
+![TBD]()
