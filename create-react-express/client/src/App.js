@@ -11,6 +11,7 @@ import Summary from "./pages/Summary";
 import Navbar from "./components/Navbar";
 import Register from "./components/Register";
 import Footer from "./components/Footer";
+import ProjectDisplay from "./components/DisplayProjects"
 // import Wrapper from "./components/Wrapper";
 import "./App.css";
 
@@ -44,8 +45,10 @@ class App extends Component {
 
         this.setState({
           loggedIn: true,
-          username: response.data.user.username
+          username: response.data.user.username,
+          id: response.data.user._id
         })
+        console.log(this.state.id)
       } else {
         console.log('Get user: no user');
         this.setState({
@@ -74,6 +77,12 @@ class App extends Component {
               <Route exact path="/register" 
                 render={() => <Register 
                   loggedIn={this.state.loggedIn}
+                />} 
+              />
+              <Route exact path="/projects" 
+                render={() => <ProjectDisplay 
+                  loggedIn={this.state.loggedIn}
+                  userId={this.state.id}
                 />} 
               />
               <Route exact path="/logout" component={Logout} />
