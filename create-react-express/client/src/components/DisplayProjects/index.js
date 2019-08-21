@@ -6,7 +6,7 @@ import { Col, Row, Container } from "../Grid";
 import { List, ListItem } from "../List";
 import { Input, TextArea, FormBtn } from "../Form";
 
-class Projects extends Component {
+class projects extends Component {
   // Setting our component's initial state
   state = {
     projects: [],
@@ -48,16 +48,16 @@ class Projects extends Component {
   // Then reload Projects from the database
   handleFormSubmit = event => {
     event.preventDefault();
-    if (this.state.name && this.state.owner) {
-      API.saveProject({
+    
+      API.newProject({
         name: this.state.name,
         owner: this.state.owner,
         description: this.state.description
       })
         .then(res => this.loadProjects())
         .catch(err => console.log(err));
-    }
-  };
+    };
+  
 
   render() {
     return (
@@ -123,4 +123,4 @@ class Projects extends Component {
   }
 }
 
-export default Projects;
+export default projects;

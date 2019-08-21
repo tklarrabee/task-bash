@@ -13,13 +13,13 @@ const project = require('./routes/project');
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-// const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/taskBash';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/taskBash';
 
-// mongoose.connect(
-//   MONGODB_URI, { useNewUrlParser: true }, (err, res) => {
-//   if(err) console.log('ERROR connecting to: ' + MONGODB_URI + '. ' + err)
-//   else console.log('Succeded connected to: ' + MONGODB_URI)
-// });
+mongoose.connect(
+  MONGODB_URI, { useNewUrlParser: true }, (err, res) => {
+  if(err) console.log('ERROR connecting to: ' + MONGODB_URI + '. ' + err)
+  else console.log('Succeded connected to: ' + MONGODB_URI)
+});
 app.use(
   session({
     secret: 'fraggle-rock', //pick a random string to make the hash that is generated secure
