@@ -1,37 +1,34 @@
 import React, { Component } from "react";
-import { BoardContainer, Header, Columns } from "../components/Boards";
-import AppDragDrop from "../components/Clickanddrag";
-// TODO: Set Kanban Card Element as Child Element to the Board
+import { Header } from "../components/Boards";
+import Board from 'react-trello'
 
-class Board extends Component {
-  state = {
-    numColumns: 0
-  };
-
-  onAddColumns = () => {
-    this.setState({
-      numColumns: this.state.numColumns + 1
-    });
-  };
-
-  render() {
-    const columns = [];
-
-    for (let i = 0; i < this.state.numColumns; i += 1) {
-      columns.push(<Columns key={i} number={i} />);
+const data = {
+  lanes: [
+    {
+      id: 'lane1',
+      title: 'Planned Tasks',
+      label: '',
+      cards: [
+        {id: 'Card1', title: 'Write Blog', description: 'Can AI make memes', label: '30 mins'},
+        {id: 'Card2', title: 'Pay Rent', description: 'Transfer via NEFT', label: '5 mins', metadata: {sha: 'be312a1'}}
+      ]
+    },
+    {
+      id: 'lane2',
+      title: 'Completed',
+      label: '',
+      cards: []
     }
+  ]
+}
 
+export default class App extends React.Component {
+  render() {
     return (
       <div>
-        {/* <NavbarAll /> */}
-          <Header />
-        <BoardContainer addColumns={this.onAddColumns}>
-          {columns}
-        </BoardContainer>
-          <AppDragDrop />
-        {/* <Footer /> */}
-      </div>
-    );
+      <Header/>
+    <Board data={data} draggable editable editLaneTitle canAddLanes/>
+    </div>
+    )
   }
 }
-export default Board;

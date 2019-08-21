@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Jumbotron from "../../components/Jumbotron";
 import DeleteBtn from "../DeleteBtn";
-// import API from "../../utils/API";
 import Project from "../../utils/project"
+import API from "../../utils/project";
 import { Col, Row, Container } from "../Grid";
 import { List, ListItem } from "../List";
 import { Input, TextArea, FormBtn } from "../Form";
