@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Jumbotron from "../../components/Jumbotron";
 import DeleteBtn from "../DeleteBtn";
+import Project from "../../utils/project"
 import API from "../../utils/project";
 import { Col, Row, Container } from "../Grid";
 import { List, ListItem } from "../List";
@@ -11,28 +12,30 @@ class Projects extends Component {
   state = {
     projects: [],
     name: "",
-    owner: "",
+    user: "",
     description: ""
   };
 
   // When the component mounts, load all Projects and save them to this.state.Projects
   componentDidMount() {
-    this.loadProjects();
+    // console.log("COMPONENT MOUNT", this.props.userId)
+    // this.loadProjects(this.state.user)
   }
 
   // Loads all Projects  and sets them to this.state.Projects
-  loadProjects = () => {
-    API.getProjects()
+  loadProjects = (user) => {
+    Project.getProjects(user)
       .then(res =>
-        this.setState({ projects: res.data, name: "", owner: "", description: "" })
+        console.log("TYLER'S ERROR", res, user)
+        // this.setState({ projects: res.data, name: "", owner: "", description: "" })
       )
       .catch(err => console.log(err));
   };
 
   // Deletes a book from the database with a given id, then reloads Projects from the db
   deleteProject = id => {
-    API.deleteProject(id)
-      .then(res => this.loadProjects())
+    Project.deleteProject(id)
+      .then(res => this.loadProjects(this.props.user.id))
       .catch(err => console.log(err));
   };
 
@@ -49,17 +52,23 @@ class Projects extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.state.name && this.state.owner) {
-      API.saveProject({
+      Project.newProject({
         name: this.state.name,
         owner: this.state.owner,
         description: this.state.description
       })
-        .then(res => this.loadProjects())
+        .then(res => this.loadProjects(this.props.user.id))
         .catch(err => console.log(err));
     }
   };
 
   render() {
+    const user ={ id: this.props.userId }
+    console.log("USER FROM 67 of DISPLAY PROJ COMP", user)
+    Project.getProjects(user).then( res => console.log("GETPROJEEEEE", res))
+    // this.setState({user: this.props.userId}) 
+
+    console.log(this.state.user)
     return (
       <Container fluid>
         <Row>
