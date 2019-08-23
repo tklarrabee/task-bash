@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Header } from "../components/Boards";
 import Board from 'react-trello'
+import projectAPI from "../utils/project"
 
 const data = {
   lanes: [

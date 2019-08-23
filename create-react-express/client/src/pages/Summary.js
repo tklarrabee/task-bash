@@ -22,7 +22,7 @@ class Summary extends Component {
             login: "",
             projects: []
         };
-        // this.loadProjects = this.loadProjects.bind(this)
+        this.loadProjects = this.loadProjects.bind(this)
     }
     
 
@@ -32,8 +32,10 @@ class Summary extends Component {
             .then(
                 res => 
                 {
-                    console.log(res.data)
-                    return  res.data
+                    // console.log(res.data)
+                    this.setState({projects: res.data})
+                    console.log("===USER PROJECTS===")
+                    console.log(this.state.projects)
                     // return this.setState({projects: res.data})
                 }
             )
@@ -46,10 +48,10 @@ class Summary extends Component {
         const user = {id: this.props.userId}
         console.log('Summary Page props.userId')
         console.log(user)
-        let myProjects = await this.loadProjects(this.props.userId)
+        await this.loadProjects(this.props.userId)
 
-        this.setState({projects: myProjects})
-        console.log(myProjects)
+        
+        // this.setState({projects: myProjects})
         // console.log(userId)
         // this.loadProjects(userId)
         // this.loadProjects(user)
@@ -57,16 +59,7 @@ class Summary extends Component {
         // console.log(this.state.projects)
     }
 
-    componentDidUpdate(prevProps) {
-    
-        // Typical usage (don't forget to compare props):
-        if (this.props.userId !== prevProps.userId) {
-          this.loadProjects(this.props.userId)
-          console.log(this.state.projects)
-        }
-      
-      
-    }
+
     
     render() {
         // const loggedIn = this.props.loggedIn
