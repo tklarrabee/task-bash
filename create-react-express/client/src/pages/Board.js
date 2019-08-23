@@ -23,7 +23,19 @@ const data = {
   ]
 }
 
-export default class App extends Component {
+export default class KanBan extends Component {
+  constructor() {
+    super()
+    this.state = {
+      columns: []
+    }
+  }
+
+  getKanBan = project => {
+    projectAPI.getBoard(this.props.project)
+  }
+
+
   render() {
     return (
       <div>
