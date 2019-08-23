@@ -10,10 +10,10 @@ export default {
     newCard: card => axios.post('/project/card', card),
     // {body: "val", date: "val", user: "val", column: "val"}
 
-    getProjects: userId => axios.get('/project', {id: userId}),
+    getProjects: () => axios.get('/project'),
     // { id: "val" }
 
-    getBoard: project => axios.get('/project/board', {project: project}),
+    getBoard: project => axios.patch('/project/board', {project: project}),
     // { project: "val" }
 
     deleteCol: column => axios.delete('/project/col', column),

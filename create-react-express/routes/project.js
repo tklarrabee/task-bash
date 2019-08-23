@@ -1,7 +1,9 @@
 const db = require("../database/models");
 const express = require('express')
+
 // const passport = require('../passport')
 const router = express.Router()
+
 
 // Prefix /project
 // Create a new project
@@ -66,7 +68,7 @@ router.post('/card', (req, res) => {
 })
 
 
-// get projects created by signed in ruser
+// get projects created by signed in user
 router.get('/', (req, res) => {
     console.log('My projects ') 
     console.log(req.user)
@@ -79,16 +81,20 @@ router.get('/', (req, res) => {
 })
 
 // get all columns and their related cards for a given project
-router.get('/board', (req, res) => {
+router.patch('/board', (req, res) => {
     console.log('Project Id')
+    // console.log(req.body)
     
     const { project } = req.body
-    db.Column.find({ project: project })
+    db.Project.findOne({ _id: project })
     // db.Column.find({ project: project }, (project) => {
         //     if (err) console.log("Error loading columns", err)
         //     else res.next(project)
         // })
-        .populate('elements')
+        .populate({
+            path: 'columns',
+            populate: {path: 'elements'}
+        })
         .exec((err, dbColumns) => {
             if(err) res.json(err)
             else res.json(dbColumns)

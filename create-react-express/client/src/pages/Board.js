@@ -9,8 +9,9 @@ import projectAPI from "../utils/project"
 // 
 
 
-
-
+// LaneCard.cards = function() {
+//   for(this.cards.length)
+// }
 
 const data = {
   lanes: [
@@ -32,25 +33,66 @@ const data = {
   ]
 }
 
+
+function LaneCard(id, title, label, cards) {
+  this.id = id
+  this.title = title
+  this.label = JSON.stringify(label)
+  this.cards = []
+  this.formCards = function() {
+    const shapedCards = []
+    for(let i = 0; i < cards.length; i++){
+      const card = {
+        id: cards[i]._id ,
+        title: cards[i].body,
+        description: cards[i].body,
+        label: cards[i].date,
+        metadata: {user: cards[i].user}
+      }
+      shapedCards.push(card)
+    }
+    // console.log(shapedCards)
+    return this.cards = shapedCards
+  }
+}
+
 export default class KanBan extends Component {
   constructor(props) {
     super(props)
     this.state = {
       lanes: []
     }
+    this.setEventBus =this.setEventBus.bind(this)
+    this.getKanBan = this.getKanBan.bind(this)
   }
+
+  setEventBus = eventBus => {
+    this.setState({eventBus})
+}
 
   getKanBan = project => {
     console.log(project)
     projectAPI.getBoard(project)
       .then(response => {
-        console.log(response)
+        const cols = response.data.columns
+        const readyCols = []
+        for( let i = 0; i < cols.length; i++ ) {
+          const {_id, name, index,  elements} = cols[i]
+          const formedCol = new LaneCard(_id, name, index,  elements)
+          formedCol.formCards()
+          readyCols.push(formedCol)
+        }
+        this.setState({lanes: readyCols})
+        console.log(this.state.lanes)
       })
+      .catch((err) => console.log(err))
   }
+  
   async componentDidMount() {
-    console.log(this.props.match.params)
-    await this.getKanBan(this.props.match.params.id)
-    // this.getKanBan(this.props.params.id)
+    const projectId = this.props.match.params.id
+    console.log(projectId)
+    // await this.getKanBan(this.props.match.params.id)
+    await this.getKanBan(projectId)
   }
 
 
@@ -58,7 +100,14 @@ export default class KanBan extends Component {
     return (
       <div>
       <Header/>
-    <Board data={data} draggable editable editLaneTitle canAddLanes />
+    <Board 
+      data={{lanes: this.state.lanes}} 
+      draggable 
+      editable 
+      editLaneTitle 
+      canAddLanes 
+      eventBusHandle={this.setEventBus}
+      />
     </div>
     )
   }
