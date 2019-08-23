@@ -8,51 +8,58 @@ import projectAPI from "../utils/project"
 // put get call into board
 // 
 
-
-// LaneCard.cards = function() {
-//   for(this.cards.length)
-// }
-
-const data = {
-  lanes: [
-    {
-      id: 'lane1',
-      title: 'Planned Tasks',
-      label: '',
-      cards: [
-        {id: 'Card1', title: 'Write Blog', description: 'Can AI make memes', label: '30 mins'},
-        {id: 'Card2', title: 'Pay Rent', description: 'Transfer via NEFT', label: '5 mins', metadata: {sha: 'be312a1'}}
-      ]
-    },
-    {
-      id: 'lane2',
-      title: 'Completed',
-      label: '',
-      cards: []
-    }
-  ]
+const handleDragStart = (cardId, laneId) => {
+  console.log('drag started')
+  console.log(`cardId: ${cardId}`)
+  console.log(`laneId: ${laneId}`)
 }
+
+const handleDragEnd = (cardId, sourceLaneId, targetLaneId) => {
+  console.log('drag ended')
+  console.log(`cardId: ${cardId}`)
+  console.log(`sourceLaneId: ${sourceLaneId}`)
+  console.log(`targetLaneId: ${targetLaneId}`)
+}
+
+const lanePop = (cols) => {
+  const readyCols = []
+  for( let i = 0; i < cols.length; i++ ) {
+    const {_id, name, index,  elements} = cols[i]
+    const formedCol = new LaneCard(_id, name, index,  elements)
+    formedCol.formCards()
+    readyCols.push(formedCol)
+  }
+  let laneTot = readyCols.length
+  // this.setState({total: laneTot})
+  return {columns: readyCols, total: laneTot}
+}
+
 
 
 function LaneCard(id, title, label, cards) {
   this.id = id
+  this.laneId = id
   this.title = title
   this.label = JSON.stringify(label)
-  this.cards = []
+  this.cards = cards
   this.formCards = function() {
-    const shapedCards = []
-    for(let i = 0; i < cards.length; i++){
-      const card = {
-        id: cards[i]._id ,
-        title: cards[i].body,
-        description: cards[i].body,
-        label: cards[i].date,
-        metadata: {user: cards[i].user}
+    if(cards) {
+      const shapedCards = []
+      for(let i = 0; i < cards.length; i++){
+        const card = {
+          id: cards[i]._id ,
+          cardId: cards[i]._id ,
+          title: cards[i].body,
+          description: cards[i].body,
+          label: cards[i].date,
+          metadata: {user: cards[i].user}
+        }
+        shapedCards.push(card)
       }
-      shapedCards.push(card)
+      // console.log(shapedCards)
+      return this.cards = shapedCards
     }
-    // console.log(shapedCards)
-    return this.cards = shapedCards
+    else return this.cards = []
   }
 }
 
@@ -60,10 +67,13 @@ export default class KanBan extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      lanes: []
+      lanes: [],
+      total: 0
     }
     this.setEventBus =this.setEventBus.bind(this)
     this.getKanBan = this.getKanBan.bind(this)
+    this.onLaneAdd = this.onLaneAdd.bind(this)
+    this.shouldReceiveNewData = this.shouldReceiveNewData.bind(this)
   }
 
   setEventBus = eventBus => {
@@ -71,7 +81,7 @@ export default class KanBan extends Component {
 }
 
   getKanBan = project => {
-    console.log(project)
+    // console.log(project)
     projectAPI.getBoard(project)
       .then(response => {
         const cols = response.data.columns
@@ -82,31 +92,78 @@ export default class KanBan extends Component {
           formedCol.formCards()
           readyCols.push(formedCol)
         }
-        this.setState({lanes: readyCols})
-        console.log(this.state.lanes)
+        let laneTot = readyCols.length
+        this.setState({lanes: readyCols, total: laneTot})
+        console.log(this.state)
       })
       .catch((err) => console.log(err))
   }
   
   async componentDidMount() {
     const projectId = this.props.match.params.id
-    console.log(projectId)
+    // console.log(projectId)
     // await this.getKanBan(this.props.match.params.id)
     await this.getKanBan(projectId)
   }
+
+  onLaneAdd = (data, id) => {
+    console.log(data, id)
+    let index = parseInt(this.state.total) + 1
+    const column = {name: data.title, project: this.props.match.params.id, index: index}
+    console.log(column)
+    projectAPI.newColumn(column)
+      .then((res) => {
+        const laneInfo = lanePop(res.data.columns)
+        console.log(laneInfo)
+        let lanes = laneInfo.columns
+        let total = laneInfo.total
+        // console.log(res)
+        this.state.eventBus.publish({
+          type: 'UPDATE_LANES',
+          lanes: lanes
+        })
+        this.setState({total: total})
+
+
+      })
+    // this.state.eventBus.publish({
+    //   type: 'UPDATE_LANES'
+    // })
+  }
+
+  shouldReceiveNewData = nextData => {
+    console.log('New card has been added')
+    console.log(nextData)
+}
+
+//   completeCard = () => {
+//     this.state.eventBus.publish({
+//         type: 'ADD_CARD',
+//         laneId: 'COMPLETED',
+//         card: {id: 'Milk', title: 'Buy Milk', label: '15 mins', description: 'Use Headspace app'}
+//     })
+//     this.state.eventBus.publish({type: 'REMOVE_CARD', laneId: 'PLANNED', cardId: 'Milk'})
+// }
 
 
   render() {
     return (
       <div>
       <Header/>
+      <button onClick={this.addLane} style={{margin: 5}}>
+        Add Lane
+      </button>
     <Board 
       data={{lanes: this.state.lanes}} 
       draggable 
       editable 
       editLaneTitle 
-      canAddLanes 
+      canAddLanes
       eventBusHandle={this.setEventBus}
+      handleDragStart={handleDragStart}
+      handleDragEnd={handleDragEnd}
+      onLaneAdd={this.onLaneAdd}
+      onDataChange={this.shouldReceiveNewData}
       />
     </div>
     )

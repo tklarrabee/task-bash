@@ -40,7 +40,24 @@ router.post('/col', (req, res) => {
         else db.Project.findOneAndUpdate({_id: project}, { $push: { columns: newCol._id } }, { new: true })
             .exec((err, dbProject) => {
                 if(err) res.json(err)
-                else res.json(dbProject)
+                // else res.json(dbProject)
+                else db.Project.populate(dbProject, {path: 'columns', populate: {path: 'elements'}},
+                (err, populated) => {
+                    if(err) res.json(err)
+                    else res.json(populated)
+                }
+                )
+                // db.Column.populate(dbColumns, {
+                //     path: 'columns.elements'
+                // }, (error, updatedColumn) => {
+                //     if(error) res.json(error)
+                //     else res.json(updatedColumn)
+                // })
+                // .exec((err, popProj) => {
+                //     if (err) res.json(err)
+                //     else res.json(popProj)
+                // })
+                
             })
     })
     
@@ -96,8 +113,14 @@ router.patch('/board', (req, res) => {
             populate: {path: 'elements'}
         })
         .exec((err, dbColumns) => {
-            if(err) res.json(err)
-            else res.json(dbColumns)
+            db.Column.populate(dbColumns, {
+                path: 'columns.elements'
+            }, (error, updatedColumn) => {
+                if(error) res.json(error)
+                else res.json(updatedColumn)
+            })
+            // if(err) res.json(err)
+            // else res.json(dbColumns)
         })
         
         console.log(req.body)
