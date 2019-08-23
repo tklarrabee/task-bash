@@ -10,8 +10,8 @@ router.post('/new', (req, res) => {
     const { name, owner, description } = req.body
 
     db.Project.create({
-        owner: owner,
         name: name,
+        owner: owner,
         description: description
     })
         .then((dbProject) => {

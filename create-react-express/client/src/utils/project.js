@@ -1,10 +1,10 @@
 import axios from 'axios';
 
 export default {
-    newProject: project => axios.post('/project/newproject', project),
+    newProject: project => axios.post('/project/new', project),
     // { owner: "val", name: "val", description: "val"}
 
-    newColumn: column => axios.post('/project/col', column),
+    newColumn: column => axios.post('/project/col',  column),
     // { name: "val", project: "val", index: "val" }
 
     newCard: card => axios.post('/project/card', card),
