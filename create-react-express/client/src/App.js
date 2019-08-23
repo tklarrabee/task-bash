@@ -92,7 +92,8 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Welcome} />
               <Route exact path="/calendar" component={Calendar} />
-              <Route exact path="/board/:id" render={() => <Board 
+              <Route exact path="/board/:id" render={(props) => <Board 
+                  {...props}
                   updateUser={this.updateUser} 
                   loggedIn={this.state.loggedIn} 
                   username={this.state.username}

@@ -24,15 +24,19 @@ const data = {
 }
 
 export default class KanBan extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       columns: []
     }
   }
 
   getKanBan = project => {
-    projectAPI.getBoard(this.props.project)
+    projectAPI.getBoard(project)
+  }
+  componentDidMount() {
+    console.log(this.props.match.params)
+    // this.getKanBan(this.props.params.id)
   }
 
 
