@@ -1,5 +1,6 @@
-const db = require("../database/models/Project");
+const db = require("../database/models");
 const express = require('express')
+// const passport = require('../passport')
 const router = express.Router()
 
 // Prefix /project
@@ -67,9 +68,10 @@ router.post('/card', (req, res) => {
 
 // get projects created by signed in ruser
 router.get('/', (req, res) => {
-    console.log('My projects ', req.body)
+    console.log('My projects ') 
+    console.log(req.user)
 
-    const { id } = req.body
+    const { id } = req.user
     db.Project.find({ owner: id }, (err, user) => {
         if (err) console.log('Error finding projects', err)
         else res.json(user)

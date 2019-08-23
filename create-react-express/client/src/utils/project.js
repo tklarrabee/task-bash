@@ -10,7 +10,7 @@ export default {
     newCard: card => axios.post('/project/card', card),
     // {body: "val", date: "val", user: "val"}
 
-    getProjects: user => axios.get('/project', user),
+    getProjects: userId => axios.get('/project', {id: userId}),
     // { id: "val" }
 
     getBoard: project => axios.get('/project/board', project),
