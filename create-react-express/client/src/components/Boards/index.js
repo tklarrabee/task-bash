@@ -1,5 +1,8 @@
 import React, { Component } from "react";
-import TextEditor from "../TextEditor";
+// import { Redirect } from 'react-router-dom'
+// import projectAPI from '../../utils/project'
+// import userAPI from '../../utils/user'
+// import TextEditor from "../TextEditor";
 import "./styles.css";
 
 export function BoardContainer(props) {
@@ -12,8 +15,9 @@ export function BoardContainer(props) {
 
 export class Header extends Component {
   state = {
-    boardName: "Board Name",
-    users: ["user1", "user2", "user3"],
+    project: "",
+    boardName: "",
+    users: [],
     isInEditMode: false
   };
 
@@ -51,13 +55,20 @@ export class Header extends Component {
     );
   };
 
+  // componentDidMount = () => {
+  //   projectAPI.
+  // }
+
   render() {
+
+    // const userId = this.props.userId
+    
     return (
       <div className="header">
         <div className="plx-card silver">
           
           <div className="pxc-avatar">
-            <img src="https://i.pinimg.com/originals/ab/eb/42/abeb4287590a49402d0b125a6dceebdb.jpg" />
+            <img src="https://i.pinimg.com/originals/ab/eb/42/abeb4287590a49402d0b125a6dceebdb.jpg" alt="" />
           </div>
           <div className="pxc-subcard">
             <div className="pxc-title">
@@ -72,29 +83,29 @@ export class Header extends Component {
               <div className="pxc-info">
                 <div className="flags">
                   <span>
-                    <img src="http://pollux.fun/images/flags/EN.png" />
+                    <img src="http://pollux.fun/images/flags/EN.png" alt=""/>
                   </span>
                   <span>
-                    <img src="http://pollux.fun/images/flags/BR.png" />
+                    <img src="http://pollux.fun/images/flags/BR.png"alt="" />
                   </span>
                   <span>
-                    <img src="http://pollux.fun/images/flags/FR.png" />
+                    <img src="http://pollux.fun/images/flags/FR.png" alt=""/>
                   </span>
                   <span>
-                    <img src="http://pollux.fun/images/flags/TR.png" />
+                    <img src="http://pollux.fun/images/flags/TR.png" alt=""/>
                   </span>
                   <span>
-                    <img src="http://pollux.fun/images/flags/JP.png" />
+                    <img src="http://pollux.fun/images/flags/JP.png" alt=""/>
                   </span>
                 </div>
               </div>
               <div className="links">
-                <a className="shop">
+                {/* <a className="shop" href="#">
                   <i className="fa fa-star-o"> </i>
                 </a>
-                <a className="shop">
+                <a className="shop" href="#">
                   <i className="fa fa-plus-circle"> </i>
-                </a>
+                </a> */}
               </div>
             </div>
           </div>
