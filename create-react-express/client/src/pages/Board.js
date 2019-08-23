@@ -33,9 +33,13 @@ export default class KanBan extends Component {
 
   getKanBan = project => {
     projectAPI.getBoard(project)
+      .then(response => {
+        console.log(response)
+      })
   }
   componentDidMount() {
     console.log(this.props.match.params)
+    this.getKanBan(this.props.match.params.id)
     // this.getKanBan(this.props.params.id)
   }
 
