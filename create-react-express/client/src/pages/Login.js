@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Wrapper from "../components/Wrapper";
-import Carousel from "react-bootstrap/Carousel";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
