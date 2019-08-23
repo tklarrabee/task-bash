@@ -1,14 +1,8 @@
 import React, { Component } from "react";
 import Wrapper from "../components/Wrapper";
-// import Carousel from 'react-bootstrap/Carousel';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container'
-// import Form from 'react-bootstrap/Form'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Card from 'react-bootstrap/Card'
-// import Projects from "../components/DisplayProjects";
+import Projects from "../components/DisplayProjects";
 import projectAPI from "../utils/project"
+// import Projects from "../../../../../task-bash2/create-react-express/client/src/components/DisplayProjects";
 // import userAPI from "../utils/user"
 
 // import DeleteBtn from "../../components/DeleteBtn";
@@ -82,135 +76,8 @@ class Summary extends Component {
             <div>
                 {/* <NavbarAll /> */}
                 <Wrapper>
-                    <Container style={{ marginTop: 30 }}>
-                        <Wrapper>
+                    <Projects />
 
-                            {/* Nav Sidebar */}
-                            <Row>
-                                <Col xs={2}>
-                                    <Card>
-                                        <Card.Header>Links</Card.Header>
-                                        <Button variant="primary" >New Project</Button>
-                                        <Button variant="primary" >New Project</Button>
-                                        <Button variant="primary" >New Project</Button>
-                                        <Button variant="primary" >New Project</Button>
-                                        <Button variant="primary" >New Project</Button>
-                                        <Button variant="primary" >New Project</Button>
-                                        <Button variant="primary" >New Project</Button>
-                                        <Button variant="primary" >New Project</Button>
-                                    </Card>
-                                </Col>
-                                {/* Top row column */}
-                                <Col xs={10}>
-                                    <Row>
-                                        <Col xs={12}>
-                                            <Card>
-                                                <Card.Header>Boards!</Card.Header>
-                                                <Container>
-                                                    <Card.Body>
-                                                        <Row>
-                                                            <Col xs={6}>
-                                                                <Card>
-                                                                    <Card.Header>My Boards!</Card.Header>
-                                                                    <Container>
-                                                                        <Card.Body>
-                                                                            <Row>
-                                                                                <Col>
-
-                                                                                    <Card.Title>You Currently have X Projects Open!</Card.Title>
-                                                                                    {/* <Projects /> */}
-
-                                                            
-                                                                                </Col>
-
-                                                                            </Row>
-
-
-
-
-
-                                                                        </Card.Body>
-                                                                    </Container>
-                                                                </Card>
-                                                            </Col>
-                                                            <Col xs={6}>
-
-                                                                <Card>
-                                                                    <Card.Header>Shared Boards!</Card.Header>
-                                                                    <Container>
-                                                                        <Card.Body>
-                                                                            <Row>
-                                                                                <Col>
-
-                                                                                    <Card.Title>You Currently have X Projects Open!</Card.Title>
-                                                                                </Col>
-
-                                                                            </Row>
-
-
-
-
-
-                                                                        </Card.Body>
-                                                                    </Container>
-                                                                </Card>
-                                                            </Col>
-
-
-                                                        </Row>
-
-
-
-
-
-                                                    </Card.Body>
-                                                </Container>
-                                            </Card>
-                                        </Col>
-
-                                    </Row>
-
-                                    <Row>
-
-
-
-                                    </Row>
-
-                                    <Row>
-                                        <Col xs={12}>
-                                            <Card>
-                                                <Card.Header>Invites!</Card.Header>
-                                                <Container>
-                                                    <Card.Body>
-                                                        <Row>
-                                                            <Col>
-
-                                                                <Card.Title>You Currently have X Projects Open!</Card.Title>
-                                                            </Col>
-
-                                                        </Row>
-
-
-
-
-
-                                                    </Card.Body>
-                                                </Container>
-                                            </Card>
-                                        </Col>
-
-
-                                    </Row>
-                                </Col>
-
-
-
-                            </Row>
-                            <div>
-
-                            </div>
-                        </Wrapper>
-                    </Container>
 
                 </Wrapper>
             </div>

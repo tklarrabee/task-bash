@@ -1,17 +1,20 @@
 import React, { Component } from "react";
-import Jumbotron from "../../components/Jumbotron";
 import DeleteBtn from "../DeleteBtn";
 import Project from "../../utils/project"
-import { Col, Row, Container } from "../Grid";
 import { List, ListItem } from "../List";
 import { Input, TextArea, FormBtn } from "../Form";
+import Wrapper from "../../components/Wrapper";
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Card from 'react-bootstrap/Card'
 
-class projects extends Component {
+class Projects extends Component {
   // Setting our component's initial state
   state = {
     projects: [],
     name: "",
-    user: "",
+    owner: "",
     description: ""
   };
 
@@ -50,7 +53,7 @@ class projects extends Component {
   // Then reload Projects from the database
   handleFormSubmit = event => {
     event.preventDefault();
-  
+    if (this.state.name && this.state.owner) {
       Project.newProject({
         name: this.state.name,
         owner: this.state.owner,
@@ -59,80 +62,139 @@ class projects extends Component {
         .then(res => this.loadProjects(this.props.user.id))
         .catch(err => console.log(err));
     }
-  
+  };
 
   render() {
-    const user ={ id: this.props.userId }
+    const user = { id: this.props.userId }
     console.log("USER FROM 67 of DISPLAY PROJ COMP", user)
-    Project.getProjects(user).then( res => console.log("GETPROJEEEEE", res))
+    Project.getProjects(user).then(res => console.log("GETPROJEEEEE", res))
     // this.setState({user: this.props.userId}) 
 
     console.log(this.state.user)
     return (
-      <Container fluid>
-        <Row>
-          <Col size="md-12">
-            <Jumbotron>
-              <h1>What Projects Should I Read?</h1>
-            </Jumbotron>
-            <form>
-              <Input
-                value={this.state.name}
-                onChange={this.handleInputChange}
-                name="name"
-                placeholder="project name (required)"
-                className="text-center"
-                id="Title"
-                type="text"
-                required
-              />
-              <Input
-                value={this.state.owner}
-                onChange={this.handleInputChange}
-                name="owner"
-                placeholder="owner (required)"
-              />
-              <TextArea
-                value={this.state.description}
-                onChange={this.handleInputChange}
-                name="description"
-                placeholder="description (Optional)"
-              />
-              <FormBtn
-               
-                onClick={this.handleFormSubmit}
-              >
-                Submit Project
+      <Container style={{ marginTop: 30 }}>
+        <Wrapper>
+
+          {/* Nav Sidebar */}
+          <Row>
+            <Col xs={4}>
+              <Card>
+                <Card.Header>New Project:</Card.Header>
+                <form>
+                  <Input
+                    value={this.state.name}
+                    onChange={this.handleInputChange}
+                    name="name"
+                    placeholder="project name (required)"
+                  />
+                  {/* <Input
+                    value={this.state.owner}
+                    onChange={this.handleInputChange}
+                    name="owner"
+                    placeholder="owner (required)"
+                  /> */}
+                  <TextArea
+                    value={this.state.description}
+                    onChange={this.handleInputChange}
+                    name="description"
+                    placeholder="description (Optional)"
+                  />
+                  <FormBtn
+                    disabled={!(this.state.owner && this.state.name)}
+                    onClick={this.handleFormSubmit}
+                  >
+                    Submit Project
               </FormBtn>
-            </form>
-          </Col>
-          <Col size="md-12 sm-12">
-            <Jumbotron>
-              <h1>Projects On My List</h1>
-            </Jumbotron>
-            {this.state.projects.length ? (
-              <List>
-                {this.state.projects.map(project => {
-                  return (
-                    <ListItem key={project._id}>
-                      <a href={"/projects/" + project._id}>
-                        <strong>
-                          {project.name} by {project.owner}
-                        </strong>
-                      </a>
-                      <DeleteBtn onClick={() => this.deleteProject(project._id)} />
-                    </ListItem>
-                  );
-                })}
-              </List>
-            ) : (
-              <h3>No Projects</h3>
-            )}
-          </Col>
-        </Row>
+                </form>
+              </Card>
+            </Col>
+            {/* Top row column */}
+            <Col xs={8}>
+              <Row>
+                <Col xs={12}>
+                  <Card>
+                    <Card.Header>My Boards!</Card.Header>
+                    <Container>
+                      <Card.Body>
+                        <Col size="md-12 sm-12">
+
+                          {this.state.projects.length ? (
+                            <List>
+                              {this.state.projects.map(project => {
+                                return (
+                                  <ListItem key={project._id}>
+                                    <a href={"/projects/" + project._id}>
+                                      <strong>
+                                        {project.name} by {project.owner}
+                                      </strong>
+                                    </a>
+                                    <DeleteBtn onClick={() => this.deleteProject(project._id)} />
+                                  </ListItem>
+                                );
+                              })}
+                            </List>
+                          ) : (
+                              <h3>No Projects</h3>
+                            )}
+                        </Col>
+
+
+
+
+
+
+                      </Card.Body>
+                    </Container>
+                  </Card>
+                </Col>
+
+              </Row>
+
+              <Row>
+
+
+
+              </Row>
+
+              <Row>
+                <Col xs={12}>
+                  <Card>
+                    <Card.Header>Invites!</Card.Header>
+                    <Container>
+                      <Card.Body>
+                        <Row>
+                          <Col>
+
+                            <Card.Title>You Currently have X Projects Open!</Card.Title>
+                          </Col>
+
+                        </Row>
+
+
+
+
+
+                      </Card.Body>
+                    </Container>
+                  </Card>
+                </Col>
+
+
+              </Row>
+            </Col>
+
+
+
+          </Row>
+          <div>
+
+          </div>
+        </Wrapper>
+
+
       </Container>
     );
   }
 }
 
-export default projects;
+export default Projects;
