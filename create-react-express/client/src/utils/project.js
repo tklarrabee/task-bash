@@ -13,7 +13,7 @@ export default {
     getProjects: userId => axios.get('/project', {id: userId}),
     // { id: "val" }
 
-    getBoard: project => axios.get('/project/board', project),
+    getBoard: project => axios.get('/project/board', {project: project}),
     // { project: "val" }
 
     deleteCol: column => axios.delete('/project/col', column),

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Header } from "../components/Boards";
 import Board from 'react-trello'
+import projectAPI from "../utils/project"
 
 const data = {
   lanes: [
@@ -22,7 +23,27 @@ const data = {
   ]
 }
 
-export default class App extends Component {
+export default class KanBan extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      columns: []
+    }
+  }
+
+  getKanBan = project => {
+    projectAPI.getBoard(project)
+      .then(response => {
+        console.log(response)
+      })
+  }
+  componentDidMount() {
+    console.log(this.props.match.params)
+    this.getKanBan(this.props.match.params.id)
+    // this.getKanBan(this.props.params.id)
+  }
+
+
   render() {
     return (
       <div>
