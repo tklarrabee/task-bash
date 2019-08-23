@@ -3,6 +3,15 @@ import { Header } from "../components/Boards";
 import Board from 'react-trello'
 import projectAPI from "../utils/project"
 
+// TODO
+// translate between trello and current model values
+// put get call into board
+// 
+
+
+
+
+
 const data = {
   lanes: [
     {
@@ -27,19 +36,20 @@ export default class KanBan extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      columns: []
+      lanes: []
     }
   }
 
   getKanBan = project => {
+    console.log(project)
     projectAPI.getBoard(project)
       .then(response => {
         console.log(response)
       })
   }
-  componentDidMount() {
+  async componentDidMount() {
     console.log(this.props.match.params)
-    this.getKanBan(this.props.match.params.id)
+    await this.getKanBan(this.props.match.params.id)
     // this.getKanBan(this.props.params.id)
   }
 
@@ -48,7 +58,7 @@ export default class KanBan extends Component {
     return (
       <div>
       <Header/>
-    <Board data={data} draggable editable editLaneTitle canAddLanes/>
+    <Board data={data} draggable editable editLaneTitle canAddLanes />
     </div>
     )
   }

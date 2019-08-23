@@ -47,16 +47,16 @@ router.post('/col', (req, res) => {
 
 // Create new Kanban card
 router.post('/card', (req, res) => {
-    console.log('New Card', req.body)
+    console.log('New Card', req.body, req.user)
 
-    const { user, date, body } = req.body
+    const { column, date, body, user } = req.body
 
     db.Element.create({
         body: body,
         date: date,
         user: user
     }).then((dbElement) => {
-        db.Column.findOneAndUpdate({}, { $push: { elements: dbElement._id } }, { new: true })
+        db.Column.findOneAndUpdate({_id: column}, { $push: { elements: dbElement._id } }, { new: true })
             .then((dbColumn) => {
                 res.json(dbColumn)
             })
@@ -80,16 +80,23 @@ router.get('/', (req, res) => {
 
 // get all columns and their related cards for a given project
 router.get('/board', (req, res) => {
-    console.log('Project Columns', req)
-
+    console.log('Project Id')
+    
     const { project } = req.body
-    db.Column.find({ project: project }, (err, project) => {
-        if (err) console.log("Error loading columns", err)
-        else res.json(project)
-    })
+    db.Column.find({ project: project })
+    // db.Column.find({ project: project }, (project) => {
+        //     if (err) console.log("Error loading columns", err)
+        //     else res.next(project)
+        // })
         .populate('elements')
-        .then((dbColumns) => res.json(dbColumns))
-        .catch(err => res.json(err))
+        .exec((err, dbColumns) => {
+            if(err) res.json(err)
+            else res.json(dbColumns)
+        })
+        
+        console.log(req.body)
+        // .then((dbColumns) => res.json(dbColumns))
+        // .catch(err => res.json(err))
 })
 
 // delete column
