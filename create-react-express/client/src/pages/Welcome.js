@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import Container from "react-bootstrap/Container";
+import ScrollAnimation from "react-animate-on-scroll";
+import "animate.css/animate.min.css";
 import "./styles.css";
 
 class Welcome extends Component {
@@ -14,22 +16,29 @@ class Welcome extends Component {
           <div className="container">
             <div className="row align-items-center">
               <div className="col-md-10">
-                <span className="d-block mb-3 caption">
-                  UCD coding bootcamp project #3 2019
-                </span>
-                <h1 className="d-block mb-4">Task Bash is here</h1>
-                <span className="d-block mb-5 caption">
-                  created with lots of love
-                </span>
-                <a href="#" className="btn-custom">
-                  <span>find more</span>
-                </a>
+                <ScrollAnimation animateIn="fadeIn" animateOnce>
+                  <span className="d-block mb-3 caption">
+                    UCD coding bootcamp project #3 2019
+                  </span>
+                </ScrollAnimation>
+                <ScrollAnimation animateIn="fadeIn" animateOnce delay="400">
+                  <h1 className="d-block mb-4">Task Bash is here</h1>
+                </ScrollAnimation>
+                <ScrollAnimation animateIn="fadeIn" animateOnce delay="800">
+                  <span className="d-block mb-5 caption pl-lg-5">
+                  Prioritizing, scheduling, and assigning tasks have never been easier. Dynamic Request Forms ensure teams have every project detail before they start working. Visualize dependencies, identify conflicts, and easily reschedule tasks with Task-Bash chart.
+                  </span>
+                  <a href="#" className="btn-custom">
+                    <span>Get Started</span>
+                  </a>
+                </ScrollAnimation>
               </div>
             </div>
           </div>
         </div>
         <div className="site-sction site-space">
           <Container>
+          <ScrollAnimation animateIn="bounce" animateOnce>
             <Carousel>
               <Carousel.Item>
                 <img
@@ -50,43 +59,44 @@ class Welcome extends Component {
                 />
               </Carousel.Item>
             </Carousel>
+            </ScrollAnimation>
           </Container>
         </div>
 
         <div className="site-sction ">
           <div className="container">
-            <div class="row mb-5">
-              <div class="col-lg-4">
-                <div class="site-section-heading">
-                  <h2>Created by:</h2>
+            <ScrollAnimation animateIn="fadeIn" delay="300" animateOnce>
+              <div class="row mb-5">
+                <div class="col-lg-4">
+                  <div class="site-section-heading">
+                    <h2>Created by:</h2>
+                  </div>
                 </div>
               </div>
-              <div class="col-lg-5 mt-5 pl-lg-5">
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus
-                  error deleniti dolores necessitatibus eligendi.
-                </p>
-              </div>
-            </div>
+            </ScrollAnimation>
 
             <div className="row align-items-center speaker">
               <div className="col-lg-6 mb-5 mb-lg-0">
                 {/* <img src="images/person_1.jpg" alt="Image" className="img-fluid" /> */}
               </div>
               <div className="col-lg-6 ml-auto order-lg-1">
-                <h3 className="text-white mb-4 name">Helen Kim</h3>
-                <div className="bio pl-lg-5">
-                  <span className="text-uppercase text-primary d-block mb-3">
-                    Web Designer
-                  </span>
-                  <p className="mb-4">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Natus error deleniti dolores necessitatibus eligendi.
-                    Nesciunt repellendus ab voluptatibus. Minima architecto
-                    impedit eaque molestiae dicta quam. Cum ducimus. Culpa
-                    distinctio aperiam
-                  </p>
-                </div>
+                <ScrollAnimation animateIn="fadeInLeft" delay="400" animateOnce>
+                  <h3 className="text-white mb-4 name">Helen Kim</h3>
+                </ScrollAnimation>
+                <ScrollAnimation animateIn="fadeInLeft" delay="700" animateOnce>
+                  <div className="bio pl-lg-5">
+                    <span className="text-uppercase text-primary d-block mb-3">
+                      Web Developer
+                    </span>
+                    <p className="mb-4">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Natus error deleniti dolores necessitatibus eligendi.
+                      Nesciunt repellendus ab voluptatibus. Minima architecto
+                      impedit eaque molestiae dicta quam. Cum ducimus. Culpa
+                      distinctio aperiam
+                    </p>
+                  </div>
+                </ScrollAnimation>
               </div>
             </div>
 
@@ -95,10 +105,13 @@ class Welcome extends Component {
                 {/* <img src="images/person_2.jpg" alt="Image" class="img-fluid"/> */}
               </div>
               <div className="col-lg-6 ml-auto">
+              <ScrollAnimation animateIn="fadeInRight" delay="400" animateOnce>
                 <h3 className="text-white mb-4 name">Israel Sanchez</h3>
+                </ScrollAnimation>
+                <ScrollAnimation animateIn="fadeInRight" delay="700" animateOnce>
                 <div className="bio pr-lg-5">
                   <span className="text-uppercase text-primary d-block mb-3">
-                    Web Designer
+                    Web Developer
                   </span>
                   <p className="mb-4">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -108,6 +121,7 @@ class Welcome extends Component {
                     distinctio aperiam
                   </p>
                 </div>
+                </ScrollAnimation>
               </div>
             </div>
 
@@ -116,19 +130,23 @@ class Welcome extends Component {
                 {/* <img src="images/person_1.jpg" alt="Image" className="img-fluid" /> */}
               </div>
               <div className="col-lg-6 ml-auto">
-                <h3 className="text-white mb-4 name">Tyler Larrabee</h3>
-                <div className="bio pl-lg-5">
-                  <span className="text-uppercase text-primary d-block mb-3">
-                    Web Designer
-                  </span>
-                  <p className="mb-4">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Natus error deleniti dolores necessitatibus eligendi.
-                    Nesciunt repellendus ab voluptatibus. Minima architecto
-                    impedit eaque molestiae dicta quam. Cum ducimus. Culpa
-                    distinctio aperiam
-                  </p>
-                </div>
+              <ScrollAnimation animateIn="fadeInLeft" delay="400" animateOnce>
+                  <h3 className="text-white mb-4 name">Tyler Larrabee</h3>
+                </ScrollAnimation>
+                <ScrollAnimation animateIn="fadeInLeft" delay="700" animateOnce>
+                  <div className="bio pl-lg-5">
+                    <span className="text-uppercase text-primary d-block mb-3">
+                      Web Developer
+                    </span>
+                    <p className="mb-4">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Natus error deleniti dolores necessitatibus eligendi.
+                      Nesciunt repellendus ab voluptatibus. Minima architecto
+                      impedit eaque molestiae dicta quam. Cum ducimus. Culpa
+                      distinctio aperiam
+                    </p>
+                  </div>
+                </ScrollAnimation>
               </div>
             </div>
 
@@ -137,10 +155,13 @@ class Welcome extends Component {
                 {/* <img src="images/person_2.jpg" alt="Image" class="img-fluid"/> */}
               </div>
               <div className="col-lg-6 ml-auto order-lg-1">
+              <ScrollAnimation animateIn="fadeInRight" delay="400" animateOnce>
                 <h3 className="text-white mb-4 name">Chisoo Song</h3>
-                <div className="bio pr-lg-5">
+              </ScrollAnimation>
+              <ScrollAnimation animateIn="fadeInRight" delay="700" animateOnce>
+                  <div className="bio pr-lg-5">
                   <span className="text-uppercase text-primary d-block mb-3">
-                    Web Designer
+                    Web Developer
                   </span>
                   <p className="mb-4">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -150,6 +171,7 @@ class Welcome extends Component {
                     distinctio aperiam
                   </p>
                 </div>
+              </ScrollAnimation>
               </div>
             </div>
           </div>
@@ -189,7 +211,7 @@ class Welcome extends Component {
             <div className="row">
               <div className="col-12 text-center pt-5">
                 <a href="#" className="btn-custom">
-                  <span>Get started</span>
+                  <span>Find more</span>
                 </a>
               </div>
             </div>
