@@ -21,6 +21,7 @@ const ProjectSchema = new Schema({
     },
 
     columns: [{type: Schema.Types.ObjectId, ref: 'Column'}],
+    date: { type: Date, default: Date.now }
 
 
 });

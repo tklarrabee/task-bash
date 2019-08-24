@@ -60,6 +60,8 @@ class Summary extends Component {
         const user = { id: this.props.userId };
         const idNum = user.id;
         console.log(idNum + " test");
+        // const propProject = this.state.projects;
+        // console.log("PropProject:" + propProject);
         // const loggedIn = this.props.loggedIn
         // if(loggedIn) this.props.getUser()
         // const userId = {id: this.props.userId}
@@ -73,7 +75,7 @@ class Summary extends Component {
             <div className="body">
                 <div className="site-section">
                     <Projects 
-                        Projects = {this.props.projects}
+                        Projects = {this.state.projects}
                         idNum = {this.props.userId}/>
                 </div>
             </div>

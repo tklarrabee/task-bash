@@ -114,7 +114,7 @@ router.delete('/card', (req, res) => {
 router.delete('/', (req, res) => {
     console.log('Delete Project: ', req.body)
     const { id } = req.body
-    db.Project.deleteOne({ _id: id })
+    db.Project.deleteOne({ _id: id }, req.body)
         .then(deleted => res.json(deleted))
         .catch(err => res.json(err))
 })
