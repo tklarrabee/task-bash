@@ -80,7 +80,7 @@ router.get('/', (req, res) => {
 
 // get all columns and their related cards for a given project
 router.get('/board', (req, res) => {
-    console.log('Project Columns', req.body)
+    console.log('Project Columns', req)
 
     const { project } = req.body
     db.Column.find({ project: project }, (err, project) => {

@@ -3,7 +3,6 @@ import DeleteBtn from "../DeleteBtn";
 import Project from "../../utils/project"
 import { List, ListItem } from "../List";
 import { Input, TextArea, FormBtn } from "../Form";
-import Wrapper from "../../components/Wrapper";
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -87,8 +86,6 @@ class Projects extends Component {
     console.log(this.props.idNum)
     return (
       <Container style={{ marginTop: 30 }}>
-        <Wrapper>
-
           {/* Nav Sidebar */}
           <Row>
             <Col xs={4}>
@@ -203,9 +200,6 @@ class Projects extends Component {
           <div>
 
           </div>
-        </Wrapper>
-
-
       </Container>
     );
   }

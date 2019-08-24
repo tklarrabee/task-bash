@@ -11,7 +11,7 @@ import Summary from "./pages/Summary";
 import Navbar from "./components/Navbar";
 import Register from "./components/Register";
 import Footer from "./components/Footer";
-import ProjectDisplay from "./components/DisplayProjects"
+import ProjectDisplay from "./components/DisplayProjects";
 // import projectAPI from "./utils/project"
 // import Wrapper from "./components/Wrapper";
 import "./App.css";
@@ -47,7 +47,7 @@ class App extends Component {
   }
 
   getUser() {
-    axios.get('/user/').then(response => {
+    axios.get('/user').then(response => {
       console.log('Get user response: ')
       console.log(response.data)
       if (response.data.user) {
@@ -94,7 +94,8 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Welcome} />
               <Route exact path="/calendar" component={Calendar} />
-              <Route exact path="/board" render={() => <Board 
+              <Route exact path="/board/:id" render={(props) => <Board 
+                  {...props}
                   updateUser={this.updateUser} 
                   loggedIn={this.state.loggedIn} 
                   username={this.state.username}
