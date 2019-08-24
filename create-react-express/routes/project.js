@@ -173,12 +173,18 @@ router.patch('/card', (req, res) => {
 
 // delete project
 router.patch('/', (req, res) => {
-    const id  = req.body
+    const { id }  = req.body
+    const userId = req.user.id
     console.log('Delete Project: ', id)
     console.log(id)
     
     db.Project.deleteOne({_id: id})
-        .then(deleted => res.json(deleted))
+        .then(deleted => {
+            db.Project.find({ owner: userId }, (err, dbProjects) => {
+                if (err) res.json(err)
+                else res.json (dbProjects)
+            })
+        })
         .catch(err => res.json(err))
 })
 
