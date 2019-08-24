@@ -19,6 +19,19 @@ const handleDragEnd = (cardId, sourceLaneId, targetLaneId) => {
   console.log(`cardId: ${cardId}`)
   console.log(`sourceLaneId: ${sourceLaneId}`)
   console.log(`targetLaneId: ${targetLaneId}`)
+  if(sourceLaneId !== targetLaneId) {
+
+    const movement = {
+      cards: [cardId],
+      column: sourceLaneId,
+      newColumn: targetLaneId
+    }
+    projectAPI.moveCard(movement)
+      .then((err, res) => {
+        if (err) console.log(err)
+        else console.log(res)
+      })
+  }
 }
 
 const lanePop = (cols) => {
@@ -159,9 +172,6 @@ export default class KanBan extends Component {
     return (
       <div>
         <Header />
-        <button onClick={this.addLane} style={{ margin: 5 }}>
-          Add Lane
-      </button>
         <Board
           data={{ lanes: this.state.lanes }}
           draggable
