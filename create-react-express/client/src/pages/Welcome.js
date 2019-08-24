@@ -180,7 +180,7 @@ class Welcome extends Component {
               </div>
               <div className="col-lg-6 ml-auto order-lg-1">
                 <ScrollAnimation animateIn="fadeInLeft" delay={400} animateOnce>
-                  <h3 className="text-white mb-4 name">Helen Kim</h3>
+                  <h3 className="text-white mb-4 name">Kim Helen</h3>
                 </ScrollAnimation>
                 <ScrollAnimation animateIn="fadeInLeft" delay={700} animateOnce>
                   <div className="bio pl-lg-5">
