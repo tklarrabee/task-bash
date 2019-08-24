@@ -120,12 +120,27 @@ router.patch('/board', (req, res) => {
 
 // delete column
 router.patch('/col', (req, res) => {
-    console.log('Delete Project: ', req.body)
+    console.log('Delete Column: ', req.body)
     const { id } = req.body
     db.Column.findOne({ _id: id }, (err, colForDel) => {
- 
-        db.Element.remove({id: {$in: (req.body.id).map(mongoose.Types.ObjectId)}})
-        
+        console.log('FOUND THIS BITCH', colForDel)
+        if(err) res.json(err)
+        else if(colForDel.elements){
+            const elementsForDel = colForDel.elements
+            console.log('THIS BITCH HERE TOO', elementsForDel)
+            db.Element.delete(elementsForDel)
+            // for( let i = 0; elementsForDel.length; i++) {
+            //     db.Element.findOneAndDelete({_id: elementsForDel[i]}, err => 
+            //         res.json({text: "Card Element deletion error",error: err}))
+            // }
+        // db.Elements.findById(elementsForDel, (err, elementsDel) => {
+        //     if(err) res.json(err)
+        //     else res.json(elementsDel)
+        // })
+            // db.Element.deleteMany({_id: {$in: elementsForDel}}, err => res.json(err))
+
+        }
+        db.Column.deleteOne(colForDel, err => res.json(err))
       
     })
         // .then((deleted) => res.json(deleted))
