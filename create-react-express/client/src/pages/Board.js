@@ -222,7 +222,7 @@ export default class KanBan extends Component {
           onLaneDelete={this.onLaneDelete}
           />
           </Loading>
-        />
+        
       </div>
     )
   }
