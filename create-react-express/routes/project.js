@@ -128,7 +128,7 @@ router.patch('/col', (req, res) => {
         else if(colForDel.elements){
             const elementsForDel = colForDel.elements
             console.log('THIS BITCH HERE TOO', elementsForDel)
-            db.Element.delete(elementsForDel)
+            // db.Element.delete(elementsForDel)
             // for( let i = 0; elementsForDel.length; i++) {
             //     db.Element.findOneAndDelete({_id: elementsForDel[i]}, err => 
             //         res.json({text: "Card Element deletion error",error: err}))
