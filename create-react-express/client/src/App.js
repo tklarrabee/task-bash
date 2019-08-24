@@ -33,16 +33,16 @@ class App extends Component {
     // this.loadProjects = this.loadProjects.bind(this)
   }
 
-  
+
   componentDidMount() {
     this.getUser()
   }
 
-  updateUser (userObject) {
+  updateUser(userObject) {
     this.setState(userObject)
   }
 
-  updateProject (projectObject) {
+  updateProject(projectObject) {
     this.setState(projectObject)
   }
 
@@ -69,20 +69,20 @@ class App extends Component {
     })
   }
 
-//   loadProjects = user => {
-//     const request = {id: user}
-//     console.log(request)
-//     projectAPI.getProjects(request)
-//         .then(
-//             res => 
-//             {
-//                 console.log(res.data)
-//                 return this.setState({projects: res.data})
-//             }
-//         )
-//         .catch(err => console.log(err))
-//         // console.log(this.state.projects)  
-// }
+  //   loadProjects = user => {
+  //     const request = {id: user}
+  //     console.log(request)
+  //     projectAPI.getProjects(request)
+  //         .then(
+  //             res => 
+  //             {
+  //                 console.log(res.data)
+  //                 return this.setState({projects: res.data})
+  //             }
+  //         )
+  //         .catch(err => console.log(err))
+  //         // console.log(this.state.projects)  
+  // }
 
   // <>
   render() {
@@ -91,40 +91,43 @@ class App extends Component {
       <div>
         <Router>
           <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn}></Navbar>
-            <Switch>
-              <Route exact path="/" component={Welcome} />
-              <Route exact path="/calendar" component={Calendar} />
-              <Route exact path="/board/:id" render={(props) => <Board 
-                  {...props}
-                  updateUser={this.updateUser} 
-                  loggedIn={this.state.loggedIn} 
-                  username={this.state.username}
-                  updateProject={this.updateProject}
-                  />}
-                />
-              <Route exact path="/login" 
-                render={() => <Login 
-                  updateUser={this.updateUser} 
-                  loggedIn={this.state.loggedIn} 
-                  />} 
-                />
-              <Route exact path="/register" 
-                render={() => <Register 
-                  loggedIn={this.state.loggedIn}
-                />} 
-              />
-              <Route exact path="/projects" 
-                render={() => <ProjectDisplay 
-                  loggedIn={this.state.loggedIn}
-                  userId={this.state.id}
-                />} 
-                />
-                <Route exact path="/deleteproject/:id" 
-                component={Summary} />} 
-              />
+          <Switch>
+            <Route exact path="/" component={Welcome}
+              updateUser={this.updateUser}
+              loggedIn={this.state.loggedIn}
+            />
+            <Route exact path="/calendar" component={Calendar} />
+            <Route exact path="/board/:id" render={(props) => <Board
+              {...props}
+              updateUser={this.updateUser}
+              loggedIn={this.state.loggedIn}
+              username={this.state.username}
+              updateProject={this.updateProject}
+            />}
+            />
+            <Route exact path="/login"
+              render={() => <Login
+                updateUser={this.updateUser}
+                loggedIn={this.state.loggedIn}
+              />}
+            />
+            <Route exact path="/register"
+              render={() => <Register
+                loggedIn={this.state.loggedIn}
+              />}
+            />
+            <Route exact path="/projects"
+              render={() => <ProjectDisplay
+                loggedIn={this.state.loggedIn}
+                userId={this.state.id}
+              />}
+            />
+            <Route exact path="/deleteproject/:id"
+              component={Summary} />}
+          />
               <Route exact path="/logout" component={Logout} />
-              <Route exact path="/create" component={CreateAccount} />
-              {/* <Route exact path="/summary" 
+            <Route exact path="/create" component={CreateAccount} />
+            {/* <Route exact path="/summary" 
                 render={() => <Summary 
                   loggedIn={this.state.loggedIn}
                   userId={this.state.id}
@@ -132,16 +135,16 @@ class App extends Component {
                   getUser={this.getUser}
                 />}
               /> */}
-              <Route exact path="/summary">
-                { username ? <Summary 
-                  loggedIn={loggedIn}
-                  userId={id}
-                  updateProject={this.updateProject}
-                  getUser={this.getUser}
-                /> : null}
-              </Route>
-              
-            </Switch>
+            <Route exact path="/summary">
+              {username ? <Summary
+                loggedIn={loggedIn}
+                userId={id}
+                updateProject={this.updateProject}
+                getUser={this.getUser}
+              /> : null}
+            </Route>
+
+          </Switch>
           <Footer />
         </Router>
       </div>
