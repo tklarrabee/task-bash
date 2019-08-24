@@ -10,11 +10,12 @@ import projectAPI from "../utils/project"
 
 
 class Summary extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             login: "",
-            projects: []
+            projects: [],
+            userID: ""
         };
         // this.loadProjects = this.loadProjects.bind(this)
     }
@@ -38,8 +39,9 @@ class Summary extends Component {
     async componentDidMount() {
         // this.props.getUser()
         const user = {id: this.props.userId}
-        console.log('Summary Page props.userId')
+        console.log('Summary Page' + this.props.userId)
         console.log(user)
+        this.setState({userID: user})
         let myProjects = await this.loadProjects(this.props.userId)
 
         this.setState({projects: myProjects})
@@ -63,6 +65,8 @@ class Summary extends Component {
     }
     
     render() {
+        // const idNum = { id: this.props.user };
+        console.log(this.props.userId + " test");
         // const loggedIn = this.props.loggedIn
         // if(loggedIn) this.props.getUser()
         // const userId = {id: this.props.userId}
@@ -73,10 +77,13 @@ class Summary extends Component {
             
             
             return (
+            
             <div>
                 {/* <NavbarAll /> */}
                 <Wrapper>
-                    <Projects />
+                    <Projects 
+                    Projects = {this.props.projects}
+                    idNum = {this.props.userId}/>
 
 
                 </Wrapper>
