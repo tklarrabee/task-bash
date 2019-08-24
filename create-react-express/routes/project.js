@@ -1,7 +1,9 @@
 const db = require("../database/models");
 const express = require('express')
+
 // const passport = require('../passport')
 const router = express.Router()
+
 
 // Prefix /project
 // Create a new project
@@ -38,7 +40,13 @@ router.post('/col', (req, res) => {
         else db.Project.findOneAndUpdate({_id: project}, { $push: { columns: newCol._id } }, { new: true })
             .exec((err, dbProject) => {
                 if(err) res.json(err)
-                else res.json(dbProject)
+                // else res.json(dbProject)
+                else db.Project.populate(dbProject, {path: 'columns', populate: {path: 'elements'}},
+                (err, populated) => {
+                    if(err) res.json(err)
+                    else res.json(populated)
+                }
+                )
             })
     })
     
@@ -47,16 +55,17 @@ router.post('/col', (req, res) => {
 
 // Create new Kanban card
 router.post('/card', (req, res) => {
-    console.log('New Card', req.body)
+    console.log('New Card', req.body, req.user)
 
-    const { user, date, body } = req.body
-
+    const { column, label, body, title } = req.body
+    const { _id } = req.user
     db.Element.create({
         body: body,
-        date: date,
-        user: user
+        label: label,
+        title: title,
+        user: _id
     }).then((dbElement) => {
-        db.Column.findOneAndUpdate({}, { $push: { elements: dbElement._id } }, { new: true })
+        db.Column.findOneAndUpdate({_id: column}, { $push: { elements: dbElement._id } }, { new: true })
             .then((dbColumn) => {
                 res.json(dbColumn)
             })
@@ -66,7 +75,7 @@ router.post('/card', (req, res) => {
 })
 
 
-// get projects created by signed in ruser
+// get projects created by signed in user
 router.get('/', (req, res) => {
     console.log('My projects ') 
     console.log(req.user)
@@ -79,42 +88,79 @@ router.get('/', (req, res) => {
 })
 
 // get all columns and their related cards for a given project
-router.get('/board', (req, res) => {
-    console.log('Project Columns', req)
-
+router.patch('/board', (req, res) => {
+    console.log('Project Id')
+    // console.log(req.body)
+    
     const { project } = req.body
-    db.Column.find({ project: project }, (err, project) => {
-        if (err) console.log("Error loading columns", err)
-        else res.json(project)
-    })
-        .populate('elements')
-        .then((dbColumns) => res.json(dbColumns))
-        .catch(err => res.json(err))
+    db.Project.findOne({ _id: project })
+    // db.Column.find({ project: project }, (project) => {
+        //     if (err) console.log("Error loading columns", err)
+        //     else res.next(project)
+        // })
+        .populate({
+            path: 'columns',
+            populate: {path: 'elements'}
+        })
+        .exec((err, dbColumns) => {
+            db.Column.populate(dbColumns, {
+                path: 'columns.elements'
+            }, (error, updatedColumn) => {
+                if(error) res.json(error)
+                else res.json(updatedColumn)
+            })
+            // if(err) res.json(err)
+            // else res.json(dbColumns)
+        })
+        
+        console.log(req.body)
+        // .then((dbColumns) => res.json(dbColumns))
+        // .catch(err => res.json(err))
 })
 
 // delete column
-router.delete('/col', (req, res) => {
+router.patch('/col', (req, res) => {
     console.log('Delete Project: ', req.body)
     const { id } = req.body
-    db.Column.deleteOne({ _id: id })
-        .then((deleted) => res.json(deleted))
-        .catch(err => res.json(err))
+    db.Column.findOne({ _id: id }, (err, colForDel) => {
+ 
+        db.Element.remove({id: {$in: (req.body.id).map(mongoose.Types.ObjectId)}})
+        
+      
+    })
+        // .then((deleted) => res.json(deleted))
+        // .catch(err => res.json(err))
 })
 
 // delete card
-router.delete('/card', (req, res) => {
+router.patch('/card', (req, res) => {
     console.log('Delete Card: ', req.body)
-    const { id } = req.body
-    db.Element.deleteOne({ _id: id })
-        .then((deleted) => res.json(deleted))
-        .catch(err => res.json(err))
+    const { id, column } = req.body
+    db.Column.findOne({ _id: column })
+    .then((dbColumn) => {
+        dbColumn.elements.remove({ _id: id })
+        db.Element.deleteOne({ _id: id })
+        .then((deleted) => console.log(deleted))
+        .catch( err => res.json({message: 'Deletion error for card element', error: err }))
+        dbColumn.save((err, updatedCol) => {
+            if (err) res.json(err)
+            else if (updatedCol.elements){ db.Column.findOne(updatedCol, {populate: 'elements'})
+                
+                .exec((err, finalCol) => {
+                    if (err) res.json(err)
+                    else res.json(finalCol)
+                })}
+            else res.json(updatedCol)
+        })
+    })
+
 })
 
 // delete project
 router.delete('/', (req, res) => {
     console.log('Delete Project: ', req.body)
     const { id } = req.body
-    db.Project.deleteOne({ _id: id })
+    db.Project.deleteOne({ _id: id }, req.body)
         .then(deleted => res.json(deleted))
         .catch(err => res.json(err))
 })
@@ -177,45 +223,7 @@ router.put('/col', (req, res) => {
                 else res.json(colUpdate)
             })
         })
-        // .catch(err => res.json({ error: "Error updating Column", text: err }))
 
-        const findAll= function(req, res) {
-            db.Project.find(req.query)
-              .then(dbProject => res.json(dbProject))
-              .catch(err => res.status(422).json(err));
-          }
-          const findById= function(req, res) {
-            db.Project.findById(req.params.id)
-              .then(dbProject => res.json(dbProject))
-              .catch(err => res.status(422).json(err));
-          }
-          const create= function(req, res) {
-            db.Project.create(req.body)
-              .then(dbProject => res.json(dbProject))
-              .catch(err => res.status(422).json(err));
-          }
-          const update= function(req, res) {
-            db.Project.findOneAndUpdate({ id: req.params.id }, req.body)
-              .then(dbProject => res.json(dbProject))
-              .catch(err => res.status(422).json(err));
-          }
-          const remove= function(req, res) {
-            db.Project.findById(req.params.id)
-              .then(dbProject => dbProject.remove())
-              .then(dbProject => res.json(dbProject))
-              .catch(err => res.status(422).json(err));
-          }
-          // Matches with "/api/books"
-          router.route("/newproject")
-            .get(findAll)
-            .post(create);
-          
-          // Matches with "/api/books/:id"
-          router
-            .route("/:id")
-            .get(findById)
-            .put(update)
-            .delete(remove);
 })
 
 

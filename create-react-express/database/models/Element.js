@@ -10,10 +10,19 @@ const ElementSchema = new Schema({
         required: true
     },
 
-    date: {
-        type: Date,
+    label: {
+        type: String,
         required: false
     },
+
+    title: {
+        type: String,
+        required: false
+    },
+    // date: {
+    //     type: Date,
+    //     required: false
+    // },
 
     user: {
         type: Schema.Types.ObjectId,
