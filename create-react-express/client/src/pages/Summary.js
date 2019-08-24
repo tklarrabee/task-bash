@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Wrapper from "../components/Wrapper";
 import Projects from "../components/DisplayProjects";
 import projectAPI from "../utils/project"
+import "./styles.css"
 // import Projects from "../../../../../task-bash2/create-react-express/client/src/components/DisplayProjects";
 // import userAPI from "../utils/user"
 
@@ -66,13 +66,10 @@ class Summary extends Component {
             
             
             return (
-            <div>
-                {/* <NavbarAll /> */}
-                <Wrapper>
+            <div className="body">
+                <div className="site-section">
                     <Projects />
-
-
-                </Wrapper>
+                </div>
             </div>
 
 
