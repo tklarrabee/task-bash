@@ -47,17 +47,6 @@ router.post('/col', (req, res) => {
                     else res.json(populated)
                 }
                 )
-                // db.Column.populate(dbColumns, {
-                //     path: 'columns.elements'
-                // }, (error, updatedColumn) => {
-                //     if(error) res.json(error)
-                //     else res.json(updatedColumn)
-                // })
-                // .exec((err, popProj) => {
-                //     if (err) res.json(err)
-                //     else res.json(popProj)
-                // })
-                
             })
     })
     
@@ -68,12 +57,13 @@ router.post('/col', (req, res) => {
 router.post('/card', (req, res) => {
     console.log('New Card', req.body, req.user)
 
-    const { column, date, body, user } = req.body
-
+    const { column, label, body, title } = req.body
+    const { _id } = req.user
     db.Element.create({
         body: body,
-        date: date,
-        user: user
+        label: label,
+        title: title,
+        user: _id
     }).then((dbElement) => {
         db.Column.findOneAndUpdate({_id: column}, { $push: { elements: dbElement._id } }, { new: true })
             .then((dbColumn) => {

@@ -23,15 +23,15 @@ const handleDragEnd = (cardId, sourceLaneId, targetLaneId) => {
 
 const lanePop = (cols) => {
   const readyCols = []
-  for( let i = 0; i < cols.length; i++ ) {
-    const {_id, name, index,  elements} = cols[i]
-    const formedCol = new LaneCard(_id, name, index,  elements)
+  for (let i = 0; i < cols.length; i++) {
+    const { _id, name, index, elements } = cols[i]
+    const formedCol = new LaneCard(_id, name, index, elements)
     formedCol.formCards()
     readyCols.push(formedCol)
   }
   let laneTot = readyCols.length
   // this.setState({total: laneTot})
-  return {columns: readyCols, total: laneTot}
+  return { columns: readyCols, total: laneTot }
 }
 
 
@@ -42,17 +42,17 @@ function LaneCard(id, title, label, cards) {
   this.title = title
   this.label = JSON.stringify(label)
   this.cards = cards
-  this.formCards = function() {
-    if(cards) {
+  this.formCards = function () {
+    if (cards) {
       const shapedCards = []
-      for(let i = 0; i < cards.length; i++){
+      for (let i = 0; i < cards.length; i++) {
         const card = {
-          id: cards[i]._id ,
-          cardId: cards[i]._id ,
-          title: cards[i].body,
+          id: cards[i]._id,
+          cardId: cards[i]._id,
+          title: cards[i].title,
           description: cards[i].body,
-          label: cards[i].date,
-          metadata: {user: cards[i].user}
+          label: cards[i].label,
+          metadata: { user: cards[i].user }
         }
         shapedCards.push(card)
       }
@@ -70,15 +70,16 @@ export default class KanBan extends Component {
       lanes: [],
       total: 0
     }
-    this.setEventBus =this.setEventBus.bind(this)
+    this.setEventBus = this.setEventBus.bind(this)
     this.getKanBan = this.getKanBan.bind(this)
     this.onLaneAdd = this.onLaneAdd.bind(this)
+    this.onCardAdd = this.onCardAdd.bind(this)
     this.shouldReceiveNewData = this.shouldReceiveNewData.bind(this)
   }
 
   setEventBus = eventBus => {
-    this.setState({eventBus})
-}
+    this.setState({ eventBus })
+  }
 
   getKanBan = project => {
     // console.log(project)
@@ -86,19 +87,19 @@ export default class KanBan extends Component {
       .then(response => {
         const cols = response.data.columns
         const readyCols = []
-        for( let i = 0; i < cols.length; i++ ) {
-          const {_id, name, index,  elements} = cols[i]
-          const formedCol = new LaneCard(_id, name, index,  elements)
+        for (let i = 0; i < cols.length; i++) {
+          const { _id, name, index, elements } = cols[i]
+          const formedCol = new LaneCard(_id, name, index, elements)
           formedCol.formCards()
           readyCols.push(formedCol)
         }
         let laneTot = readyCols.length
-        this.setState({lanes: readyCols, total: laneTot})
+        this.setState({ lanes: readyCols, total: laneTot })
         console.log(this.state)
       })
       .catch((err) => console.log(err))
   }
-  
+
   async componentDidMount() {
     const projectId = this.props.match.params.id
     // console.log(projectId)
@@ -109,7 +110,7 @@ export default class KanBan extends Component {
   onLaneAdd = (data, id) => {
     console.log(data, id)
     let index = parseInt(this.state.total) + 1
-    const column = {name: data.title, project: this.props.match.params.id, index: index}
+    const column = { name: data.title, project: this.props.match.params.id, index: index }
     console.log(column)
     projectAPI.newColumn(column)
       .then((res) => {
@@ -122,50 +123,59 @@ export default class KanBan extends Component {
           type: 'UPDATE_LANES',
           lanes: lanes
         })
-        this.setState({total: total})
+        this.setState({ total: total })
 
 
       })
-    // this.state.eventBus.publish({
-    //   type: 'UPDATE_LANES'
-    // })
+  }
+
+  onCardAdd = (card, laneId) => {
+    const formCard = {
+      body: card.description,
+      title: card.title,
+      label: card.label,
+      column: laneId
+    }
+    projectAPI.newCard(formCard)
+    console.log(card)
   }
 
   shouldReceiveNewData = nextData => {
     console.log('New card has been added')
     console.log(nextData)
-}
+  }
 
-//   completeCard = () => {
-//     this.state.eventBus.publish({
-//         type: 'ADD_CARD',
-//         laneId: 'COMPLETED',
-//         card: {id: 'Milk', title: 'Buy Milk', label: '15 mins', description: 'Use Headspace app'}
-//     })
-//     this.state.eventBus.publish({type: 'REMOVE_CARD', laneId: 'PLANNED', cardId: 'Milk'})
-// }
+  //   completeCard = () => {
+  //     this.state.eventBus.publish({
+  //         type: 'ADD_CARD',
+  //         laneId: 'COMPLETED',
+  //         card: {id: 'Milk', title: 'Buy Milk', label: '15 mins', description: 'Use Headspace app'}
+  //     })
+  //     this.state.eventBus.publish({type: 'REMOVE_CARD', laneId: 'PLANNED', cardId: 'Milk'})
+  // }
 
 
   render() {
     return (
       <div>
-      <Header/>
-      <button onClick={this.addLane} style={{margin: 5}}>
-        Add Lane
+        <Header />
+        <button onClick={this.addLane} style={{ margin: 5 }}>
+          Add Lane
       </button>
-    <Board 
-      data={{lanes: this.state.lanes}} 
-      draggable 
-      editable 
-      editLaneTitle 
-      canAddLanes
-      eventBusHandle={this.setEventBus}
-      handleDragStart={handleDragStart}
-      handleDragEnd={handleDragEnd}
-      onLaneAdd={this.onLaneAdd}
-      onDataChange={this.shouldReceiveNewData}
-      />
-    </div>
+        <Board
+          data={{ lanes: this.state.lanes }}
+          draggable
+          editable
+          editLaneTitle
+          canAddLanes
+          eventBusHandle={this.setEventBus}
+          handleDragStart={handleDragStart}
+          handleDragEnd={handleDragEnd}
+          onLaneAdd={this.onLaneAdd}
+          onDataChange={this.shouldReceiveNewData}
+          onCardAdd={this.onCardAdd}
+        />
+      </div>
     )
   }
 }
