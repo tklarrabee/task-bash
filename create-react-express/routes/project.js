@@ -172,10 +172,12 @@ router.patch('/card', (req, res) => {
 })
 
 // delete project
-router.delete('/', (req, res) => {
-    console.log('Delete Project: ', req.body)
-    const { id } = req.body
-    db.Project.deleteOne({ _id: id }, req.body)
+router.patch('/', (req, res) => {
+    const id  = req.body
+    console.log('Delete Project: ', id)
+    console.log(id)
+    
+    db.Project.deleteOne({_id: id})
         .then(deleted => res.json(deleted))
         .catch(err => res.json(err))
 })

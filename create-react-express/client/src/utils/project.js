@@ -22,7 +22,7 @@ export default {
     deleteCard: card => axios.patch('/project/card', card),
     // { id: "val", column: ObjectId }
     
-    deleteProject: project => axios.delete('/project', project),
+    deleteProject: project => axios.patch('/project', project),
     // { id: "val" }
  
     updateProject: project => axios.put('/project', project),
