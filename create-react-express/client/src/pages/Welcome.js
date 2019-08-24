@@ -3,13 +3,29 @@ import Carousel from "react-bootstrap/Carousel";
 import Container from "react-bootstrap/Container";
 import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.css";
+import Modal from "../components/Modal";
+import Login from "../pages/Login";
+import CreateAccount from "../pages/CreateAccount"
 import "./styles.css";
-
 
 class Welcome extends Component {
   state = {
-    login: ""
+    login: "",
+    show: false,
+    registerShow: false
   };
+
+  showModal = e => {
+    this.setState({
+      show: !this.state.show
+    });
+  };
+
+  showRegister = e => {
+    this.setState({
+      registerShow: !this.state.registerShow
+    })
+  }
   render() {
     return (
       <div className="body">
@@ -27,39 +43,63 @@ class Welcome extends Component {
                 </ScrollAnimation>
                 <ScrollAnimation animateIn="fadeIn" animateOnce delay={800}>
                   <span className="d-block mb-5 caption pl-lg-5">
-                  Prioritizing, scheduling, and assigning tasks have never been easier. Dynamic Request Forms ensure teams have every project detail before they start working. Visualize dependencies, identify conflicts, and easily reschedule tasks with Task-Bash chart.
+                    Prioritizing, scheduling, and assigning tasks have never
+                    been easier. Dynamic Request Forms ensure teams have every
+                    project detail before they start working. Visualize
+                    dependencies, identify conflicts, and easily reschedule
+                    tasks with Task-Bash chart.
                   </span>
-                  <a href="#" className="btn-custom">
+                  <a href="#popup"
+                    className="btn-custom"
+                    onClick={e => {
+                      this.showRegister();
+                    }}
+                  >
                     <span>Get Started</span>
                   </a>
+                  <a href="#popup"
+                    className="btn-custom"
+                    onClick={e => {
+                      this.showModal();
+                    }}
+                  >
+                    <span>Log In</span>
+                  </a>
+                  
                 </ScrollAnimation>
+                <Modal onClose={this.showModal} show={this.state.show}> 
+                  <Login/>
+                </Modal>
+                <Modal onClose={this.showRegister} show={this.state.registerShow}>
+                  <CreateAccount/>
+                </Modal>
               </div>
             </div>
           </div>
         </div>
         <div className="site-sction site-space">
           <Container>
-          <ScrollAnimation animateIn="bounce" animateOnce>
-            <Carousel>
-              <Carousel.Item>
-                <img
-                  widtch={500}
-                  height={400}
-                  className="d-block w-100"
-                  src="https://i.pinimg.com/originals/52/87/8e/52878ebc087ea97731327ddd1842e0fc.png"
-                  alt="First slide"
-                />
-              </Carousel.Item>
-              <Carousel.Item>
-                <img
-                  widtch={500}
-                  height={400}
-                  className="d-block w-100"
-                  src="https://i2.wp.com/gernotkapteina.com/wp-content/uploads/2015/11/pmback.png?fit=816%2C361&ssl=1"
-                  alt="Third slide"
-                />
-              </Carousel.Item>
-            </Carousel>
+            <ScrollAnimation animateIn="bounce" animateOnce>
+              <Carousel>
+                <Carousel.Item>
+                  <img
+                    widtch={500}
+                    height={400}
+                    className="d-block w-100"
+                    src="https://i.pinimg.com/originals/52/87/8e/52878ebc087ea97731327ddd1842e0fc.png"
+                    alt="First slide"
+                  />
+                </Carousel.Item>
+                <Carousel.Item>
+                  <img
+                    widtch={500}
+                    height={400}
+                    className="d-block w-100"
+                    src="https://i2.wp.com/gernotkapteina.com/wp-content/uploads/2015/11/pmback.png?fit=816%2C361&ssl=1"
+                    alt="Third slide"
+                  />
+                </Carousel.Item>
+              </Carousel>
             </ScrollAnimation>
           </Container>
         </div>
@@ -106,22 +146,30 @@ class Welcome extends Component {
                 {/* <img src="images/person_2.jpg" alt="Image" class="img-fluid"/> */}
               </div>
               <div className="col-lg-6 ml-auto">
-              <ScrollAnimation animateIn="fadeInRight" delay={400} animateOnce>
-                <h3 className="text-white mb-4 name">Israel Sanchez</h3>
+                <ScrollAnimation
+                  animateIn="fadeInRight"
+                  delay={400}
+                  animateOnce
+                >
+                  <h3 className="text-white mb-4 name">Israel Sanchez</h3>
                 </ScrollAnimation>
-                <ScrollAnimation animateIn="fadeInRight" delay={700} animateOnce>
-                <div className="bio pr-lg-5">
-                  <span className="text-uppercase text-primary d-block mb-3">
-                    Web Developer
-                  </span>
-                  <p className="mb-4">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Natus error deleniti dolores necessitatibus eligendi.
-                    Nesciunt repellendus ab voluptatibus. Minima architecto
-                    impedit eaque molestiae dicta quam. Cum ducimus. Culpa
-                    distinctio aperiam
-                  </p>
-                </div>
+                <ScrollAnimation
+                  animateIn="fadeInRight"
+                  delay={700}
+                  animateOnce
+                >
+                  <div className="bio pr-lg-5">
+                    <span className="text-uppercase text-primary d-block mb-3">
+                      Web Developer
+                    </span>
+                    <p className="mb-4">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Natus error deleniti dolores necessitatibus eligendi.
+                      Nesciunt repellendus ab voluptatibus. Minima architecto
+                      impedit eaque molestiae dicta quam. Cum ducimus. Culpa
+                      distinctio aperiam
+                    </p>
+                  </div>
                 </ScrollAnimation>
               </div>
             </div>
@@ -131,7 +179,7 @@ class Welcome extends Component {
                 {/* <img src="images/person_1.jpg" alt="Image" className="img-fluid" /> */}
               </div>
               <div className="col-lg-6 ml-auto">
-              <ScrollAnimation animateIn="fadeInLeft" delay={400} animateOnce>
+                <ScrollAnimation animateIn="fadeInLeft" delay={400} animateOnce>
                   <h3 className="text-white mb-4 name">Tyler Larrabee</h3>
                 </ScrollAnimation>
                 <ScrollAnimation animateIn="fadeInLeft" delay={700} animateOnce>
@@ -156,23 +204,31 @@ class Welcome extends Component {
                 {/* <img src="images/person_2.jpg" alt="Image" class="img-fluid"/> */}
               </div>
               <div className="col-lg-6 ml-auto order-lg-1">
-              <ScrollAnimation animateIn="fadeInRight" delay={400} animateOnce>
-                <h3 className="text-white mb-4 name">Chisoo Song</h3>
-              </ScrollAnimation>
-              <ScrollAnimation animateIn="fadeInRight" delay={700} animateOnce>
+                <ScrollAnimation
+                  animateIn="fadeInRight"
+                  delay={400}
+                  animateOnce
+                >
+                  <h3 className="text-white mb-4 name">Chisoo Song</h3>
+                </ScrollAnimation>
+                <ScrollAnimation
+                  animateIn="fadeInRight"
+                  delay={700}
+                  animateOnce
+                >
                   <div className="bio pr-lg-5">
-                  <span className="text-uppercase text-primary d-block mb-3">
-                    Web Developer
-                  </span>
-                  <p className="mb-4">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Natus error deleniti dolores necessitatibus eligendi.
-                    Nesciunt repellendus ab voluptatibus. Minima architecto
-                    impedit eaque molestiae dicta quam. Cum ducimus. Culpa
-                    distinctio aperiam
-                  </p>
-                </div>
-              </ScrollAnimation>
+                    <span className="text-uppercase text-primary d-block mb-3">
+                      Web Developer
+                    </span>
+                    <p className="mb-4">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Natus error deleniti dolores necessitatibus eligendi.
+                      Nesciunt repellendus ab voluptatibus. Minima architecto
+                      impedit eaque molestiae dicta quam. Cum ducimus. Culpa
+                      distinctio aperiam
+                    </p>
+                  </div>
+                </ScrollAnimation>
               </div>
             </div>
           </div>
@@ -211,7 +267,7 @@ class Welcome extends Component {
 
             <div className="row">
               <div className="col-12 text-center pt-5">
-                <a href="#" className="btn-custom">
+                <a href="/" className="btn-custom">
                   <span>Find more</span>
                 </a>
               </div>
