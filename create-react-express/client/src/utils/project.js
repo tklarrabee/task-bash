@@ -1,26 +1,26 @@
 import axios from 'axios';
 
 export default {
-    newProject: project => axios.post('/project/new', project),
+    newProject: Project => axios.post('/project/new', Project),
     // { owner: "val", name: "val", description: "val"}
 
     newColumn: column => axios.post('/project/col',  column),
     // { name: "val", project: "val", index: "val" }
 
     newCard: card => axios.post('/project/card', card),
-    // {body: "val", date: "val", user: "val"}
+    // {body: "val", date: "val", user: "val", column: "val"}
 
-    getProjects: userId => axios.get('/project', {id: userId}),
+    getProjects: () => axios.get('/project'),
     // { id: "val" }
 
-    getBoard: project => axios.get('/project/board', {project: project}),
+    getBoard: project => axios.patch('/project/board', {project: project}),
     // { project: "val" }
 
     deleteCol: column => axios.delete('/project/col', column),
     // { id: "val" }
     
-    deleteCard: card => axios.delete('/project/card', card),
-    // { id: "val" }
+    deleteCard: card => axios.patch('/project/card', card),
+    // { id: "val", column: ObjectId }
     
     deleteProject: project => axios.delete('/project', project),
     // { id: "val" }

@@ -16,9 +16,10 @@ import ProjectDisplay from "./components/DisplayProjects";
 // import Wrapper from "./components/Wrapper";
 import "./App.css";
 
+
 class App extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       loggedIn: false,
       username: null,
@@ -32,6 +33,7 @@ class App extends Component {
     // this.loadProjects = this.loadProjects.bind(this)
   }
 
+  
   componentDidMount() {
     this.getUser()
   }
@@ -116,6 +118,9 @@ class App extends Component {
                   loggedIn={this.state.loggedIn}
                   userId={this.state.id}
                 />} 
+                />
+                <Route exact path="/deleteproject/:id" 
+                component={Summary} />} 
               />
               <Route exact path="/logout" component={Logout} />
               <Route exact path="/create" component={CreateAccount} />
@@ -144,4 +149,7 @@ class App extends Component {
   }
 
 }
+
+
+
 export default App;
