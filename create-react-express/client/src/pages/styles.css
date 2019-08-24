@@ -68,7 +68,14 @@ h2 {
                 padding: 16px 30px;
                 display: inline-block;
                 letter-spacing: .2em;
-                position: relative; }
+                position: relative;
+                margin-right: 1rem;
+              }
+              
+              .btn-custom h6 {
+                font-size: 10px
+              }
+
                 .btn-custom > span {
                   position: relative;
                   z-index: 2; }

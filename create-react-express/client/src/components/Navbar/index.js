@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Navigate from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import API from "../../utils/user";
-import ScrollAnimation from 'react-animate-on-scroll';
 
 class Navbar extends Component {
   constructor() {
