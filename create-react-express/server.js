@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require('body-parser')
 const path = require("path");
 const session = require("express-session")
-const morgan = require("morgan")
+// const morgan = require("morgan")
 const dbConnection = require("./database");
 const MongoStore = require('connect-mongo')(session);
 const passport = require("./passport");
@@ -31,9 +31,10 @@ app.use(
 
 
 // Define middleware here
-app.use(morgan('dev'))
-app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(morgan('dev'))
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+// app.use(bodyParser.json({ type: 'application/*+json' }));
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));

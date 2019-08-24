@@ -1,7 +1,9 @@
 const db = require("../database/models");
 const express = require('express')
+
 // const passport = require('../passport')
 const router = express.Router()
+
 
 // Prefix /project
 // Create a new project
@@ -38,7 +40,13 @@ router.post('/col', (req, res) => {
         else db.Project.findOneAndUpdate({_id: project}, { $push: { columns: newCol._id } }, { new: true })
             .exec((err, dbProject) => {
                 if(err) res.json(err)
-                else res.json(dbProject)
+                // else res.json(dbProject)
+                else db.Project.populate(dbProject, {path: 'columns', populate: {path: 'elements'}},
+                (err, populated) => {
+                    if(err) res.json(err)
+                    else res.json(populated)
+                }
+                )
             })
     })
     
@@ -47,16 +55,17 @@ router.post('/col', (req, res) => {
 
 // Create new Kanban card
 router.post('/card', (req, res) => {
-    console.log('New Card', req.body)
+    console.log('New Card', req.body, req.user)
 
-    const { user, date, body } = req.body
-
+    const { column, label, body, title } = req.body
+    const { _id } = req.user
     db.Element.create({
         body: body,
-        date: date,
-        user: user
+        label: label,
+        title: title,
+        user: _id
     }).then((dbElement) => {
-        db.Column.findOneAndUpdate({}, { $push: { elements: dbElement._id } }, { new: true })
+        db.Column.findOneAndUpdate({_id: column}, { $push: { elements: dbElement._id } }, { new: true })
             .then((dbColumn) => {
                 res.json(dbColumn)
             })
@@ -66,7 +75,7 @@ router.post('/card', (req, res) => {
 })
 
 
-// get projects created by signed in ruser
+// get projects created by signed in user
 router.get('/', (req, res) => {
     console.log('My projects ') 
     console.log(req.user)
@@ -79,17 +88,34 @@ router.get('/', (req, res) => {
 })
 
 // get all columns and their related cards for a given project
-router.get('/board', (req, res) => {
-    console.log('Project Columns', req)
-
+router.patch('/board', (req, res) => {
+    console.log('Project Id')
+    // console.log(req.body)
+    
     const { project } = req.body
-    db.Column.find({ project: project }, (err, project) => {
-        if (err) console.log("Error loading columns", err)
-        else res.json(project)
-    })
-        .populate('elements')
-        .then((dbColumns) => res.json(dbColumns))
-        .catch(err => res.json(err))
+    db.Project.findOne({ _id: project })
+    // db.Column.find({ project: project }, (project) => {
+        //     if (err) console.log("Error loading columns", err)
+        //     else res.next(project)
+        // })
+        .populate({
+            path: 'columns',
+            populate: {path: 'elements'}
+        })
+        .exec((err, dbColumns) => {
+            db.Column.populate(dbColumns, {
+                path: 'columns.elements'
+            }, (error, updatedColumn) => {
+                if(error) res.json(error)
+                else res.json(updatedColumn)
+            })
+            // if(err) res.json(err)
+            // else res.json(dbColumns)
+        })
+        
+        console.log(req.body)
+        // .then((dbColumns) => res.json(dbColumns))
+        // .catch(err => res.json(err))
 })
 
 // delete column
