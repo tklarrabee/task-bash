@@ -51,7 +51,7 @@ class Navbar extends Component {
             <Nav className="mr-auto">
               <Nav.Link href="/summary">Projects</Nav.Link>
               {/* <Nav.Link href="/board">Board</Nav.Link> */}
-              <Nav.Link href="/calendar">Calendar</Nav.Link>
+              {/* <Nav.Link href="/calendar">Calendar</Nav.Link> */}
 
               <Nav.Link to="/login" onClick={this.logout}>
                 Logout

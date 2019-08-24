@@ -59,7 +59,10 @@ class Projects extends Component {
   deleteProject = project => {
     const id = {id: project}
     Project.deleteProject(id)
-      .then(res => this.loadProjects(this.props.idNum))
+      .then(res => {
+        console.log("delete", res.data)
+        this.setState({projects: res.data})
+      })
       .catch(err => console.log(err));
   };
 
