@@ -4,11 +4,17 @@ import Container from "react-bootstrap/Container";
 import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.css";
 import Modal from "../components/Modal";
-import Login from "../pages/Login";
-import CreateAccount from "../pages/CreateAccount"
+import Login from "../components/Login";
+import CreateAccount from "../pages/CreateAccount";
+import API from "../utils/user";
 import "./styles.css";
 
 class Welcome extends Component {
+  constructor() {
+    super();
+    this.logout = this.logout.bind(this);
+  }
+
   state = {
     login: "",
     show: false,
@@ -24,9 +30,31 @@ class Welcome extends Component {
   showRegister = e => {
     this.setState({
       registerShow: !this.state.registerShow
-    })
+    });
+  };
+
+  logout(event) {
+    event.preventDefault();
+    console.log("loggin out");
+    API.logout()
+      .then(res => {
+        console.log(res.data);
+        if (res.status === 200) {
+          this.props.updateUser({
+            loggedIn: false,
+            username: null
+          });
+        }
+      })
+      .catch(error => {
+        console.log("logout error");
+        console.log(error);
+      });
   }
+
   render() {
+    const loggedIn = this.props.loggedIn;
+
     return (
       <div className="body">
         <div className="site-section site-hero">
@@ -49,7 +77,30 @@ class Welcome extends Component {
                     dependencies, identify conflicts, and easily reschedule
                     tasks with Task-Bash chart.
                   </span>
-                  <a href="#popup"
+
+                  {loggedIn ? (
+                    <div>
+                      <a
+                        href="/summary"
+                        className="btn-custom"
+                        onClick={e => {
+                          this.showRegister();
+                        }}
+                      >
+                        <span>Summary</span>
+                      </a>
+                      <a
+                        to="/login"
+                        className="btn-custom"
+                        onClick={this.logout}
+                      >
+                        <span>Logout</span>
+                      </a>
+                    </div>
+                  ) : (
+                    <div>
+                      <a
+                    href="#popup"
                     className="btn-custom"
                     onClick={e => {
                       this.showRegister();
@@ -57,7 +108,8 @@ class Welcome extends Component {
                   >
                     <span>Get Started</span>
                   </a>
-                  <a href="#popup"
+                  <a
+                    href="#popup"
                     className="btn-custom"
                     onClick={e => {
                       this.showModal();
@@ -65,13 +117,19 @@ class Welcome extends Component {
                   >
                     <span>Log In</span>
                   </a>
+                    </div>
+                  )}
+
                   
                 </ScrollAnimation>
-                <Modal onClose={this.showModal} show={this.state.show}> 
-                  <Login/>
+                <Modal onClose={this.showModal} show={this.state.show}>
+                  <Login />
                 </Modal>
-                <Modal onClose={this.showRegister} show={this.state.registerShow}>
-                  <CreateAccount/>
+                <Modal
+                  onClose={this.showRegister}
+                  show={this.state.registerShow}
+                >
+                  <CreateAccount />
                 </Modal>
               </div>
             </div>
@@ -262,14 +320,6 @@ class Welcome extends Component {
               </div>
               <div className="col-md-6 col-lg-4 mb-5 mb-lg-0">
                 <i className="fab fa-node" />
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="col-12 text-center pt-5">
-                <a href="/" className="btn-custom">
-                  <span>Find more</span>
-                </a>
               </div>
             </div>
           </div>

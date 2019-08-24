@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
-// import NavbarLogin from "../components/NavbarLogin";
-// import Footer from "../components/Footer";
+
 
 class Login extends Component {
   state = {
@@ -26,9 +25,6 @@ class Login extends Component {
                 <Form.Group controlId="formBasicPassword">
                   <Form.Label>Password</Form.Label>
                   <Form.Control type="password" placeholder="Password" />
-                </Form.Group>
-                <Form.Group controlId="formBasicChecbox">
-                  <Form.Check type="checkbox" label="Check me out" />
                 </Form.Group>
                 <Button variant="dark" type="submit">
                   Submit
