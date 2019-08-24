@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Header } from "../components/Boards";
+import Loading from "../components/Loading";
 import Board from 'react-trello'
 import projectAPI from "../utils/project"
+import "./styles.css"
 
 // TODO
 // translate between trello and current model values
@@ -170,7 +171,8 @@ export default class KanBan extends Component {
       this.state.eventBus.publish({
         type: 'REMOVE_CARD', 
         laneId: laneId, 
-        cardId: card})
+        cardId: card
+      })
   }
 
   onCardAdd = (card, laneId) => {
@@ -201,8 +203,8 @@ export default class KanBan extends Component {
 
   render() {
     return (
-      <div>
-        {/* <Header /> */}
+      <div className="body">
+        <Loading text="loading your board right Meow!">
         <Board
           data={{ lanes: this.state.lanes }}
           draggable
@@ -217,6 +219,9 @@ export default class KanBan extends Component {
           onDataChange={this.shouldReceiveNewData}
           onCardAdd={this.onCardAdd}
           onCardDelete={this.onCardDelete}
+          onLaneDelete={this.onLaneDelete}
+          />
+          </Loading>
         />
       </div>
     )

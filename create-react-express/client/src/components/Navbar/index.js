@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Navigate from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import API from "../../utils/user";
-import ScrollAnimation from 'react-animate-on-scroll';
 
 class Navbar extends Component {
   constructor() {
@@ -50,8 +49,8 @@ class Navbar extends Component {
 
           {loggedIn ? (
             <Nav className="mr-auto">
-              <Nav.Link href="/summary">Summary</Nav.Link>
-              <Nav.Link href="/board">Board</Nav.Link>
+              <Nav.Link href="/summary">Projects</Nav.Link>
+              {/* <Nav.Link href="/board">Board</Nav.Link> */}
               <Nav.Link href="/calendar">Calendar</Nav.Link>
 
               <Nav.Link to="/login" onClick={this.logout}>
