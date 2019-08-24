@@ -116,7 +116,7 @@ class Projects extends Component {
 
           {/* Nav Sidebar */}
           <Row>
-            <Col xs={4}>
+            <Col md={4} xs={12}>
               <Card>
                 <Card.Header>New Project:</Card.Header>
                 <form>
@@ -148,9 +148,9 @@ class Projects extends Component {
               </Card>
             </Col>
             {/* Top row column */}
-            <Col xs={8}>
+            <Col md={8} xs={12}>
               <Row>
-                <Col xs={12}>
+                <Col md={12}>
                   <Card>
                     <Card.Header>My Boards!</Card.Header>
                     <Container>
