@@ -57,8 +57,9 @@ class Summary extends Component {
 
     
     render() {
-        // const idNum = { id: this.props.user };
-        console.log(this.props.userId + " test");
+        const user = { id: this.props.userId };
+        const idNum = user.id;
+        console.log(idNum + " test");
         // const loggedIn = this.props.loggedIn
         // if(loggedIn) this.props.getUser()
         // const userId = {id: this.props.userId}
