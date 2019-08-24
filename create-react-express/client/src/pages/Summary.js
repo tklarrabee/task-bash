@@ -76,7 +76,8 @@ class Summary extends Component {
                 <div className="site-section">
                     <Projects 
                         Projects = {this.state.projects}
-                        idNum = {this.props.userId}/>
+                        idNum = {this.props.userId}
+                    />
                 </div>
             </div>
 

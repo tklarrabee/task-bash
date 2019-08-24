@@ -1,29 +1,22 @@
-# Create React Express App
+# task-bash
+Free-form text entry that converts to smart project elements online or in from the command line
 
-## About This Boilerplate
+## Overview
 
-This setup allows for a Node/Express/React app which can be easily deployed to Heroku.
+A new React-based App. This app utilize React lifecycle methods to query and display and stores user informations. 
+As a user, you can create accounts, then create cards, topics, and others for Kanban style organization.
 
-The front-end React app will auto-reload as it's updated via webpack dev server, and the backend Express app will auto-reload independently with nodemon.
+## Features
 
-## Starting the app locally
+- [] Fully functioning app. 
+- [x] Complete routes for future features.
+- [] Calandar feature
+- [x] Fully utilizes advantages of React.
 
-Start by installing front and backend dependencies. While in this directory, run the following command:
 
-```
-npm install
-```
+## Demo:
 
-This should install node modules within the server and the client folder.
+* Preview
 
-After both installations complete, run the following command in your terminal:
+![TBD]()
 
-```
-npm start
-```
-
-Your app should now be running on <http://localhost:3000>. The Express server should intercept any AJAX requests from the client.
-
-## Deployment (Heroku)
-
-To deploy, simply add and commit your changes, and push to Heroku. As is, the NPM scripts should take care of the rest.
