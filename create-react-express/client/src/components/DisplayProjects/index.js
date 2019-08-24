@@ -3,6 +3,7 @@ import DeleteBtn from "../DeleteBtn";
 import Project from "../../utils/project"
 import { List, ListItem } from "../List";
 import { Input, TextArea, FormBtn } from "../Form";
+import Wrapper from "../../components/Wrapper";
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -11,14 +12,15 @@ import Card from 'react-bootstrap/Card'
 class Projects extends Component {
   constructor(props) {
     super(props)
-  this.state = {
-    projects: [],
-    name: "",
-    owner: "",
-    description: ""
-  };
-  this.loadProjects = this.loadProjects.bind(this)
-}
+    this.state = {
+      projects: [],
+      name: "",
+      owner: "",
+      description: ""
+    };
+    this.loadProjects = this.loadProjects.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+  }
 
 
 
@@ -30,6 +32,16 @@ class Projects extends Component {
 
     this.setState({ owner: idNum })
     console.log(idNum)
+    Project.getProjects(user).then(
+      res => {
+        // console.log(res.data)
+        this.setState({ projects: res.data })
+        console.log("===USER PROJECTS SET STATE DONE===")
+        console.log(this.state.projects)
+        // return this.setState({projects: res.data})
+      }
+    )
+    // this.loadProjects();
     // this.loadProjects(this.state.user)
   }
 
@@ -44,9 +56,9 @@ class Projects extends Component {
   };
 
   // Deletes a book from the database with a given id, then reloads Projects from the db
-  deleteProject = id => {
-    Project.deleteProject(id)
-      .then(res => this.loadProjects(this.props.user.id))
+  deleteProject = project => {
+    Project.deleteProject(project)
+      .then(res => this.loadProjects(this.props.idNum))
       .catch(err => console.log(err));
   };
 
@@ -54,7 +66,7 @@ class Projects extends Component {
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({ [name]: value })
-   }
+  }
 
   // When the form is submitted, use the API.saveProject method to save the book data
   // Then reload Projects from the database
@@ -70,22 +82,34 @@ class Projects extends Component {
         owner: idNum,
         description: this.state.description
       })
-        .then(res => this.loadProjects(this.props.idNum))
-        .catch(err => console.log(err));
+        .then(Project.getProjects(user)
+        .then(
+          res => {
+            // This code makes display refresh after new submit of project.
+            this.setState({ projects: res.data })
+            console.log("===HANDLE FORM SUBMIT PROJECTS SET STATE DONE===")
+            console.log("New Project List: " +this.state.projects)
+            // return this.setState({projects: res.data})
+          }
+        ))
+        .catch(err => console.log(err))
     }
   };
 
   render(props) {
-  
+
     const user = { id: this.props.idNum }
     console.log("USER FROM 67 of DISPLAY PROJ COMP", user)
     // this.setState({owner: user});
-    Project.getProjects(user).then(res => console.log("GETPROJEEEEE", res))
+
     // this.setState({user: this.props.userId}) 
+    // console.log("project props display projects: " + this.state.projects)
 
     console.log(this.props.idNum)
     return (
       <Container style={{ marginTop: 30 }}>
+        <Wrapper>
+
           {/* Nav Sidebar */}
           <Row>
             <Col xs={4}>
@@ -134,9 +158,10 @@ class Projects extends Component {
                               {this.state.projects.map(project => {
                                 return (
                                   <ListItem key={project._id}>
-                                    <a href={"/projects/" + project._id}>
+                                    <a href={"/board/" + project._id}>
                                       <strong>
-                                        {project.name} by {project.owner}
+                                        {project.name}
+                                        {/* {console.log(project._id)} */}
                                       </strong>
                                     </a>
                                     <DeleteBtn onClick={() => this.deleteProject(project._id)} />
@@ -200,6 +225,9 @@ class Projects extends Component {
           <div>
 
           </div>
+        </Wrapper>
+
+
       </Container>
     );
   }
