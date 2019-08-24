@@ -202,7 +202,7 @@ export default class KanBan extends Component {
   render() {
     return (
       <div>
-        <Header />
+        {/* <Header /> */}
         <Board
           data={{ lanes: this.state.lanes }}
           draggable
