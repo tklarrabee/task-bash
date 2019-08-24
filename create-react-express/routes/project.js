@@ -128,12 +128,27 @@ router.delete('/col', (req, res) => {
 })
 
 // delete card
-router.delete('/card', (req, res) => {
+router.patch('/card', (req, res) => {
     console.log('Delete Card: ', req.body)
-    const { id } = req.body
-    db.Element.deleteOne({ _id: id })
-        .then((deleted) => res.json(deleted))
-        .catch(err => res.json(err))
+    const { id, column } = req.body
+    db.Column.findOne({ _id: column })
+    .then((dbColumn) => {
+        dbColumn.elements.remove({ _id: id })
+        db.Element.deleteOne({ _id: id })
+        .then((deleted) => console.log(deleted))
+        .catch( err => res.json({message: 'Deletion error for card element', error: err }))
+        dbColumn.save((err, updatedCol) => {
+            if (err) res.json(err)
+            else if (updatedCol.elements){ db.Column.findOne(updatedCol, {populate: 'elements'})
+                
+                .exec((err, finalCol) => {
+                    if (err) res.json(err)
+                    else res.json(finalCol)
+                })}
+            else res.json(updatedCol)
+        })
+    })
+
 })
 
 // delete project
@@ -203,45 +218,7 @@ router.put('/col', (req, res) => {
                 else res.json(colUpdate)
             })
         })
-        // .catch(err => res.json({ error: "Error updating Column", text: err }))
 
-        const findAll= function(req, res) {
-            db.Project.find(req.query)
-              .then(dbProject => res.json(dbProject))
-              .catch(err => res.status(422).json(err));
-          }
-          const findById= function(req, res) {
-            db.Project.findById(req.params.id)
-              .then(dbProject => res.json(dbProject))
-              .catch(err => res.status(422).json(err));
-          }
-          const create= function(req, res) {
-            db.Project.create(req.body)
-              .then(dbProject => res.json(dbProject))
-              .catch(err => res.status(422).json(err));
-          }
-          const update= function(req, res) {
-            db.Project.findOneAndUpdate({ id: req.params.id }, req.body)
-              .then(dbProject => res.json(dbProject))
-              .catch(err => res.status(422).json(err));
-          }
-          const remove= function(req, res) {
-            db.Project.findById(req.params.id)
-              .then(dbProject => dbProject.remove())
-              .then(dbProject => res.json(dbProject))
-              .catch(err => res.status(422).json(err));
-          }
-          // Matches with "/api/books"
-          router.route("/newproject")
-            .get(findAll)
-            .post(create);
-          
-          // Matches with "/api/books/:id"
-          router
-            .route("/:id")
-            .get(findById)
-            .put(update)
-            .delete(remove);
 })
 
 

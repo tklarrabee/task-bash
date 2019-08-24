@@ -8,6 +8,13 @@ import projectAPI from "../utils/project"
 // put get call into board
 // 
 
+const handleLaneDragEnd = (removeIndex, addIndex, payload) => {
+  console.log(`Lane Drag End`)
+  console.log(`remove index ${removeIndex}`)
+  console.log(`add index ${addIndex}`)
+  console.log(payload)
+}
+
 const handleDragStart = (cardId, laneId) => {
   console.log('drag started')
   console.log(`cardId: ${cardId}`)
@@ -88,6 +95,7 @@ export default class KanBan extends Component {
     this.onLaneAdd = this.onLaneAdd.bind(this)
     this.onCardAdd = this.onCardAdd.bind(this)
     this.shouldReceiveNewData = this.shouldReceiveNewData.bind(this)
+    this.onCardDelete = this.onCardDelete.bind(this)
   }
 
   setEventBus = eventBus => {
@@ -142,6 +150,22 @@ export default class KanBan extends Component {
       })
   }
 
+  onCardDelete = (card, laneId) => {
+    console.log(card)
+
+    const request = {
+      id: card,
+      column: laneId
+    }
+    projectAPI.deleteCard(request)
+      .then( res => console.log('THE FORKING DELETE RESPONSE' , res) )
+
+      this.state.eventBus.publish({
+        type: 'REMOVE_CARD', 
+        laneId: laneId, 
+        cardId: card})
+  }
+
   onCardAdd = (card, laneId) => {
     const formCard = {
       body: card.description,
@@ -181,9 +205,11 @@ export default class KanBan extends Component {
           eventBusHandle={this.setEventBus}
           handleDragStart={handleDragStart}
           handleDragEnd={handleDragEnd}
+          handleLaneDragEnd={handleLaneDragEnd}
           onLaneAdd={this.onLaneAdd}
           onDataChange={this.shouldReceiveNewData}
           onCardAdd={this.onCardAdd}
+          onCardDelete={this.onCardDelete}
         />
       </div>
     )
