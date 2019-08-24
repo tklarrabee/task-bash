@@ -9,17 +9,27 @@ import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 
 class Projects extends Component {
-  // Setting our component's initial state
-  state = {
+  constructor(props) {
+    super(props)
+  this.state = {
     projects: [],
     name: "",
     owner: "",
     description: ""
   };
+  this.loadProjects = this.loadProjects.bind(this)
+}
+
+
 
   // When the component mounts, load all Projects and save them to this.state.Projects
   componentDidMount() {
-    // console.log("COMPONENT MOUNT", this.props.userId)
+    const user = { id: this.props.idNum };
+    const idNum = user.id;
+    console.log("COMPONENT MOUNT", this.props.idNum);
+
+    this.setState({ owner: idNum })
+    console.log(idNum)
     // this.loadProjects(this.state.user)
   }
 
@@ -43,33 +53,37 @@ class Projects extends Component {
   // Handles updating component state when the user types into the input field
   handleInputChange = event => {
     const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
-  };
+    this.setState({ [name]: value })
+   }
 
   // When the form is submitted, use the API.saveProject method to save the book data
   // Then reload Projects from the database
   handleFormSubmit = event => {
     event.preventDefault();
-    if (this.state.name && this.state.owner) {
+
+    if (this.state.name) {
+      const user = { id: this.props.idNum };
+      const idNum = user.id;
+      console.log("current user being logged under: " + idNum)
       Project.newProject({
         name: this.state.name,
-        owner: this.state.owner,
+        owner: idNum,
         description: this.state.description
       })
-        .then(res => this.loadProjects(this.props.user.id))
+        .then(res => this.loadProjects(this.props.idNum))
         .catch(err => console.log(err));
     }
   };
 
-  render() {
-    const user = { id: this.props.userId }
+  render(props) {
+  
+    const user = { id: this.props.idNum }
     console.log("USER FROM 67 of DISPLAY PROJ COMP", user)
+    // this.setState({owner: user});
     Project.getProjects(user).then(res => console.log("GETPROJEEEEE", res))
     // this.setState({user: this.props.userId}) 
 
-    console.log(this.state.user)
+    console.log(this.props.idNum)
     return (
       <Container style={{ marginTop: 30 }}>
           {/* Nav Sidebar */}
@@ -97,7 +111,7 @@ class Projects extends Component {
                     placeholder="description (Optional)"
                   />
                   <FormBtn
-                    disabled={!(this.state.owner && this.state.name)}
+                    disabled={!(this.state.name)}
                     onClick={this.handleFormSubmit}
                   >
                     Submit Project

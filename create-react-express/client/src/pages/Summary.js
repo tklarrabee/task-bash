@@ -10,11 +10,12 @@ import "./styles.css"
 
 
 class Summary extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             login: "",
-            projects: []
+            projects: [],
+            userID: ""
         };
         this.loadProjects = this.loadProjects.bind(this)
     }
@@ -40,7 +41,7 @@ class Summary extends Component {
     async componentDidMount() {
         // this.props.getUser()
         const user = {id: this.props.userId}
-        console.log('Summary Page props.userId')
+        console.log('Summary Page' + this.props.userId)
         console.log(user)
         await this.loadProjects(this.props.userId)
 
@@ -56,6 +57,9 @@ class Summary extends Component {
 
     
     render() {
+        const user = { id: this.props.userId };
+        const idNum = user.id;
+        console.log(idNum + " test");
         // const loggedIn = this.props.loggedIn
         // if(loggedIn) this.props.getUser()
         // const userId = {id: this.props.userId}
@@ -68,7 +72,9 @@ class Summary extends Component {
             return (
             <div className="body">
                 <div className="site-section">
-                    <Projects />
+                    <Projects 
+                        Projects = {this.props.projects}
+                        idNum = {this.props.userId}/>
                 </div>
             </div>
 
