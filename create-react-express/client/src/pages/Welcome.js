@@ -1,76 +1,225 @@
 import React, { Component } from "react";
-import Wrapper from "../components/Wrapper";
-import Carousel from 'react-bootstrap/Carousel';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container'
-// import Form from 'react-bootstrap/Form'
-// import Row from 'react-bootstrap/Row'
-// import Col from 'react-bootstrap/Col'
-import Card from 'react-bootstrap/Card'
-// import NavbarLogin from "../components/NavbarLogin"; // Login/ Logout Nabar Component > Dynamic Navbar Component 
-// import Footer from "../components/Footer";
+import Carousel from "react-bootstrap/Carousel";
+import Container from "react-bootstrap/Container";
+import ScrollAnimation from "react-animate-on-scroll";
+import "animate.css/animate.min.css";
+import "./styles.css";
 
 
 class Welcome extends Component {
-    state = {
-        login: ""
-    };
-    render() {
-        return (
-            <div>
-                {/* <NavbarLogin /> */}
-                <Wrapper>
-                    <Container style={{ marginTop: 30 }}>
-                        <Wrapper>
-                            <Carousel>
-                                <Carousel.Item>
-                                    <img widtch={500} Height={400}
-                                        className="d-block w-100"
-                                        src="https://i.pinimg.com/originals/52/87/8e/52878ebc087ea97731327ddd1842e0fc.png"
-                                        alt="First slide"
-                                    />
-                                    <Carousel.Caption>
-                                        <h3>First slide label</h3>
-                                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                                    </Carousel.Caption>
-                                </Carousel.Item>
-                                <Carousel.Item>
-                                    <img widtch={500} Height={400}
-                                        className="d-block w-100"
-                                        src="https://i2.wp.com/gernotkapteina.com/wp-content/uploads/2015/11/pmback.png?fit=816%2C361&ssl=1"
-                                        alt="Third slide"
-                                    />
+  state = {
+    login: ""
+  };
+  render() {
+    return (
+      <div className="body">
+        <div className="site-section site-hero">
+          <div className="container">
+            <div className="row align-items-center">
+              <div className="col-md-10">
+                <ScrollAnimation animateIn="fadeIn" animateOnce>
+                  <span className="d-block mb-3 caption">
+                    UCD coding bootcamp project #3 2019
+                  </span>
+                </ScrollAnimation>
+                <ScrollAnimation animateIn="fadeIn" animateOnce delay="400">
+                  <h1 className="d-block mb-4">Task Bash is here</h1>
+                </ScrollAnimation>
+                <ScrollAnimation animateIn="fadeIn" animateOnce delay="800">
+                  <span className="d-block mb-5 caption pl-lg-5">
+                  Prioritizing, scheduling, and assigning tasks have never been easier. Dynamic Request Forms ensure teams have every project detail before they start working. Visualize dependencies, identify conflicts, and easily reschedule tasks with Task-Bash chart.
+                  </span>
+                  <a href="#" className="btn-custom">
+                    <span>Get Started</span>
+                  </a>
+                </ScrollAnimation>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="site-sction site-space">
+          <Container>
+          <ScrollAnimation animateIn="bounce" animateOnce>
+            <Carousel>
+              <Carousel.Item>
+                <img
+                  widtch={500}
+                  Height={400}
+                  className="d-block w-100"
+                  src="https://i.pinimg.com/originals/52/87/8e/52878ebc087ea97731327ddd1842e0fc.png"
+                  alt="First slide"
+                />
+              </Carousel.Item>
+              <Carousel.Item>
+                <img
+                  widtch={500}
+                  Height={400}
+                  className="d-block w-100"
+                  src="https://i2.wp.com/gernotkapteina.com/wp-content/uploads/2015/11/pmback.png?fit=816%2C361&ssl=1"
+                  alt="Third slide"
+                />
+              </Carousel.Item>
+            </Carousel>
+            </ScrollAnimation>
+          </Container>
+        </div>
 
-                                    <Carousel.Caption>
-                                        <h3>Second slide label</h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                    </Carousel.Caption>
-                                </Carousel.Item>
+        <div className="site-sction ">
+          <div className="container">
+            <ScrollAnimation animateIn="fadeIn" delay="300" animateOnce>
+              <div class="row mb-5">
+                <div class="col-lg-4">
+                  <div class="site-section-heading">
+                    <h2>Created by:</h2>
+                  </div>
+                </div>
+              </div>
+            </ScrollAnimation>
 
-                            </Carousel>
-                            
-                            <Card>
-  <Card.Header>Put your team on the path to Operational Excellence</Card.Header>
-  <Card.Body>
-    <Card.Title>Simplify project planning</Card.Title>
-    <Card.Text>
-    Prioritizing, scheduling, and assigning tasks have never been easier. Dynamic Request Forms ensure teams have every project detail before they start working. Visualize dependencies, identify conflicts, and easily reschedule tasks with Task-Bash chart.
-    </Card.Text>
-    <Button variant="primary" href="/login">Login</Button>
-    <Button variant="primary" href="/create">Create Account</Button>
-  </Card.Body>
-</Card>
-                            <div>
-                                
-                            </div>
-                        </Wrapper>
-                    </Container>
-                    {/* <Footer /> */}
-                </Wrapper>
+            <div className="row align-items-center speaker">
+              <div className="col-lg-6 mb-5 mb-lg-0">
+                {/* <img src="images/person_1.jpg" alt="Image" className="img-fluid" /> */}
+              </div>
+              <div className="col-lg-6 ml-auto order-lg-1">
+                <ScrollAnimation animateIn="fadeInLeft" delay="400" animateOnce>
+                  <h3 className="text-white mb-4 name">Helen Kim</h3>
+                </ScrollAnimation>
+                <ScrollAnimation animateIn="fadeInLeft" delay="700" animateOnce>
+                  <div className="bio pl-lg-5">
+                    <span className="text-uppercase text-primary d-block mb-3">
+                      Web Developer
+                    </span>
+                    <p className="mb-4">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Natus error deleniti dolores necessitatibus eligendi.
+                      Nesciunt repellendus ab voluptatibus. Minima architecto
+                      impedit eaque molestiae dicta quam. Cum ducimus. Culpa
+                      distinctio aperiam
+                    </p>
+                  </div>
+                </ScrollAnimation>
+              </div>
             </div>
 
+            <div className="row align-items-center speaker">
+              <div className="col-lg-6 mb-5 mb-lg-0 order-lg-2">
+                {/* <img src="images/person_2.jpg" alt="Image" class="img-fluid"/> */}
+              </div>
+              <div className="col-lg-6 ml-auto">
+              <ScrollAnimation animateIn="fadeInRight" delay="400" animateOnce>
+                <h3 className="text-white mb-4 name">Israel Sanchez</h3>
+                </ScrollAnimation>
+                <ScrollAnimation animateIn="fadeInRight" delay="700" animateOnce>
+                <div className="bio pr-lg-5">
+                  <span className="text-uppercase text-primary d-block mb-3">
+                    Web Developer
+                  </span>
+                  <p className="mb-4">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Natus error deleniti dolores necessitatibus eligendi.
+                    Nesciunt repellendus ab voluptatibus. Minima architecto
+                    impedit eaque molestiae dicta quam. Cum ducimus. Culpa
+                    distinctio aperiam
+                  </p>
+                </div>
+                </ScrollAnimation>
+              </div>
+            </div>
 
-        );
-    }
+            <div className="row align-items-center speaker">
+              <div className="col-lg-6 mb-5 mb-lg-0">
+                {/* <img src="images/person_1.jpg" alt="Image" className="img-fluid" /> */}
+              </div>
+              <div className="col-lg-6 ml-auto">
+              <ScrollAnimation animateIn="fadeInLeft" delay="400" animateOnce>
+                  <h3 className="text-white mb-4 name">Tyler Larrabee</h3>
+                </ScrollAnimation>
+                <ScrollAnimation animateIn="fadeInLeft" delay="700" animateOnce>
+                  <div className="bio pl-lg-5">
+                    <span className="text-uppercase text-primary d-block mb-3">
+                      Web Developer
+                    </span>
+                    <p className="mb-4">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Natus error deleniti dolores necessitatibus eligendi.
+                      Nesciunt repellendus ab voluptatibus. Minima architecto
+                      impedit eaque molestiae dicta quam. Cum ducimus. Culpa
+                      distinctio aperiam
+                    </p>
+                  </div>
+                </ScrollAnimation>
+              </div>
+            </div>
+
+            <div className="row align-items-center speaker">
+              <div className="col-lg-6 mb-5 mb-lg-0 order-lg-2">
+                {/* <img src="images/person_2.jpg" alt="Image" class="img-fluid"/> */}
+              </div>
+              <div className="col-lg-6 ml-auto order-lg-1">
+              <ScrollAnimation animateIn="fadeInRight" delay="400" animateOnce>
+                <h3 className="text-white mb-4 name">Chisoo Song</h3>
+              </ScrollAnimation>
+              <ScrollAnimation animateIn="fadeInRight" delay="700" animateOnce>
+                  <div className="bio pr-lg-5">
+                  <span className="text-uppercase text-primary d-block mb-3">
+                    Web Developer
+                  </span>
+                  <p className="mb-4">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Natus error deleniti dolores necessitatibus eligendi.
+                    Nesciunt repellendus ab voluptatibus. Minima architecto
+                    impedit eaque molestiae dicta quam. Cum ducimus. Culpa
+                    distinctio aperiam
+                  </p>
+                </div>
+              </ScrollAnimation>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="site-section">
+          <div className="container">
+            <div className="row mb-5">
+              <div className="col-lg-4 ">
+                <div className="site-section-heading">
+                  <h2>Created with:</h2>
+                </div>
+              </div>
+            </div>
+            <div className="row mb-5 list-inline-item dev-icons">
+              <div className="col-md-6 col-lg-4 mb-5 mb-lg-0">
+                <i className="fab fa-html5" />
+              </div>
+              <div className="col-md-6 col-lg-4 mb-5 mb-lg-0">
+                <i className="fab fa-css3-alt" />
+              </div>
+              <div className="col-md-6 col-lg-4 mb-5 mb-lg-0">
+                <i className="fab fa-js-square" />
+              </div>
+
+              <div className="col-md-6 col-lg-4 mb-5 mb-lg-0">
+                <i className="fas fa-fire-alt" />
+              </div>
+              <div className="col-md-6 col-lg-4 mb-5 mb-lg-0">
+                <i className="fab fa-react" />
+              </div>
+              <div className="col-md-6 col-lg-4 mb-5 mb-lg-0">
+                <i className="fab fa-node" />
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col-12 text-center pt-5">
+                <a href="#" className="btn-custom">
+                  <span>Find more</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 export default Welcome;

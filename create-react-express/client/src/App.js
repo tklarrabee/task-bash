@@ -11,14 +11,15 @@ import Summary from "./pages/Summary";
 import Navbar from "./components/Navbar";
 import Register from "./components/Register";
 import Footer from "./components/Footer";
-import ProjectDisplay from "./components/DisplayProjects"
+import ProjectDisplay from "./components/DisplayProjects";
 // import projectAPI from "./utils/project"
 // import Wrapper from "./components/Wrapper";
 import "./App.css";
 
+
 class App extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       loggedIn: false,
       username: null,
@@ -32,6 +33,7 @@ class App extends Component {
     // this.loadProjects = this.loadProjects.bind(this)
   }
 
+  
   componentDidMount() {
     this.getUser()
   }
@@ -144,4 +146,7 @@ class App extends Component {
   }
 
 }
+
+
+
 export default App;

@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import Wrapper from "../components/Wrapper";
-
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container'
-
 import Card from 'react-bootstrap/Card'
 
 

@@ -1,14 +1,8 @@
 import React, { Component } from "react";
-import Wrapper from "../components/Wrapper";
-// import Carousel from 'react-bootstrap/Carousel';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container'
-// import Form from 'react-bootstrap/Form'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Card from 'react-bootstrap/Card'
-// import Projects from "../components/DisplayProjects";
+import Projects from "../components/DisplayProjects";
 import projectAPI from "../utils/project"
+import "./styles.css"
+// import Projects from "../../../../../task-bash2/create-react-express/client/src/components/DisplayProjects";
 // import userAPI from "../utils/user"
 
 // import DeleteBtn from "../../components/DeleteBtn";
@@ -16,11 +10,12 @@ import projectAPI from "../utils/project"
 
 
 class Summary extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             login: "",
-            projects: []
+            projects: [],
+            userID: ""
         };
         this.loadProjects = this.loadProjects.bind(this)
     }
@@ -46,7 +41,7 @@ class Summary extends Component {
     async componentDidMount() {
         // this.props.getUser()
         const user = {id: this.props.userId}
-        console.log('Summary Page props.userId')
+        console.log('Summary Page' + this.props.userId)
         console.log(user)
         await this.loadProjects(this.props.userId)
 
@@ -62,6 +57,9 @@ class Summary extends Component {
 
     
     render() {
+        const user = { id: this.props.userId };
+        const idNum = user.id;
+        console.log(idNum + " test");
         // const loggedIn = this.props.loggedIn
         // if(loggedIn) this.props.getUser()
         // const userId = {id: this.props.userId}
@@ -72,140 +70,12 @@ class Summary extends Component {
             
             
             return (
-            <div>
-                {/* <NavbarAll /> */}
-                <Wrapper>
-                    <Container style={{ marginTop: 30 }}>
-                        <Wrapper>
-
-                            {/* Nav Sidebar */}
-                            <Row>
-                                <Col xs={2}>
-                                    <Card>
-                                        <Card.Header>Links</Card.Header>
-                                        <Button variant="primary" >New Project</Button>
-                                        <Button variant="primary" >New Project</Button>
-                                        <Button variant="primary" >New Project</Button>
-                                        <Button variant="primary" >New Project</Button>
-                                        <Button variant="primary" >New Project</Button>
-                                        <Button variant="primary" >New Project</Button>
-                                        <Button variant="primary" >New Project</Button>
-                                        <Button variant="primary" >New Project</Button>
-                                    </Card>
-                                </Col>
-                                {/* Top row column */}
-                                <Col xs={10}>
-                                    <Row>
-                                        <Col xs={12}>
-                                            <Card>
-                                                <Card.Header>Boards!</Card.Header>
-                                                <Container>
-                                                    <Card.Body>
-                                                        <Row>
-                                                            <Col xs={6}>
-                                                                <Card>
-                                                                    <Card.Header>My Boards!</Card.Header>
-                                                                    <Container>
-                                                                        <Card.Body>
-                                                                            <Row>
-                                                                                <Col>
-
-                                                                                    <Card.Title>You Currently have X Projects Open!</Card.Title>
-                                                                                    {/* <Projects /> */}
-
-                                                            
-                                                                                </Col>
-
-                                                                            </Row>
-
-
-
-
-
-                                                                        </Card.Body>
-                                                                    </Container>
-                                                                </Card>
-                                                            </Col>
-                                                            <Col xs={6}>
-
-                                                                <Card>
-                                                                    <Card.Header>Shared Boards!</Card.Header>
-                                                                    <Container>
-                                                                        <Card.Body>
-                                                                            <Row>
-                                                                                <Col>
-
-                                                                                    <Card.Title>You Currently have X Projects Open!</Card.Title>
-                                                                                </Col>
-
-                                                                            </Row>
-
-
-
-
-
-                                                                        </Card.Body>
-                                                                    </Container>
-                                                                </Card>
-                                                            </Col>
-
-
-                                                        </Row>
-
-
-
-
-
-                                                    </Card.Body>
-                                                </Container>
-                                            </Card>
-                                        </Col>
-
-                                    </Row>
-
-                                    <Row>
-
-
-
-                                    </Row>
-
-                                    <Row>
-                                        <Col xs={12}>
-                                            <Card>
-                                                <Card.Header>Invites!</Card.Header>
-                                                <Container>
-                                                    <Card.Body>
-                                                        <Row>
-                                                            <Col>
-
-                                                                <Card.Title>You Currently have X Projects Open!</Card.Title>
-                                                            </Col>
-
-                                                        </Row>
-
-
-
-
-
-                                                    </Card.Body>
-                                                </Container>
-                                            </Card>
-                                        </Col>
-
-
-                                    </Row>
-                                </Col>
-
-
-
-                            </Row>
-                            <div>
-
-                            </div>
-                        </Wrapper>
-                    </Container>
-
-                </Wrapper>
+            <div className="body">
+                <div className="site-section">
+                    <Projects 
+                        Projects = {this.props.projects}
+                        idNum = {this.props.userId}/>
+                </div>
             </div>
 
 
