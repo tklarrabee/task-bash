@@ -21,6 +21,7 @@ const ColumnSchema = new Schema({
     elements: [{type: Schema.Types.ObjectId, ref: 'Element'}]
 })
 
+
 const Column = mongoose.model('Column', ColumnSchema);
 
 module.exports = Column;
