@@ -19,8 +19,8 @@ export default {
     deleteCol: column => axios.delete('/project/col', column),
     // { id: "val" }
     
-    deleteCard: card => axios.delete('/project/card', card),
-    // { id: "val" }
+    deleteCard: card => axios.patch('/project/card', card),
+    // { id: "val", column: ObjectId }
     
     deleteProject: project => axios.delete('/project', project),
     // { id: "val" }
