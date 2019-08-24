@@ -16,7 +16,7 @@ export default {
     getBoard: project => axios.patch('/project/board', {project: project}),
     // { project: "val" }
 
-    deleteCol: column => axios.delete('/project/col', column),
+    deleteCol: column => axios.patch('/project/col', column),
     // { id: "val" }
     
     deleteCard: card => axios.patch('/project/card', card),
