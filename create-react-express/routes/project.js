@@ -119,12 +119,17 @@ router.patch('/board', (req, res) => {
 })
 
 // delete column
-router.delete('/col', (req, res) => {
+router.patch('/col', (req, res) => {
     console.log('Delete Project: ', req.body)
     const { id } = req.body
-    db.Column.deleteOne({ _id: id })
-        .then((deleted) => res.json(deleted))
-        .catch(err => res.json(err))
+    db.Column.findOne({ _id: id }, (err, colForDel) => {
+ 
+        db.Element.remove({id: {$in: (req.body.id).map(mongoose.Types.ObjectId)}})
+        
+      
+    })
+        // .then((deleted) => res.json(deleted))
+        // .catch(err => res.json(err))
 })
 
 // delete card

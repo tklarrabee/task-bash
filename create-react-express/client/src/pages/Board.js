@@ -150,6 +150,13 @@ export default class KanBan extends Component {
       })
   }
 
+  onLaneDelete = (laneId) => {
+    const column = { id: laneId }
+
+    projectAPI.deleteCol(column)
+      .then((res => console.log(res)))
+  }
+
   onCardDelete = (card, laneId) => {
     console.log(card)
 
