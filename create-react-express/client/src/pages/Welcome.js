@@ -123,7 +123,8 @@ class Welcome extends Component {
                   
                 </ScrollAnimation>
                 <Modal onClose={this.showModal} show={this.state.show}>
-                  <Login />
+                  <Login 
+                  updateUser={this.props.updateUser}/>
                 </Modal>
                 <Modal
                   onClose={this.showRegister}
