@@ -57,7 +57,8 @@ class Projects extends Component {
 
   // Deletes a book from the database with a given id, then reloads Projects from the db
   deleteProject = project => {
-    Project.deleteProject(project)
+    const id = {id: project}
+    Project.deleteProject(id)
       .then(res => this.loadProjects(this.props.idNum))
       .catch(err => console.log(err));
   };

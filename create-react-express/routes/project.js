@@ -177,7 +177,7 @@ router.patch('/', (req, res) => {
     console.log('Delete Project: ', id)
     console.log(id)
     
-    db.Project.deleteOne(req.body)
+    db.Project.deleteOne({_id: id})
         .then(deleted => res.json(deleted))
         .catch(err => res.json(err))
 })
