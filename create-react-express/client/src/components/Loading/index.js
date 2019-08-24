@@ -15,7 +15,7 @@ const loadingAnimation = {
   }
 };
 
-const doneAnimation2 = {
+const doneAnimation = {
     loop: false,
     autoplay: true,
     animationData: doneData.default,
@@ -55,7 +55,7 @@ export default class Loading extends React.Component {
               {this.props.text}
               {!this.state.loading ? (
               <Lottie options={loadingAnimation} height={120} width={120} /> ) : (
-                  <Lottie options={doneAnimation2} height={120} width={120} />
+                  <Lottie options={doneAnimation} height={120} width={120} />
               )}
             </div>
           </FadeIn>

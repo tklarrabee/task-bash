@@ -5,6 +5,7 @@ import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.min.css";
 import "./styles.css";
 
+
 class Welcome extends Component {
   state = {
     login: ""

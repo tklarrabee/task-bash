@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Navigate from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import API from "../../utils/user";
+import ScrollAnimation from 'react-animate-on-scroll';
 
 class Navbar extends Component {
   constructor() {
@@ -35,7 +36,7 @@ class Navbar extends Component {
 
     return (
       <div>
-        <Navigate bg="dark" variant="dark" fixed="top">
+        <Navigate bg="dark" variant="dark">
           <Navigate.Brand href="#home">
             <img
               src="https://miro.medium.com/max/600/1*FEE98iWinlZBYkxBAG8MvA.png"
