@@ -74,4 +74,4 @@ class CreateAccount extends Component {
   }
 }
 
-export default Register
+export default CreateAccount

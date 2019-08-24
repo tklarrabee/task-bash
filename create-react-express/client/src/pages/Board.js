@@ -170,7 +170,8 @@ export default class KanBan extends Component {
       this.state.eventBus.publish({
         type: 'REMOVE_CARD', 
         laneId: laneId, 
-        cardId: card})
+        cardId: card
+      })
   }
 
   onCardAdd = (card, laneId) => {
@@ -217,6 +218,7 @@ export default class KanBan extends Component {
           onDataChange={this.shouldReceiveNewData}
           onCardAdd={this.onCardAdd}
           onCardDelete={this.onCardDelete}
+          onLaneDelete={this.onLaneDelete}
         />
       </div>
     )
