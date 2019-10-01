@@ -1,22 +1,29 @@
-# task-bash
-Free-form text entry that converts to smart project elements online or in from the command line
+<h1 align="center">Welcome to Task Bash 👋</h1>
+<p>
+  <img alt="Version" src="https://img.shields.io/badge/version- 1.1.0-blue.svg?cacheSeconds=2592000" />
+</p>
 
-## Overview
+> Free-from text entry that converts to smart project elements online or in from the command line.
 
-A new React-based App. This app utilize React lifecycle methods to query and display and stores user informations. 
-As a user, you can create accounts, then create cards, topics, and others for Kanban style organization.
+## Install
 
-## Features
+```sh
+npm install
+```
 
-- [] Fully functioning app. 
-- [x] Complete routes for future features.
-- [] Calandar feature
-- [x] Fully utilizes advantages of React.
+## Usage
 
+```sh
+npm run start
+```
 
-## Demo:
+## Author
 
-* Preview
+* Github: [@cltn39](https://github.com/cltn39)
 
-![TBD]()
+## Show your support
 
+Give a ⭐️ if this project helped you!
+
+***
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
